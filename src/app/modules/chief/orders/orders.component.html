@@ -1,0 +1,233 @@
+<main>
+    <div class="container">
+        <aside class="col-sm-3 d-aside no-padding sticky">
+            <app-chief-layout></app-chief-layout>
+        </aside>
+        <div class="col-sm-9 d-content">
+            <div>
+                <div class="d-content-c plmd">
+                    <div class="select-container">
+                        <div class="custom-datepicker text-left">
+                            <div class="custom-input">
+                                <!-- <input type="text" formControlName="date" bsDatepicker id="pickDate" class="input-field input-normal" [ngClass]="{'has-error':form.get('date').invalid && form.get('date').dirty}" placeholder="Pick a date"> -->
+                                <input type="text" bsDatepicker placeholder="Start Date" [(ngModel)]="filter.StartDate">
+                            </div>
+                            <div class="custom-input">
+                                <input class="d-inline" type="text" bsDatepicker placeholder="End Date " [(ngModel)]="filter.EndDate ">
+                            </div>
+                            <a class="btn btn-green btn-search" (click)="search() ">
+                                <i class="fas fa-search "></i>
+                            </a>
+                        </div>
+                        <div *ngIf="loading " class="m-loading ">
+                            <i class="fas fa-spinner fa-spin color-green "></i>
+                        </div>
+                    </div>
+                    <div class="order-status order mbxxlg " *ngIf="!loading ">
+                        <div class="row ">
+                            <div class="col-sm-3 ">
+                                <div class="feature faq-card text-center ">
+                                    <div class="feature-img ">
+                                        <i class="fa fa-circle img-circle " aria-hidden="true "></i>
+                                        <i class="fa fa-circle img-circle " aria-hidden="true "></i>
+                                        <i class="fa fa-circle img-circle " aria-hidden="true "></i>
+                                        <!-- <img src="assets/img/icons/completed.svg " alt=" "> -->
+                                    </div>
+                                    <h3 class="no-margin mtmd">{{'order.pending'|translate}}</h3>
+                                    <h3 class="text-bold mtsm">
+                                        {{orders.pending}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="feature faq-card text-center ">
+                                    <div class="feature-img ">
+                                        <img src="assets/img/icons/plate.svg ">
+                                    </div>
+                                    <h3 class="no-margin mtmd">{{'order.Accepted'|translate}}</h3>
+                                    <h3 class="text-bold mtsm ">
+                                        {{orders.confirmed}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="feature faq-card text-center ">
+                                    <div class="feature-img ">
+                                        <img src="assets/img/icons/cancel.svg">
+                                    </div>
+                                    <h3 class="no-margin mtmd ">{{'order.Rejected'|translate}}</h3>
+                                    <h3 class="text-bold mtsm ">
+                                        {{orders.rejected}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="feature faq-card text-center ">
+                                    <div class="feature-img ">
+                                        <img src="assets/img/icons/completed.svg">
+                                    </div>
+                                    <h3 class="no-margin mtmd">{{'order.delivered'|translate}}</h3>
+                                    <h3 class="text-bold mtsm ">
+                                        {{orders.delivered}}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature mbxxlg " *ngIf="!loading ">
+                        <div class="tab-g ">
+                            <ul class="nav nav-tabs text-center " role="tablist ">
+                                <li role="presentation " [class.active]="tab==1 "><a class="btn " (click)="tab=1 " aria-controls="orders " role="tab " data-toggle="tab " aria-expanded="true ">{{'order.Today-Orders'|translate}}</a></li>
+                                <!-- <li role="presentation " [class.active]="tab==2 "><a class="btn " (click)="tab=2 " aria-controls="history " role="tab " data-toggle="tab " aria-expanded="false ">weekely Deals</a></li> -->
+                            </ul>
+                            <div class="tab-content ">
+                                <div role="tabpanel " class="tab-pane active " [class.active]="tab==1 ">
+                                    <div class="menu-items order-items ">
+                                        <ng-container *ngFor="let row of orders.orders ">
+                                            <div class="me-c ">
+                                                <div class="product-item menu-item ">
+                                                    <figure class="cover ">
+                                                        <h3 class="no-margin mtmd mbxs text-bold ptlg pblg ">
+                                                            <span class="text-center" *ngIf="row.dishes.length>0">{{'order.order'|translate}}</span>
+                                                            <span class="text-center" *ngIf="row.weeklydeals.length>0">{{'order.Deal'|translate}}</span> :{{row.code}}
+                                                            <!-- <span class="text-center" *ngIf="row.weeklydeals.length>0">{{'order.Deal'|translate}}</span> -->
+                                                        </h3>
+                                                    </figure>
+
+                                                    <div class="meal-data bt bb mtmd mbmd ">
+                                                        <span class="br d-inline ">
+                                                     {{'order.total'|translate}}<br>
+                                                      <label>
+                                                        {{row.NetTotal}} {{'share.SAR'|translate}}
+                                                    </label>
+                                                </span>
+                                                        <span class="br d-inline ">
+                                                      {{'order.Customer'|translate}}<br>
+                                                    <label>
+                                                    {{row.customer.firstname}}
+                                                    </label>
+                                                </span>
+                                                        <span class="d-inline ">
+                                                           {{'order.phone'|translate}}<br>
+                                                        <label>
+                                                            {{row.customer.user.phone}}
+                                                        </label>
+                                                    </span>
+                                                    </div>
+                                                    <div class="meal-data bt bb mtmd mbmd note-height-table ">
+                                                        <table border="1px ">
+                                                            <thead *ngIf="row.dishes.length>0">
+                                                                <th class="text-center">{{'order.Item'|translate}}</th>
+
+                                                                <th class="text-center ">{{'order.quantity'|translate}}</th>
+                                                                <th class="text-center ">{{'order.price'|translate}}</th>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr  class="text-center " *ngFor="let dish of row.dishes ">
+                                                                    <td>{{languageService.getLanguageOrDefault()=='ar' ? dish.ar_name :dish.en_name}}</td>
+                                                                    <td>{{dish.pivot.quantity}}</td>
+                                                                    <td>{{dish.pivot.price}}</td>
+                                                                </tr>
+                                                             
+                                                            </tbody>
+                                                        </table>
+                                                        <table border="1px ">
+                                                            <ng-container *ngFor="let dish of row.dishday">
+                                                             <tr>
+                                                                <td  class="text-center" style="background: #e6e6e6;
+                                                                font-weight: bold;
+                                                                font-size: 20px;">
+                                                                  {{languageService.getLanguageOrDefault()=='ar' ? dish.ar_name :dish.en_name}}
+                                                                </td>
+                                                             </tr>
+                                                            <tr *ngFor="let asd of dish.dishes">
+                                                                <td  class="text-center " >
+                                                                    {{languageService.getLanguageOrDefault()=='ar' ? asd.ar_name :asd.en_name}}
+                                                                </td>
+                                                            </tr>
+                                                           
+                                                        </ng-container>
+                                                    </table>
+                                                    </div>
+                                                    <div class="description bb plxxlg prxxlg pblg note-height ">
+                                                        <h4 class="no-margin mtxs mbmd text-bold ">{{languageService.getLanguageOrDefault()=='ar' ? row.paymentmethod.ar_name :row.paymentmethod.en_name}}</h4>
+                                                        <p class="text-center ">
+                                                        </p>
+                                                    </div>
+                                                    <div class="description bb plxxlg prxxlg pblg note-height ">
+                                                        <h4 class="no-margin mtxs mbmd text-bold ">{{row.note!=null ? row.note :'No Note'}}</h4>
+                                                        <p class="text-center ">
+                                                        </p>
+                                                    </div>
+                                                    <div class="description plxxlg prxxlg pblg ptlg ">
+                                                        <div class="order-btn ">
+                                                            <button (click)="UpdateStatus(row.id, 'completed') " class="btn btn-green d-inline " *ngIf="(row.status=='confirmed' || row.status=='completed') && row.dishes.length>0 " [disabled]="row.status=='confirmed' ">Accepted</button>
+                                                            <button (click)="UpdateStatus(row.id, 'completed') " class="btn btn-green d-inline " *ngIf="row.status=='confirmed' && row.weeklydeals.length>0 " [disabled]="row.status=='confirmed' ">confirmed</button>
+                                                            <a (click)="UpdateStatus(row.id, 'confirmed') " class="btn btn-green d-inline " *ngIf="row.status=='pending' ">Accept</a>
+                                                            <button (click)="UpdateStatus(row.id, 'rejected') " class="btn btn-secondary d-inline " *ngIf="row.status=='pending' || row.status=='rejected' " [disabled]="row.status=='rejected' ">Rejected</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div role="tabpanel " class="tab-pane active " [class.active]="tab==2">
+                                    <div class="menu-items order-items ">
+                                        <ng-container *ngFor="let row of UserSubscribeData ">
+                                            <div class="me-c ">
+                                                <div class="product-item menu-item ">
+                                                    <figure class="cover ">
+                                                        <h3 class="no-margin mtmd mbxs text-bold ptlg pblg "> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</h3>
+                                                    </figure>
+
+                                                    <div class="meal-data bt bb mtmd mbmd ">
+                                                        <span class="br d-inline ">
+                                                            {{'order.total'|translate}} <br>
+                                                          <label>
+                                                            {{row.price}} {{'share.SAR'|translate}}
+                                                        </label>
+                                                    </span>
+                                                        <span class="br d-inline ">
+                                                            {{'order.Customer'|translate}} <br>
+                                                        <label>
+                                                        {{row.weekly_deal_subscribe[0].customer.firstname}}
+                                                        </label>
+                                                    </span>
+                                                        <span class="d-inline ">
+                                                            {{'order.phone'|translate}} <br>
+                                                            <label>
+                                                                    {{row.weekly_deal_subscribe[0].customer.user.phone}}
+                                                            </label>
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="description plxxlg prxxlg pblg ptlg ">
+                                                        <div class="order-btn ">
+                                                            <button (click)="SubscribeUpdated(row.weekly_deal_subscribe[0].code, 'confirmed') " class="btn btn-green d-inline " [disabled]="row.pivot.status=='confirmed' ">{{'order.Accept'|translate}}</button>
+                                                            <button (click)="SubscribeUpdated(row.weekly_deal_subscribe[0].code, 'rejected') " class="btn btn-secondary d-inline " *ngIf="row.pivot.status!='confirmed' ">{{'order.Rejected'|translate}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+
+
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,20 @@
+.resp {
+    min-height: 100px;
+}
+
+.lbl-img {
+    outline-width: 0;
+}
+
+.profile {
+    border-radius: 50%;
+    border: 2px solid #e5e5e5;
+    width: 140px;
+    height: 140px
+}
+
+.save-photo {
+    background-color: #7FB017;
+    color: white;
+    border: none;
+}

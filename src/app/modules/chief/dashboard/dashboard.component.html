@@ -1,0 +1,232 @@
+<main>
+    <div class="container">
+        <aside class="col-sm-3 d-aside no-padding sticky">
+            <app-chief-layout></app-chief-layout>
+        </aside>
+        <div class="col-sm-9 d-content">
+            <div class="d-content-c plmd">
+                <div class="row mbxxlg">
+                    <div class="col-sm-4">
+                        <div class="feature faq-card text-center">
+                            <div class="feature-img">
+                                <img src="assets/img/icons/user-2.svg" alt="">
+                            </div>
+                            <h3> {{'dashboard.visitor'|translate}}</h3>
+                            <h3 class="text-bold mtsm">
+                                1039
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature faq-card text-center">
+                            <div class="feature-img">
+                                <img src="assets/img/icons/visitor.svg" alt="">
+                            </div>
+                            <h3>{{'dashboard.Visitors-Online'|translate}}</h3>
+                            <h3 class="text-bold mtsm">
+                                1039
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature faq-card text-center">
+                            <div class="feature-img">
+                                <img src="assets/img/icons/payment-1.svg" alt="">
+                            </div>
+                            <h3>{{'dashboard.Qoot-Balance'|translate}}</h3>
+                            <h3 class="text-bold mtsm">
+                                {{'share.SAR'|translate}} {{walletData.qoot_balance}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- <div style="display: block;">
+                        <canvas baseChart width="10" [colors]="lineChartColors" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                        
+                        </canvas>
+                    </div> -->
+
+                    <div class="col-sm-8">
+                        <div class="feature faq-card mbxxlg">
+                            <div class="tab-g">
+                                <ul class="nav nav-tabs text-center" role="tablist">
+                                    <li role="presentation" class="active"><a class="btn" href="#deals" aria-controls="deals" role="tab" data-toggle="tab" aria-expanded="true">{{'dashboard.Today-Menus'|translate}}</a></li>
+                                    <li role="presentation" class=""><a class="btn" href="#orders" aria-controls="orders" role="tab" data-toggle="tab" aria-expanded="false">{{'dashboard.Today-Orders'|translate}}</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="deals">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-bold">{{'dashboard.Dish'|translate}}</th>
+                                                        <th class="text-bold">{{'dashboard.Serves'|translate}}</th>
+                                                        <th class="text-bold">{{'dashboard.Price'|translate}}</th>
+                                                        <th class="text-bold">{{'dashboard.Offer'|translate}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr *ngFor="let row of menus">
+                                                    <td>{{languageService.getLanguageOrDefault()=='ar' ? row.category.ar_name :row.category.en_name}}</td>
+                                                    <td> {{row.no_persons}}</td>
+                                                    <td>{{'share.SAR'|translate}} {{row.price}}</td>
+                                                    <td>{{'share.SAR'|translate}} {{row.offerPrice}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- <div class="text-center mtxlg">
+                                            <a href="" class="btn btn-green btn-small d-inline mrsm">First</a>
+                                            <a href="" class="btn btn-green btn-small d-inline mrsm">Pervious</a>
+                                            <a href="" class="btn btn-green btn-small d-inline mrsm">Next</a>
+                                            <a href="" class="btn btn-green btn-small d-inline">Last</a>
+                                        </div> -->
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="orders">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-bold">{{'dashboard.Name'|translate}}</th>
+                                                        <th class="text-bold">{{'dashboard.Order'|translate}}</th>
+                                                        <th class="text-bold">{{'dashboard.Total-Amount'|translate}}</th>
+                                                        <th class="text-bold">{{'dashboard.Status'|translate}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr *ngFor="let row of orders.orders">
+                                                    <td> {{row.customer.user.phone}}</td>
+                                                    <td>{{row.code}}</td>
+                                                    <td> {{row.NetTotal}} SAR</td>
+                                                    <td>{{row.status}}</td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                        <!-- <div class="text-center mtxlg">
+                                            <a href="" class="btn btn-green btn-small d-inline mrsm">First</a>
+                                            <a href="" class="btn btn-green btn-small d-inline mrsm">Pervious</a>
+                                            <a href="" class="btn btn-green btn-small d-inline mrsm">Next</a>
+                                            <a href="" class="btn btn-green btn-small d-inline">Last</a>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature faq-card text-center mbxxlg">
+                            <div class="feature-img">
+                                <img src="assets/img/icons/wallet-1.svg" alt="">
+                            </div>
+                            <h3 class="text-upper">{{'dashboard.Received'|translate}}</h3>
+                            <h3 class="text-bold mtsm">
+                                {{walletData.recieved_amount}}
+                            </h3>
+                        </div>
+                        <div class="feature faq-card text-center mbxxlg">
+                            <div class="feature-img">
+                                <img src="assets/img/icons/money-1.svg" alt="">
+                            </div>
+                            <h3 class="text-upper">{{'dashboard.Revenu'|translate}}</h3>
+                            <p class="mtsm">
+                                {{walletData.revenu}}
+                            </p>
+                        </div>
+                        <!-- <div class="feature faq-card text-center mbxxlg">
+                            <div class="feature-img">
+                                <img src="assets/img/icons/user-2.svg" alt="">
+                            </div>
+                            <h3 class="text-upper"><strong>5 </strong>new customers</h3>
+                            <div class="text-center mtlg">
+                                <a href="" class="btn btn-green capitalize d-inline">view</a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="feature faq-card text-center mbxxlg">
+                            <div class="feature-head mbxlg">
+                                <h4 class="no-margin text-left text-bold mbxxlg">{{'dashboard.Order-History'|translate}}</h4>
+                                <div class="select-container">
+                                    <div class="custom-datepicker text-left">
+                                        <div class="custom-input">
+                                            <input type="text" bsDatepicker id="datepicker-from" placeholder="Start Date" [(ngModel)]="filter.StartDate">
+                                        </div>
+                                        <div class="custom-input">
+                                            <input class="d-inline" type="text" bsDatepicker id="datepicker-to" placeholder="End Date" [(ngModel)]="filter.EndDate">
+                                        </div>
+                                        <a class="btn btn-green btn-search" (click)="getOrder()">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="order-status">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-xs-6">
+                                            <div class="feature text-center">
+                                                <div class="feature-img">
+                                                    <img src="assets/img/icons/completed.svg" alt="">
+                                                </div>
+                                                <h3 class="no-margin mtmd">{{'dashboard.Completed'|translate}}</h3>
+                                                <h3 class="text-bold mtsm">
+                                                    {{orders.completed}}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-6">
+                                            <div class="feature text-center">
+                                                <div class="feature-img">
+                                                    <img src="assets/img/icons/cancel.svg" alt="">
+                                                </div>
+                                                <h3 class="no-margin mtmd">{{'dashboard.Cancelled'|translate}}</h3>
+                                                <h3 class="text-bold mtsm">
+                                                    {{orders.canceledByCustomer}}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-6">
+                                            <div class="feature text-center">
+                                                <div class="feature-img">
+                                                    <img src="assets/img/icons/rejected-1.svg" alt="">
+                                                </div>
+                                                <h3 class="no-margin mtmd">{{'dashboard.Rejected'|translate}}</h3>
+                                                <h3 class="text-bold mtsm">
+                                                    {{orders.rejected}}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-6">
+                                            <div class="feature text-center">
+                                                <div class="feature-img">
+                                                    <img src="assets/img/icons/rejected.svg" alt="">
+                                                </div>
+                                                <h3 class="no-margin mtmd">{{'dashboard.auto-rejected'|translate}}</h3>
+                                                <h3 class="text-bold mtsm">
+                                                    {{orders.canceledByChief}}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="feature faq-card text-center mbxxlg">
+                            <div class="feature-head mbxlg">
+                                <h4 class="no-margin text-left text-bold mbxxlg">{{'dashboard.Order-Calender'|translate}}</h4>
+                                <div class="calender-container">
+                                    <full-calendar defaultView="timeGridDay" [events]=events themeSystem="standard" [header]="options" [plugins]="calendarPlugins" (eventClick)="handleDateClick($event)"></full-calendar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

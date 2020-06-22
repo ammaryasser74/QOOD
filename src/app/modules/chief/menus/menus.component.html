@@ -1,0 +1,67 @@
+<main>
+    <div class="container">
+        <aside class="col-sm-3 d-aside no-padding sticky">
+            <app-chief-layout></app-chief-layout>
+        </aside>
+        <div class="col-sm-9 d-content">
+            <div *ngIf="loading" class="m-loading">
+                <i class="fas fa-spinner fa-spin color-green"></i>
+            </div>
+            <div *ngIf="!loading">
+                <div class="d-content-c plmd">
+                    <button type="button" class="btn btn-green btn-bigger width100 mbxxlg" [disabled]="appprove!='approved'" (click)="addmenu(null,false)">{{'menu.add-dish-to-menu'|translate}}</button>
+                    <div class="panel-group mtxlg">
+                        <div class="">
+                            <div class="select-container mbmd">
+                                <div class="custom-select">
+                                    <select id="days" [(ngModel)]="day_id" (change)="getMenus()">
+                                        <option *ngFor="let row of Days" value="{{row.id}}"  [selected]="row.id==day_id">
+                                                {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                            </option>
+                                    </select>
+
+                                </div>
+                                <!-- <span class="text-danger" *ngIf="form.get('category_id').invalid && form.get('category_id').dirty">{{'share.required' |translate}}</span> -->
+                            </div>
+                            <div class="panel-body">
+                                <!-- <div id="type" class="panel-collapse collapse in" aria-expanded="true"> -->
+                                <div class="menu-items">
+                                    <div class="me-c" *ngFor="let row of menus">
+                                        <div class="product-item menu-item">
+                                            <figure class="cover" [ngStyle]="{'background':'url(' + row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center' }">
+                                            </figure>
+                                            <div class="product-info">
+                                                <h3 class="no-margin mtmd mbxs text-bold"> {{languageService.getLanguageOrDefault()=='ar' ? row.category.ar_name :row.category.en_name}}</h3>
+                                                <h4 class="no-margin mtxs mbmd text-bold"> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</h4>
+                                            </div>
+                                            <div class="meal-data bt bb mtmd mbmd">
+                                                <span class="br d-inline">
+                                                   {{'share.SAR'|translate}} {{row.price}} 
+                                                </span>
+                                                <span class="d-inline">
+                                                    <img class="mrsm" src="assets/img/icons/person.svg">
+                                                          {{row.no_persons}} {{'share.person'|translate}}
+                                                </span>
+                                            </div>
+                                            <div class="checkbox-custom bb black pblg">
+                                                <input type="checkbox" value="readyNow" (change)="ReadyNow(row.id)" class="form-radio" [checked]="row.ready_now">
+                                                <label for="readyNow">{{'share.Ready-Now'|translate}}</label>
+                                            </div>
+                                            <div class="description plxxlg prxxlg pblg ptlg">
+                                                <div class="order-btn">
+                                                    <a (click)="addmenu(row,true)" class="btn btn-green d-inline">{{'share.Edit'|translate}}</a>
+                                                    <a (click)="Delete(row.id)" class="btn btn-delete d-inline">{{'share.Delete'|translate}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

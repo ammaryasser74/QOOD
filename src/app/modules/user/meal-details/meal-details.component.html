@@ -1,0 +1,243 @@
+<main>
+  <div *ngIf="loading" class="m-loading">
+    <div>
+      <i class="fas fa-spinner fa-spin color-green"></i>
+    </div>
+  </div>
+  <section class="meal sec-pad" *ngIf="!loading">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9">
+          <!-- <div *ngIf="Data.imges?.length" class="meal-hero cover" style="background-image: url('assets/img/meal.jpg')"></div> -->
+          <div class="meal-hero cover"
+            [ngStyle]="{'background':'url(' + Data.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="product-info text-center mtxxlg">
+                <star-rating value="{{Data.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px"
+                  readonly="true">
+                </star-rating>
+                <h3 class="no-margin mtmd mbsm">
+                  <a>
+                    {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_name :Data.en_name}}
+                  </a>
+                </h3>
+                <div class="price">
+                  <span *ngIf='Data.ready_now==1'> Ready Now</span>
+                  <span *ngIf='Data.days.length==0'> {{Data.price}}</span>
+                  <del *ngIf='Data.days.length>0' class="del-red"> {{Data.price}}</del>
+                  <span *ngIf='Data.days.length>0'>{{Data.price - Data.days[0].pivot.dis_count_value}}</span>
+                  {{'share.SAR'|translate}}
+                </div>
+                <div class="meal-data mtmd mbmd">
+                  <span class="mrlg"><img class="mrsm" src="assets/img/icons/time.svg">{{'share.In'|translate}}
+                    {{Data.preparation_time_value}} {{Data.preparation_time_type}}</span>
+                  <span><img class="mrsm" src="assets/img/icons/person.svg"> {{Data.no_persons}}
+                    {{'share.person'|translate}} </span>
+                </div>
+                <div class="meal-data mtmd mbmd">
+                  <span class="mrlg"><i class="fa fa-balance-scale scale-quantity" aria-hidden="true"></i>{{Data.quantity}}
+                      {{languageService.getLanguageOrDefault()=='ar' ? Data.unit.ar_name :Data.unit.en_name}}</span>
+                
+              </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="mtxxlg">
+                <div class="action-btn mtxxlg">
+                  <button class="fav-btn" (click)=addToFavourite(Data.id)>
+                    <i class="fas fa-heart" *ngIf="Data.customers.length==0"></i>
+                    <i class="fas fa-heart color-red" *ngIf="Data.customers.length>0"></i>
+                  </button>
+                  <p> {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_description :Data.en_description}}</p>
+                  <a routerLink="/user/search/0/0/{{Data.chief_id}}"
+                    class="btn btn-green d-inline">{{'home.order-now'|translate}}</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="share-social mtxlg ptlg pblg plmd bt bb">
+            <span class="mrxs">{{'meal-details.Share'|translate}}:</span> -->
+            <!-- <a ceiboShare [facebook]="{u:repoUrl}">
+                            <i class="fab fa-facebook-f"></i></a>
+                        <a ceiboShare [googlePlus]="{url:repoUrl}"><i class="fab fa-google-plus-g"></i></a>
+                        <a ceiboShare [twitter]="{url:repoUrl, text:''}"><i class="fab fa-twitter"></i></a>
+                         -->
+
+          <!-- </div> -->
+          <div class="comment-section mtxxlg">
+
+            <div class="row" [formGroup]="formComment">
+              <div class="col-sm-3">
+                <div class="avatar-img text-center">
+                  <div class="a-img cover" style="background-image: url('assets/img/kitchen.jpg')"></div>
+                </div>
+              </div>
+              <div class="col-sm-9">
+                <textarea cols="30" rows="10" formControlName="Comment"
+                  [ngClass]="{'has-error':formComment.get('Comment').invalid && formComment.get('Comment').dirty}"
+                  class="form-control"></textarea>
+                <span class="text-danger"
+                  *ngIf="formComment.get('Comment').invalid && formComment.get('Comment').dirty">{{'share.required' |translate}}</span>
+                <a (click)="sendComment()"
+                  class="btn btn-green mtxlg d-inline pull-right">{{'share.send'|translate}}</a>
+              </div>
+            </div>
+          </div>
+          <div class="menu mtxxlg">
+            <div class="section-title mbxxlg">
+              <h2 class="text-capitalize text-center no-margin">{{'meal-details.Menu'|translate}}</h2>
+            </div>
+            <div class="row">
+
+
+              <div class="col-lg-4 col-md-6 col-xs-12 col-sm-6 m-b-15" *ngFor="let row of Data.dishes">
+
+                <div class="product-item">
+
+                  <figure class="cover"
+                    [ngStyle]="{'background':'url(' + row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                    <div class="btn-group">
+                      <button type="button" class="btn dropdown-toggle" (click)=addToFavourite(row.id)>
+                        <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
+                        <i class="fas fa-heart color-red" *ngIf="row.customers.length>0"></i>
+                      </button>
+
+                    </div>
+                  </figure>
+                  <a routerLink="/user/search/0/0/{{row.chief_id}}"
+                    class="btn btn-green text-upper">{{'share.order'|translate}}</a>
+                  <div class="product-info">
+                    <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px"
+                      readonly="true">
+                    </star-rating>
+                    <h3 class="no-margin mtmd mbmd">
+                      <a>
+                        {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                      </a>
+                    </h3>
+                    <div class="price">
+                      <span *ngIf='Data.ready_now==1'> Ready Now</span>
+                      <span *ngIf='Data.days.length==0'> {{Data.price}}</span>
+                      <del *ngIf='Data.days.length>0' class="del-red"> {{Data.price}}</del>
+                      <span *ngIf='Data.days.length>0'>{{Data.price - Data.days[0].pivot.dis_count_value}}</span>
+                      {{'share.SAR'|translate}}
+                    </div>
+                    <div class="meal-data mtmd mbmd">
+                      <span class="mrlg">
+                        <img class="mrsm" src="assets/img/icons/time.svg">
+                        {{'share.In'|translate}} {{row.preparation_time_value}}
+                        {{'share.'+row.preparation_time_type+''|translate}}
+                      </span>
+                      <span>
+                        <img class="mrsm" src="assets/img/icons/person.svg">
+                        {{row.no_persons}} {{'share.person'|translate}}
+                      </span>
+                    </div>
+                  </div>
+                  <a (click)="openMealModal(row)" class="more-details"> {{'share.More-details'|translate}} </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="col-sm-3">
+          <div class="faq-card mblg">
+
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/fork.svg" width="62px" height="40px">
+              </div>
+              <a routerLink="/chief/kitchen/{{Data.chief.slug}}"
+                class="btn btn-green d-inline">{{Data.chief.kitchen_name}}</a>
+            </div>
+
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/fast.svg">
+              </div>
+              <h3>{{'home-four.Fast-Delivery'|translate}}</h3>
+              <p>
+                Choose a transfer price from a wide selection of offers.
+              </p>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/plate.svg">
+              </div>
+              <h3> {{'home-four.Various-Cusines'|translate}}</h3>
+              <p>
+                Choose a transfer price from a wide selection of offers.
+              </p>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/quality.svg">
+              </div>
+              <h3>{{'home-four.Quality'|translate}}</h3>
+              <p>
+                Choose a transfer price from a wide selection of offers.
+              </p>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/message.svg">
+              </div>
+              <h3 class="text-semibold"> {{'share.Subscribe-now'|translate}}</h3>
+              <p>
+                {{'home.recive-deals'|translate}}
+              </p>
+              <form class="hero-form hero-subscribe mtxlg" [formGroup]="form">
+                <div class="input-group mtxlg">
+                  <input type="email" formControlName="email"
+                    [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}" class="form-control">
+                  <span class="text-danger"
+                    *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.required' |translate}}</span>
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="subscribe()" type="button"><i
+                        class="fa fa-paper-plane"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/chat.svg">
+              </div>
+              <h3 class="text-semibold"> {{'home.Get-our-app'|translate}}</h3>
+              <p>
+                {{'home.app-par'|translate}}
+              </p>
+              <div class="download">
+                <a class="mbmd">
+                  <img src="assets/img/icons/play_store.svg">
+                </a>
+                <a>
+                  <img src="assets/img/icons/app_store.svg">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+</main>

@@ -1,0 +1,60 @@
+<div class="sign" id="add-address">
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+        </div>
+        <div *ngIf="loading" class="m-loading">
+            <div>
+                <i class="fas fa-spinner fa-spin color-green"></i>
+            </div>
+        </div>
+        <div class="modal-body" *ngIf="!loading">
+            <div class="tab-g m-top-10">
+                <form [formGroup]="form">
+                    <div class="feature text-center">
+                        <div class="feature-img">
+                            <img src="../assets/img/icons/deliver.svg" alt="">
+                        </div>
+                        <h3 class="text-semibold"> {{'add-address.add-New'|translate}}</h3>
+                        <agm-map [latitude]="lat" [longitude]="lng" [fullscreenControl]="true" (mapClick)="placeMarker($event)">
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        </agm-map>
+                        <div class="checkbox-custom mtlg">
+                            <ng-container *ngFor="let row of cities">
+                                <input type="radio" formControlName="city_id" [checked]="row.id==form.get('city_id').value" value="{{row.id}}" class="form-radio">
+                                <label class="mrlg" for="jeddah">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+
+                            </ng-container>
+                        </div>
+                        <input type="text" formControlName="area" placeholder="{{'add-address.Delivery-Area'|translate}}" class="input-field input-normal mtlg" [ngClass]="{'has-error':form.get('area').invalid && form.get('area').dirty}" readonly>
+                        <span class="text-danger" *ngIf="form.get('area').invalid && form.get('area').dirty">{{'share.required' |translate}}</span>
+
+                        <input type="text" formControlName="address"  placeholder="{{'add-address.Complete-Address'|translate}}" class="input-field input-normal mtlg">
+                        <!-- <span class="text-danger" *ngIf="form.get('address').invalid && form.get('address').dirty">{{'share.required' |translate}}</span> -->
+
+                        <input type="text" formControlName="delivery_instructions" class="input-field input-normal mtlg" [ngClass]="{'has-error':form.get('delivery_instructions').invalid && form.get('delivery_instructions').dirty}" placeholder="{{'add-address.Delivery-Instructions'|translate}}">
+                        <span class="text-danger" *ngIf="form.get('delivery_instructions').invalid && form.get('delivery_instructions').dirty">{{'share.required' |translate}}</span>
+
+                        <div class="col-xs-12" style="margin-bottom: 25px;">
+                            <div id="radioBtn" class="col-xs-12 btn-group custom-radio-btn" style="margin-top: 25px;">
+                                <a class="btn btn-green-outline btn-sm" [class.active]="nick=='Home'" (click)="nickSelect('Home')"> {{'add-address.Home'|translate}}</a>
+                                <a class="btn btn-green-outline btn-sm" [class.active]="nick=='Work'" (click)="nickSelect('Work')"> {{'add-address.Work'|translate}}</a>
+                                <a class="btn btn-green-outline btn-sm" [class.active]="nick=='Other'" (click)="nickSelect('Other')"> {{'add-address.Other'|translate}}</a>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" formControlName="nick_name" [class.hidden]="!isOther" placeholder="{{'add-address.write-other'|translate}}" class="input-field input-normal mtlg">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer mtxlg">
+                        <button type="button" (click)="save()" class="btn btn-green d-inline">{{'share.save'|translate}}</button>
+                        <button type="button" class="btn btn-secondary d-inline" (click)="myModel.hide()">{{'share.cancel'|translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

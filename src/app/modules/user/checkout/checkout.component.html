@@ -1,0 +1,197 @@
+<main>
+  <section class="checkout sec-pad">
+    <div class="container">
+      <div *ngIf="loading" class="m-loading">
+        <div>
+          <i class="fas fa-spinner fa-spin color-green"></i>
+        </div>
+      </div>
+      <div *ngIf="loadingtwo"
+        style="position: absolute; background-color: rgba(255, 255, 255, 0.6); width: 100%; height: 240%; z-index: 100000">
+        <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+          <i class="fas fa-spinner fa-spin color-green"></i>
+        </div>
+      </div>
+      <form [formGroup]="form">
+        <div class="row" *ngIf="!loading">
+          <div class="col-sm-9">
+            <div class="faq-card checkout-card mblg">
+              <div class="feature text-center">
+                <div class="feature-img">
+                  <img src="assets/img/icons/chat.svg" alt="">
+                </div>
+                <h3 class="text-semibold">{{'checkout.Preparation-Note'|translate}}</h3>
+                <input type="text" formControlName="note" class="input-field input-normal mtlg"
+                  placeholder="{{'checkout.Type-instructions'|translate}}">
+              </div>
+            </div>
+
+            <div class="faq-card checkout-card mblg" *ngIf="getFromLocalStorage('mycart').weeklydeals!=null">
+              <div class="feature text-center">
+                <ng-container *ngFor="let row of ShowDays">
+                  <div class="checkbox-custom black d-inline mrlg">
+                    <input type="checkbox" value="row.id" class="form-radio" (change)="DaySelect($event,row.id)"
+                      checked>
+                    <label for="Fri">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+
+            <div class="faq-card checkout-card mblg">
+              <div class="feature text-center">
+                <!-- <div class="feature-img">
+                                        <img src="assets/img/icons/deliver.svg" alt="">
+                                    </div> -->
+                <h3 class="text-semibold" *ngIf="!isWeekelyDeal"> {{'checkout.address-date'|translate}}</h3>
+                <h3 class="text-semibold" *ngIf="isWeekelyDeal"> {{'checkout.start-date'|translate}}</h3>
+
+                <!-- <kendo-timepicker [(value)]="value"></kendo-timepicker>
+ -->
+                <div class="date-time mtlg mbxxlg">
+                  <input type="text" formControlName="date" bsDatepicker id="pickDate" class="input-field input-normal"
+                    [ngClass]="{'has-error':form.get('date').invalid && form.get('date').dirty}"
+                    placeholder="{{'checkout.pick-date'|translate}}">
+                  <!-- <input type="time" formControlName="time" bsDatepicker id="pickTime" class="input-field input-normal" [ngClass]="{'has-error':form.get('time').invalid && form.get('time').dirty}" placeholder="Pick a date"> -->
+                  <ng-template #popTemplate>
+                    <timepicker formControlName="time" (ngModelChange)="changed()"></timepicker>
+                  </ng-template>
+                  <input class="input-field input-normal" value="{{mytime}}"
+                    placeholder=" {{'checkout.pick-time'|translate}}" [popover]="popTemplate" placement="bottom" />
+                  <div>
+                    <span class="text-danger" style="padding: 10%;"
+                      *ngIf="form.get('date').invalid && form.get('date').dirty">{{'share.required' |translate}}</span>
+                    <span class="text-danger" style="padding: 10%;"
+                      *ngIf="form.get('time').invalid && form.get('time').dirty">{{'share.required' |translate}}</span>
+                  </div>
+                </div>
+
+
+                <div class="available text-semibold mbxxlg" *ngIf="myAddress==null">
+
+                  {{'checkout.must-add-address'|translate}}
+                </div>
+
+                <div class="delivery-info" *ngIf="myAddress && !myAddress?.length">
+
+                  <div class="text-left mblg">
+                    <!-- <input type="radio" formControlName="payment_method_id" value="{{.id}}" class="form-radio"> -->
+                    <strong>
+
+                      {{'checkout.Delivery-Area'|translate}}
+                    </strong><br>{{myAddress.area}}
+                  </div>
+                  <div class="text-left mblg">
+                    <strong>
+
+                      {{'checkout.Complete-Address'|translate}}
+                    </strong><br> {{myAddress.address}}
+                  </div>
+                  <div class="text-left">
+                    <strong>
+
+                      {{'checkout.Delivery-Instructions'|translate}}
+                    </strong><br> {{myAddress.delivery_instructions}}
+                  </div>
+                </div>
+                <a (click)="addNewAddress()"
+                  class="btn btn-green text-upper mtxlg pull-left ">{{'add-address.add-New'|translate}}</a>
+                <a (click)="changeAddress()"
+                  class="mtxxlg pull-right text-semibold ">{{'checkout.Change-default-address'|translate}}</a>
+                <div class="clearfix "></div>
+              </div>
+            </div>
+
+
+
+            <div class="faq-card checkout-card mblg ">
+              <div class="feature text-center ">
+                <div class="feature-img ">
+                  <img src="assets/img/icons/payment.svg ">
+                </div>
+                <h3 class="text-semibold "> {{'checkout.Payment-Method'|translate}}</h3>
+                <div class="input-group mtlg">
+                  <input type="text" class="input-field input-normal" formControlName="promocode"
+                    placeholder="{{'share.enter-promocode'|translate}}">
+                  <span class="input-group-btn mtmd">
+                    <button class="btn btn-green" (click)="checkpromo()">{{'share.apply'|translate}}</button>
+                  </span>
+                </div>
+
+                <p *ngIf="form.get('dis_count_value').value!=0">لقد تم خصم مبلغ 
+                  {{form.get('dis_count_value').value}} {{form.get('dis_count_type').value==1?'%':''}} {{'share.SAR'|translate}}</p>
+
+                <div class="mtxxlg text-left">
+                  <div class="checkbox-custom check-custome" *ngFor="let row of paymentMethod">
+
+                    <input type="radio" formControlName="payment_method_id" value="{{row.id}}"
+                      [checked]="row.id==form.get('payment_method_id').value" class="form-radio"
+                      *ngIf="row.active==true">
+                    <label class="mrlg" *ngIf="row.active==true">
+                      {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a (click)="save()" [class.disabled]="form.invalid"
+              class="btn btn-green text-upper mtxlg ">{{'checkout.Proceed-Checkout'|translate}}</a>
+
+
+          </div>
+          <div class="col-sm-3 ">
+            <div class="faq-card mblg ">
+              <div class="feature text-center ">
+                <div class="feature-img ">
+                  <img src="assets/img/icons/cart-g.svg ">
+                </div>
+                <h3 class="text-semibold "><a routerLink="/user/shopping">{{'checkout.Your-cart'|translate}}</a></h3>
+              </div>
+            </div>
+            <!-- <div class="faq-card mblg ">
+                            <ul class="product-list text-center ">
+                                <li>
+                                    <span class="mrxs text-semibold ">
+                                    4
+                                </span> Coffe Gift Box
+                                </li>
+                            </ul>
+                        </div> -->
+            <!-- <div class="faq-card mblg ">
+                            <div class="price text-center ">
+                                SAR 165/-
+                            </div>
+                        </div> -->
+            <div class="faq-card mblg ">
+              <div class="info ">
+                <div class="mbmd ">
+                  <strong class="mrsm "> {{'checkout.Delivary-Fee'|translate}}</strong> 
+                  {{getFromLocalStorage('delivery_fee')}} {{'share.SAR'|translate}}
+                </div>
+                <!-- <div class="mbmd ">
+                                    <strong class="mrsm ">Vat 14%</strong>SAR 10
+                                </div> -->
+                <!-- <div class="mbmd ">
+                                    <strong class="mrsm ">Promocode:</strong> SAR 20
+                                </div> -->
+                <div class="mbmd ">
+                  <strong class="mrsm"> {{'checkout.Total-Amount'|translate}}</strong> 
+                  {{getFromLocalStorage('mycarttotal')}} {{'share.SAR'|translate}}
+                </div>
+                <div class="mbmd ">
+                  <strong class="mrsm">{{'share.promocode'|translate}}</strong> - 
+                  {{form.get('dis_count_value').value}} {{form.get('dis_count_type').value==1?'%':''}} {{'share.SAR'|translate}}
+                </div>
+                <div class="mbmd ">
+                  <strong class="mrsm "> {{'checkout.Net-Total'|translate}}</strong> 
+                  {{(getFromLocalStorage('mycarttotal'))+ (getFromLocalStorage('delivery_fee')) - (form.get('promocodeDiscount').value)}} {{'share.SAR'|translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>

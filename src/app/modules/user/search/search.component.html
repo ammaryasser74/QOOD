@@ -1,0 +1,340 @@
+<main>
+    <section class="sec-pad hero-img cover hero-border hidden-xs" style="background-image: url('assets/img/cover/homepage.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="hero-text">
+                        <h2 class="no-margin mbmd text-center">
+                            Order Your Favorite <br> Food Online Now
+                        </h2>
+                        <div class="hero-form mtlg text-center">
+
+                            <div class="checkbox-custom check-custome">
+                                <ng-container *ngFor="let row of cities">
+                                    <input type="radio" value="{{row.id}}" (change)="getFilterData()" [checked]="row.id==filter.city_id" [(ngModel)]="filter.city_id" id="jeddah" class="form-radio check-custome-form">
+                                    <label class="mrlg" style="color:white" for="jeddah"> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div *ngIf="!loadingKichen">
+        <section class="sec-pad" *ngIf="filter.KitchenID!=0">
+            <div class="container">
+                <div class="avatar-img kitchen-img text-center ">
+                    <div *ngIf="DataKitchen.avatar==null"  class="a-img cover hidden-xs" style="background-image: url('assets/img/kitchen.jpg')"></div>
+                    <div *ngIf="DataKitchen.avatar!=null" class="a-img cover hidden-xs" [ngStyle]="{'background':'url(' + DataKitchen.avatar+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }"></div>
+                </div>
+                <div class="rate-con mtmd text-center">
+                    <star-rating value="{{DataKitchen.rate}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="true">
+                    </star-rating>
+                </div>
+                <div class="sec-title">
+                    <h2 class="no-margin mbmd text-semibold text-center">
+                        {{DataKitchen.kitchen_name}}
+                    </h2>
+                </div>
+                <div class="bookmark text-center">
+                    <a *ngIf="DataKitchen.bookmark" (click)="addBookMark()"><i class="far fa-bookmark mrsm"></i>Remove From bookmark</a>
+                    <a *ngIf="!DataKitchen.bookmark" (click)="addBookMark()"><i class="far fa-bookmark mrsm"></i>Click here to bookmark</a>
+                </div>
+                <!-- <div class="deals ">
+                    <div class="tab-g">
+                        <ul class="nav nav-tabs text-center" role="tablist">
+                            <li role="presentation"><a class="btn" routerLink="/chief/kitchen/{{DataKitchen.id}}">Info</a></li>
+                            <li role="presentation" class="active"><a class="btn" routerLink="/user/search/0/0/{{DataKitchen.id}}">Menu</a></li>
+                        </ul>
+
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+    </div>
+    <section class="sec-pad">
+        <div class="container">
+            <div class="row">
+                <aside class="col-sm-3">
+                    <div class="filter">
+                        <ul class="filter-c">
+                            <li>
+                                <div class="search">
+                                    <div class="select-container">
+                                        <input type="text" placeholder="{{'share.Search'|translate}}" [(ngModel)]="filter.SearchField">
+                                        <button class="btn btn-search" (click)="getFilterData()">
+                                          <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="panel-group ">
+                                    <div class="">
+                                        <div class="panel-heading no-padding">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#Days" aria-expanded="false" class="collapsed">
+                                                        {{'search.Days'|translate}}
+                                                    <i class="fas fa-angle-down pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="Days" class="panel-collapse collapse" aria-expanded="false">
+                                                <ul>
+                                                    <ng-container *ngFor="let row of Days">
+                                                        <li class="checkbox-custom">
+                                                            <input type="checkbox" name="days" id="days" (change)="DaySelect($event,row.id)" value="{{row.id}}" class="form-radio">
+                                                            <label> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                                                        </li>
+                                                    </ng-container>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="panel-group ">
+                                    <div class="">
+                                        <div class="panel-heading no-padding">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#Kitcken" aria-expanded="false" class="collapsed">
+                                                         {{'search.Kitcken'|translate}}
+                                                    <i class="fas fa-angle-down pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="Kitcken" class="panel-collapse collapse" aria-expanded="false">
+                                                <ul style="height:500px;overflow:auto;">
+                                                    <li class="checkbox-custom">
+                                                        <input type="radio" id="kitchen" name="kitchen" (change)="getFilterData()" value="0" [(ngModel)]="filter.KitchenID" class="form-radio">
+                                                        <label>  {{'search.All-kitchen'|translate}}</label>
+                                                    </li>
+
+                                                    <ng-container *ngFor="let kitchen of kitchens">
+                                                        <li class="checkbox-custom">
+                                                            <input type="radio" name="kitchen" id="kitchen" (change)="getFilterData()" value="{{kitchen.id}}" [(ngModel)]="filter.KitchenID" class="form-radio">
+                                                            <label>{{kitchen.kitchen_name}}</label>
+                                                        </li>
+                                                    </ng-container>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="panel-group ">
+                                    <div class="">
+                                        <div class="panel-heading no-padding">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#type" aria-expanded="false" class="collapsed">
+                                                            {{'search.Meal-type'|translate}}
+                                                    <i class="fas fa-angle-down pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="type" class="panel-collapse collapse" aria-expanded="false">
+                                                <ul>
+                                                    <li class="checkbox-custom">
+                                                        <input type="radio" name="cat" id="cat" (change)="getFilterData()" [(ngModel)]="filter.category_id" value="0" class="form-radio">
+                                                        <label>     {{'search.All'|translate}}</label>
+                                                    </li>
+                                                    <ng-container *ngFor="let row of categories">
+                                                        <li class="checkbox-custom">
+                                                            <input type="radio" name="cat" id="cat" (change)="getFilterData()" value="{{row.id}}" [(ngModel)]="filter.category_id" class="form-radio">
+                                                            <label> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                                                        </li>
+                                                    </ng-container>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="panel-group">
+                                    <div class="">
+                                        <div class="panel-heading no-padding">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#cusines" aria-expanded="false" class="collapsed">
+                                                             {{'search.Cusines'|translate}}
+                                                    <i class="fas fa-angle-down pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="cusines" class="panel-collapse collapse" aria-expanded="false">
+                                                <ul>
+                                                    <ng-container *ngFor="let row of cusines">
+                                                        <li class="checkbox-custom">
+                                                            <input type="checkbox" name="cusines" id="cusines" (change)="cusinesSelect($event,row.id)" value="{{row.id}}" class="form-radio">
+                                                            <label> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                                                        </li>
+                                                    </ng-container>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="panel-group">
+                                    <div class="">
+                                        <div class="panel-heading no-padding">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#range" aria-expanded="false" class="collapsed">
+                                                               {{'share.Price'|translate}}
+                                                    <i class="fas fa-angle-down pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="range" class="panel-collapse collapse" aria-expanded="false">
+                                                <div class="range-container">
+                                                    <div class="range-slider mbsm">
+                                                        <ng5-slider (valueChange)="getFilterData()" [(value)]="filter.min_price" [(highValue)]="filter.max_price" [options]="options"></ng5-slider>
+                                                    </div>
+                                                    <div class="range-inputs">
+                                                        <div class="range-input">
+                                                            <label></label>
+                                                            <input type="text" class="sliderValue" [(ngModel)]="filter.min_price">
+                                                        </div>
+                                                        <div class="range-input">
+                                                            <label></label>
+                                                            <input type="text" class="sliderValue" [(ngModel)]="filter.max_price">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="hidden-xs">
+                                <ul class="custom-radio">
+                                    <li><input type="radio" [(ngModel)]="filter.no_persons" name="radio" (change)="getFilterData()" value="2" id="radio01" /><label for="radio01">{{'search.persons'|translate}}</label></li>
+                                    <li><input type="radio" [(ngModel)]="filter.no_persons" name="radio" (change)="getFilterData()" value="1" id="radio02" /><label for="radio02">{{'share.person'|translate}}</label></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <div class="col-sm-9">
+                    <div class="sortby mbmd">
+                        <div class="row">
+                        
+                            <div class="col-md-3 pull-left hidden-xs">
+                                <div class="sortbyse">
+                                    <div class="select">
+                                        <select class="selectpicker" class="input-field" [(ngModel)]="filter.filterType" (change)="arrangeDataASC()">
+                                            <option value="0">{{'share.Sort-by'|translate}}</option>
+                                            <option value="1">{{'share.Price'|translate}}:{{'share.Low-to-High'|translate}} </option>
+                                            <option value="2">{{'share.Price'|translate}}: {{'share.High-to-Low'|translate}}</option>  
+                                                
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pull-right">
+                                <div class="switcher">
+                                    <ul class="switch">
+                                        <li class="list" [class.active]="tab==2">
+                                            <a (click)=gridOrList(1)>
+                                                <i class="fas fa-list"></i>
+                                            </a>
+                                        </li>
+                                        <li class="grid" [class.active]="tab==1" (click)=gridOrList(2)>
+                                            <a>
+                                                <i class="fas fa-th"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="loading" class="m-loading">
+                        <div>
+                            <i class="fas fa-spinner fa-spin color-green"></i>
+                        </div>
+                    </div>
+                    <div [ngClass]="listOrGrid" *ngIf="!loading">
+                        <div class="row">
+                            <div *ngIf="Data.length==0&&!loading">
+                                <div class="empty-text"> <img src="../../../../assets/img/no_results.jpg">
+                                <br>{{'share.no_result'|translate}}</div>
+                            </div>
+                            <ng-container *ngFor="let row of Data">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="mbxlg">
+                                        <div class="product-item">
+                                            <figure [ngStyle]="{'background':'url(' + row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn dropdown-toggle" (click)=addToFavourite(row.id)>
+                                                        <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
+                                                        <i class="fas fa-heart color-red" *ngIf="row.customers.length>0"></i>
+                                                    </button>
+                                                </div>
+                                            </figure>
+                                            <a (click)="orderNow(row)" class="btn btn-green text-upper">{{'share.order'|translate}}</a>
+                                            <div class="product-info">
+                                                <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="false" (rate)="onRate($event,row.id)">
+                                                </star-rating>
+                                                <h3 class="no-margin mtmd mbmd">
+                                                    <a routerLink="/user/meal-details/{{row.id}}">
+                                                     {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                                    </a>
+                                                </h3>
+                                                <h3 class="no-margin mtmd mbmd">
+                                                    {{ row.chief.kitchen_name}}
+                                                </h3>
+
+                                                <div class="price">
+                                                    <span *ngIf='row.ready_now==1'> Ready Now</span>
+                                                    <span *ngIf='row.days.length==0'> {{row.price}}</span>
+                                                    <del *ngIf='row.days.length>0' class="del-red">  {{row.price}}</del>
+                                                    <span *ngIf='row.days.length>0'>{{row.price - row.days[0].pivot.dis_count_value}}</span> {{'share.SAR'|translate}}
+                                                </div>
+                                                <div class="meal-data mtmd mbmd">
+                                                    <span class="mrlg">
+                        <img class="mrsm" src="assets/img/icons/time.svg"  >
+                        {{'share.In'|translate}}  {{row.preparation_time_value}} {{'share.'+row.preparation_time_type+''|translate}} 
+                    </span>
+                                                    <span>
+                        <img class="mrsm" src="assets/img/icons/person.svg"  >
+                        {{row.no_persons}} {{'share.person'|translate}}
+                    </span>
+                                                </div>
+                                                <div class="meal-data mtmd mbmd">
+                                                    <span class="mrlg"><i class="fa fa-balance-scale scale-quantity" aria-hidden="true"></i>  {{row.quantity}}
+                                                        {{languageService.getLanguageOrDefault()=='ar' ? row.unit.ar_name :row.unit.en_name}}
+                                                    </span>
+                                                  
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a (click)="openMealModal(row)" class="more-details width"> {{'share.More-details'|translate}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</main>

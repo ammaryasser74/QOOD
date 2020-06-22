@@ -1,0 +1,32 @@
+<div class="sign" tabindex="-1" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div *ngIf="loading" class="m-loading">
+                <div>
+                    <i class="fas fa-spinner fa-spin color-green"></i>
+                </div>
+            </div>
+            <div class="tab-g" *ngIf="!loading">
+                <h3 class="text-center text-semibold">{{'checkout.Change-default-address'|translate}}</h3>
+                <div class="row mtxlg">
+                    <ng-container *ngFor="let row of myAddress">
+                        <div class="col-sm-12">
+                            <div class="checkbox-custom mbmd">
+
+                                <input type="radio" [checked]="row.default_address==1" (change)="setDefaultaddress(row)" class="form-radio"><label class="mrlg" for="address">{{row.area}}</label>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="modal-footer mtxlg">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="sign" tabindex="-1" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+        </div>
+        <div class="modal-body">
+            <div class="tab-g">
+                <h3 class="text-center text-semibold">{{'share.verfiy-code'|translate}}</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" placeholder="{{'share.verfiy'|translate}}" [(ngModel)]="code">
+
+                    </div>
+                </div>
+                <div class="m-b-15 ">
+                    <button type="col-sm-12 button" (click)="save()" style="width:100%" class="row btn btn-green">{{'share.Verify-Complete'|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

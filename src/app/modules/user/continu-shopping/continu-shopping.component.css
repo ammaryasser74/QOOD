@@ -1,0 +1,35 @@
+.shopping-list {
+    color: black;
+}
+
+.shopping-label {
+    color: black;
+}
+
+.checkbox-custom .form-radio {
+    background-color: #ddd;
+}
+
+.qty-height {
+    height: 30px;
+}
+
+.kitchen-lbl {
+    text-align: center;
+    margin: 8px;
+    padding: 8px;
+    background: #ddd;
+}
+
+.price-lbl {
+    margin-top: 8px;
+}
+
+.black-color {
+    color: black
+}
+
+.trash-dir {
+    float: left;
+    color: #D0021B;
+}

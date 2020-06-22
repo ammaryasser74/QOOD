@@ -1,0 +1,46 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" (click)="myModel.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" (init)="slickInit($event)" [config]="slideConfig">
+            <div class="quick-view" ngxSlickItem *ngFor="let row of images">
+                <div class="quick-item">
+                    <img class="cover img-reponsive" src="{{row}}"></div>
+            </div>
+        </ngx-slick-carousel>
+        <div class="product-info text-center">
+            <star-rating value="{{myDatat.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="true">
+            </star-rating>
+            <h3 class="no-margin mtmd mbsm">
+                <a (click)="openDetails(myDatat.id)">
+                    {{languageService.getLanguageOrDefault()=='ar' ? myDatat.ar_name :myDatat.en_name}}
+                </a>
+            </h3>
+            <h3 class="no-margin mtmd mbmd">
+                {{ myDatat.chief.kitchen_name}}
+            </h3>
+            <div class="price mbsm">{{myDatat.price}} {{'share.SAR'|translate}} </div>
+            <div class="more-details">{{languageService.getLanguageOrDefault()=='ar' ? myDatat.ar_description :myDatat.en_description}}</div>
+            <div class="meal-data mtmd mbmd">
+                <span class="mrlg"><img class="mrsm" src="assets/img/icons/time.svg" alt="">{{'share.In'|translate}}
+                    {{myDatat.preparation_time_value}} {{myDatat.preparation_time_type}}</span>
+                <span><img class="mrsm" src="assets/img/icons/person.svg" alt="">{{myDatat.no_persons}} Person</span>
+            </div>
+            <div class="meal-data mtmd mbmd">
+                <span class="mrlg"><i class="fa fa-balance-scale scale-quantity" aria-hidden="true"></i>  {{myDatat.quantity}}
+                    {{languageService.getLanguageOrDefault()=='ar' ? myDatat.unit.ar_name :myDatat.unit.en_name}}
+                </span>
+              
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button *ngIf="!myDatat.favorite" type="button" (click)="addToFavourite(myDatat.id)" class="btn btn-secondary d-inline" data-dismiss="modal">Add to favourite</button>
+        <button *ngIf="myDatat.favorite" type="button" (click)="addToFavourite(myDatat.id)" class="btn btn-secondary d-inline" data-dismiss="modal">Remove From favourite</button>
+        <a routerLink="/user/search/0/0/{{myDatat.chief_id}}" class="btn btn-green d-inline">Order now</a>
+        <!-- <button type="button" (click)="orderNow(myDatat.id)" class="btn btn-green d-inline">Order now</button> -->
+    </div>
+</div>

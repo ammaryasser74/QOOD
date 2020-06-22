@@ -1,0 +1,10 @@
+.weekely {
+    font: 0 12px/1 Poppins, sans-serif;
+    color: #333;
+    margin-bottom: 5px;
+    /* cursor: pointer; */
+}
+
+.weekely-lbl {
+    color: black
+}

@@ -1,0 +1,113 @@
+<main>
+    <div *ngIf="loading" class="m-loading">
+        <div>
+            <i class="fas fa-spinner fa-spin color-green"></i>
+        </div>
+    </div>
+    <div *ngIf="!loading">
+
+        <div class="closed" *ngIf="!Data.user.isactive">
+            <p class="no-margin text-center text-semibold">Kitchen is closed. Ordering is not available.</p>
+        </div>
+
+        <!-- <section class="sec-pad hero-img cover hero-border kitchen-hero" style="background-image: url('assets/img/cover/homepage.jpg')"> -->
+        <section class="sec-pad hero-img cover hero-border kitchen-hero" [ngStyle]="{'background':'url(' + myCover+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center' }">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="hero-text">
+                            <h2 class="no-margin mbmd text-center">
+                                Order Your Favorite <br> Food Online Now
+                            </h2>
+                            <!-- <div class="checkbox-custom">
+                                <input type="radio" checked id="jeddah" class="form-radio">
+                                <label class="mrlg" style="color:white" for="jeddah"> {{languageService.getLanguageOrDefault()=='ar' ? Data.city.ar_name :Data.city.en_name}}</label>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec-pad">
+            <div class="container">
+                <div class="avatar-img kitchen-img text-center">
+                    <div *ngIf="Data.avatar==null" class="a-img cover" style="background-image: url('assets/img/kitchen.jpg')"></div>
+                    <div *ngIf="Data.avatar!=null" class="a-img cover" [ngStyle]="{'background':'url(' + Data.avatar+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }"></div>
+
+                </div>
+                <div class="rate-con mtmd text-center">
+                    <star-rating value="{{Data.rate}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="false" (rate)="onRate($event,Data.id)">
+                    </star-rating>
+                </div>
+                <div class="sec-title">
+                    <h2 class="no-margin mbmd text-semibold text-center">
+                        {{Data.kitchen_name}}
+                    </h2>
+                </div>
+                <div class="bookmark text-center">
+                    <a *ngIf="Data.bookmark" (click)="addBookMark()"><i class="far fa-bookmark mrsm"></i>Remove From bookmark</a>
+                    <a *ngIf="!Data.bookmark" (click)="addBookMark()"><i class="far fa-bookmark mrsm"></i>Click here to bookmark</a>
+                </div>
+                <div class="deals mtxlg">
+                    <div class="tab-g">
+                        <ul class="nav nav-tabs text-center" role="tablist">
+                            <li role="presentation" class="active"><a class="btn" href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+                            <li role="presentation"><a class="btn" routerLink="/user/search/0/0/{{Data.id}}">Menu</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="info">
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <p class="text-center">
+                                            {{Data.info}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="features mtxxlg">
+                                    <div class="row">
+                                        <div class="col-sm-4 br">
+                                            <div class="feature text-center">
+                                                <div class="feature-img">
+                                                    <img src="assets/img/icons/location.svg" alt="">
+                                                </div>
+                                                <h3>Location</h3>
+                                                <p>
+                                                    Choose a transfer price from a wide selection of offers.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 br">
+                                            <div class="feature text-center">
+                                                <div class="feature-img">
+                                                    <img src="assets/img/icons/search.svg" alt="">
+                                                </div>
+                                                <h3>Search</h3>
+                                                <p>
+                                                    Choose a transfer price from a wide selection of offers.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="feature text-center">
+                                                <div class="feature-img">
+                                                    <img src="assets/img/icons/order.svg" alt="">
+                                                </div>
+                                                <h3>Order</h3>
+                                                <p>
+                                                    Choose a transfer price from a wide selection of offers.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</main>

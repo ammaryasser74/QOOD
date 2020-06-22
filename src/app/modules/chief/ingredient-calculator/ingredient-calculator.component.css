@@ -1,0 +1,11 @@
+.select-container .custom-select {
+    min-width: 200px;
+}
+
+.show-btn {
+    color: white;
+    background: #7FB017;
+    width: 100%;
+    height: 50px;
+    border: 0px;
+}

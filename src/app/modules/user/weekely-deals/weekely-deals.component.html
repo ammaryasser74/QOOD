@@ -1,0 +1,136 @@
+<main>
+    <section class="sec-pad hero-img cover hero-border hidden-xs" style="background-image: url('assets/img/cover/homepage.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="hero-text">
+                        <h2 class="no-margin mbmd text-center">
+                            {{'home.orde-Favorite1'|translate}}<br>{{'home.orde-Favorite2'|translate}} 
+                        </h2>
+                        <!-- <form class="hero-form mtlg text-center" action="">
+                            <div class="checkbox-custom">
+                                <input type="radio" name="location" value="jeddah" id="jeddah" class="form-radio" checked><label class="mrlg" for="jeddah">Jeddah</label>
+                            </div>
+
+                        </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec-pad">
+        <div class="container">
+            <div class="sec-title">
+                <h2 class="no-margin mbmd text-semibold text-center">
+                    {{'weekely-deals.weekely-deals'|translate}}
+                </h2>
+            </div>
+            <div class="deals mtxlg">
+                <div class="tab-g">
+                    <div class="row">
+                        <aside class="col-sm-3">
+                            <div class="filter">
+                                <ul class="deals-filter">
+                                    <li class="checkbox-custom weekely">
+                                        <input type="radio" id="kitchen" name="kitchen" [(ngModel)]="parmKitchen.KitchenID" (change)="getData()" value="0" class="form-radio">
+                                        <label class="weekely-lbl">{{'weekely-deals.All-kitchen'|translate}}</label>
+                                    </li>
+                                    <ng-container *ngFor="let kitchen of kitchens">
+                                        <li class="checkbox-custom weekely">
+                                            <input type="radio" (change)="getData()" [(ngModel)]="parmKitchen.KitchenID" value="{{kitchen.id}}" class="form-radio">
+                                            <label class="weekely-lbl">{{kitchen.kitchen_name}}</label>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </aside>
+                        <div class="col-sm-9">
+                            <div class="sortby mbmd">
+                                <div class="row">
+                                    <div class="col-md-3 pull-left">
+                                        <div class="sortbyse">
+                                            <div class="select">
+                                                <select class="selectpicker" name="sort" [(ngModel)]="parmKitchen.filterType" (change)="arrangeDataASC()" class="input-field">
+                                                        <option value="0">{{'share.Sort-by'|translate}}</option>
+                                                        <option value="1">{{'share.Price'|translate}}:{{'share.Low-to-High'|translate}} </option>
+                                                        <option value="2">{{'share.Price'|translate}}: {{'share.High-to-Low'|translate}}</option>         
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 pull-right">
+                                        <div class="switcher">
+                                            <ul class="switch">
+                                                <li class="list" [class.active]="tab==2">
+                                                    <a (click)=gridOrList(1)>
+                                                        <i class="fas fa-list"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="grid" [class.active]="tab==1" (click)=gridOrList(2)>
+                                                    <a>
+                                                        <i class="fas fa-th"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="loading" class="m-loading">
+                                <div>
+                                    <i class="fas fa-spinner fa-spin color-green"></i>
+                                </div>
+                            </div>
+                            <div [ngClass]="listOrGrid" *ngIf="!loading">
+                                <div class="row ">
+
+                                    <div class="col-md-4 col-sm-6" *ngFor="let row of Data">
+                                        <div class="mbxlg">
+                                            <div class="product-item">
+                                                <figure class="cover" [ngStyle]="{'background':'url(' + row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                                                    <div class="btn-group">
+                                                        <!-- <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button> -->
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Add To favourite</a></li>
+
+                                                            <li><a href="#">Share</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </figure>
+                                                <a routerLink="/user/deal/{{row.id}}" class="btn btn-green text-upper">{{'share.Subscribe-now'|translate}}</a>
+                                                <div class="product-info">
+                                                    <div class="rate-con mtmd">
+                                                        <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="true">
+                                                        </star-rating>
+                                                    </div>
+                                                    <h3 class="no-margin mtmd mbmd">
+                                                        <a routerLink="/user/deal/{{row.id}}">
+                                                            {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                                        </a>
+                                                    </h3>
+                                                    <div class="price">{{row.price}} {{'share.SAR'|translate}}</div>
+
+                                                    <div class="meal-data mtmd mbmd">
+                                                        <span>
+                                                          <img class="mrsm" src="assets/img/icons/person.svg" >
+                                                           {{row.no_persons}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <!-- <a href="" class="more-details" data-toggle="modal" data-target="#quickView">More details long details</a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,80 @@
+<main>
+    <div *ngIf="loading" class="m-loading">
+        <div>
+            <i class="fas fa-spinner fa-spin color-green"></i>
+        </div>
+    </div>
+    <section class="sec-pad npt" *ngIf="!loading">
+        <div class="container">
+            <!-- *ngIf="id_array.length>1" -->
+            <div class="closed" *ngIf="id_array.length">
+                <p class="no-margin text-center text-semibold">Order must be from one kitchen please</p>
+            </div>
+            <ng-container *ngFor="let id of id_array">
+                <div class="col-xs-12 kitchen-lbl">
+                    <div class="col-xs-12">
+                        <div class="col-xs-3">
+                            <a class="trash-dir"><i class="fas fa-trash"></i></a>
+                        </div>
+                        <div class="col-xs-3">
+                            <p class="no-margin text-center text-semibold black-color">{{id}} </p>
+                        </div>
+
+                        <div class="col-xs-3"></div>
+                    </div>
+
+                    <div class="shop-content vcenter ">
+
+                    </div>
+                </div>
+                <ng-container *ngFor="let row of myCart">
+                    <ng-container *ngIf="id==row.chief.kitchen_name">
+                        <div class="col-xs-11">
+                            <div class="col-xs-3">
+                                <div class="checkbox-custom shopping-label">
+                                    <input type="checkbox" class="form-radio shopping-list">
+                                    <label class="shopping-label"> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <input class="input-field input-normal mtlg qty-height" value="{{row.quantity}}" type="number" id="qty">
+                            </div>
+                            <div class="col-xs-2">
+                                <label class="price-lbl">{{row.price}}</label>
+                            </div>
+                            <div class="col-xs-2"><label class="price-lbl">{{row.price * row.quantity}}</label></div>
+
+                        </div>
+                    </ng-container>
+
+                </ng-container>
+            </ng-container>
+            <div class="single-item ptmd pbmd ">
+                <div class="row ">
+                    <div class="col-md-2 col-sm-3 col-xs-3 col-md-offset-6 col-sm-offset-4 ">
+                        <div class="shop-content vcenter ">
+                            <div>
+                                <span class="d-block mblg ">Total:</span>
+                                <span class="d-block ">Delivery Fees:</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-5 col-xs-6 pull-right ">
+                        <div class="shop-content end vcenter ">
+                            <div>
+                                <h3 class="price total text-right no-margin text-bold mblg ">49494<sub class="text-upper ">SAR</sub></h3>
+                                <span class="d-block text-right ">from 5 to 15 SAR based on the zone</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right mtxxlg shopping-btn ">
+                <a routerLink="/user/checkout" class="btn btn-green-outline mrlg capitalize d-inline ">Check Out</a>
+                <!-- <a href="place-order.html " class="btn btn-green capitalize d-inline ">check out</a> -->
+            </div>
+        </div>
+    </section>
+
+
+</main>

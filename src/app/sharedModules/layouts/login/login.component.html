@@ -1,0 +1,53 @@
+<div class="sign" tabindex="-1" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="tab-g">
+                <h3 class="text-center text-semibold">{{'share.signin' | translate}}</h3>
+
+                <div class="tab-content">
+                    <div>
+                        <div class="social text-center">
+                            <a  (click)="signInWithFB()" class="facebook">
+                                <i class="fab fa-facebook-f mrxs"></i> {{'sign.withface'|translate}} 
+                            </a>
+                            <a  (click)="signInWithGoogle()" class="google">
+                                <i class="fab fa-google mrxs"></i> {{'sign.withgoogle'|translate}}
+                            </a>
+                        </div>
+                        <div class="dvider-or mtxlg mbxlg text-center">
+                            <span class="text-upper">{{'sign.or'|translate}} </span>
+                        </div>
+                        <form [formGroup]="form">
+                            <div class="form-group">
+                                <input type="text" formControlName="LoginField" placeholder="{{'sign.Phone-number'|translate}}" [ngClass]="{'has-error':form.get('LoginField').invalid && form.get('LoginField').dirty}">
+                                <span class="text-danger" *ngIf="form.get('LoginField').invalid && form.get('LoginField').dirty">{{'share.required' |translate}}</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" formControlName="Password" placeholder="{{'sign.password'|translate}}" [ngClass]="{'has-error':form.get('Password').invalid && form.get('Password').dirty}">
+                                <span class="text-danger" *ngIf="form.get('Password').invalid && form.get('Password').dirty">{{'share.required' |translate}}</span>
+                            </div>
+                            <div class="clearfix">
+                                <div class="checkbox-custom pull-left">
+                                    <input type="checkbox" name="remember" value="remember" id="remember" class="form-radio">
+                                    <label class="mrlg" for="remember">{{'sign.Remeber-me'|translate}}</label>
+                                </div>
+                                <a (click)="forgetPasswort()" class="forget pull-right">{{'sign.forget'|translate}}</a>
+                            </div>
+                            <div class="modal-footer mtxlg">
+                                <button type="button" class="btn btn-green d-inline" (click)="login()" [disabled]="loading || form.invalid">{{'share.signin' | translate}}</button>
+                                <button type="button" class="btn btn-secondary d-inline sign-up" (click)="myModel.hide();signUp()">
+                                    {{'share.signup' | translate}}</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

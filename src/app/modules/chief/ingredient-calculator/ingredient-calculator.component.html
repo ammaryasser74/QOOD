@@ -1,0 +1,195 @@
+<main>
+    <div class="container">
+        <aside class="col-sm-3 d-aside no-padding sticky">
+            <app-chief-layout></app-chief-layout>
+        </aside>
+        <div class="col-sm-9 d-content">
+            <div *ngIf="loading" class="m-loading">
+                <i class="fas fa-spinner fa-spin color-green"></i>
+            </div>
+            <div *ngIf="!loading">
+                <div class="d-content-c plmd">
+                    <div class="row">
+                        <form [formGroup]="form">
+                            <div class="col-sm-12">
+                                <label class="text-semibold mlmd">{{'dashboard.Ingredient-Calculator'|translate}}</label>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="select-container mbmd">
+                                                <div class="custom-select">
+                                                    <select id="dishes" formControlName="dish_id">
+                                                    <option value="null">
+                                                      {{'menu.Select-Dish'|translate}}
+                                                    </option>
+                                                    <option *ngFor="let row of allDish" value="{{row.id}}">
+                                                        {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                                    </option>
+                                                </select>
+                                                </div>
+                                                <span class="text-danger" *ngIf="form.get('dish_id').invalid && form.get('dish_id').dirty">{{'share.required' |translate}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="number" formControlName="numberOfPortions" placeholder="{{'dashboard.Number-of-Portions'|translate}}" required>
+                                            <span class="text-danger " *ngIf="form.get('numberOfPortions').invalid && form.get('numberOfPortions').dirty">{{'share.required' |translate}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12">
+                                        <div class="form-group">
+                                            <button (click)="GetGridient()" class="show-btn">{{'dashboard.show'|translate}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="text-semibold mlmd">{{'dashboard.Add-ingeridiant'|translate}}</label>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group mbxlg">
+                                            <div class="form-group">
+                                                <input type="text" formControlName="ingredientName" placeholder="{{'dashboard.Ingredient-Name'|translate}}" [ngClass]="{'has-error':form.get('ingredientName').invalid && form.get('ingredientName').dirty}">
+                                                <span class="text-danger" *ngIf="form.get('ingredientName').invalid && form.get('ingredientName').dirty">{{'share.required' |translate}}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mbxlg">
+                                            <div class="input-group">
+
+                                                <input type="number" formControlName="quantityUsed" placeholder="{{'dashboard.Quantity-Used'|translate}}" [ngClass]="{'has-error':form.get('quantityUsed').invalid && form.get('quantityUsed').dirty}">
+
+                                                <div class="input-group-btn bs-dropdown-to-select-group">
+                                                    <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                                    <span class="text-upper label-name">{{'dashboard.QTY'|translate}}</span>
+                                                    <input type="hidden" data-bind="bs-drp-sel-value" value="qty">
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                    <ul class="dropdown-menu">
+                                                        <div class="checkbox-custom p-l-15">
+                                                            <input type="radio" formControlName="unitUsed" value="1" id="one-year-sub" class="form-radio"><label class="mrlg" for="one-year-sub">{{'share.kg'|translate}}</label><br>
+                                                            <input type="radio" formControlName="unitUsed" value="2" id="two-year-sub" class="form-radio"><label class="mrlg" for="two-year-sub">{{'share.gram'|translate}}</label><br>
+                                                            <input type="radio" formControlName="unitUsed" value="3" id="one-year-sub" class="form-radio"><label class="mrlg" for="one-year-sub">{{'share.liter'|translate}}</label><br>
+                                                            <input type="radio" formControlName="unitUsed" value="4" id="two-year-sub" class="form-radio"><label class="mrlg" for="two-year-sub">{{'share.ml'|translate}}</label>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <span class="text-danger " *ngIf="form.get('quantityUsed').invalid && form.get('quantityUsed').dirty">{{'share.required' |translate}}</span>
+                                            <span class="text-danger m-l-50" *ngIf="form.get('unitUsed').invalid && form.get('unitUsed').dirty">Quantity Required</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mbxlg">
+                                            <div class="input-group">
+
+                                                <input type="number" formControlName="quantityPurchased" placeholder="{{'dashboard.Quantity-Purchased'|translate}}" [ngClass]="{'has-error':form.get('quantityPurchased').invalid && form.get('quantityPurchased').dirty}">
+
+                                                <div class="input-group-btn bs-dropdown-to-select-group">
+                                                    <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                                    <span class="text-upper label-name">{{'dashboard.QTY'|translate}}</span>
+                                                    <input type="hidden" data-bind="bs-drp-sel-value" value="qty">
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                    <ul class="dropdown-menu">
+                                                        <div class="checkbox-custom p-l-15">
+                                                            <input type="radio" formControlName="unitPurchased" value="1" id="one-year-sub" class="form-radio"><label class="mrlg" for="one-year-sub">{{'share.kg'|translate}}</label><br>
+                                                            <input type="radio" formControlName="unitPurchased" value="2" id="two-year-sub" class="form-radio"><label class="mrlg" for="two-year-sub">{{'share.gram'|translate}}</label><br>
+                                                            <input type="radio" formControlName="unitPurchased" value="3" id="one-year-sub" class="form-radio"><label class="mrlg" for="one-year-sub">{{'share.liter'|translate}}</label><br>
+                                                            <input type="radio" formControlName="unitPurchased" value="4" id="two-year-sub" class="form-radio"><label class="mrlg" for="two-year-sub">{{'share.ml'|translate}}</label>
+                                                        </div>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                            <span class="text-danger " *ngIf="form.get('quantityPurchased').invalid && form.get('quantityPurchased').dirty">{{'share.required' |translate}}</span>
+                                            <span class="text-danger m-l-50" *ngIf="form.get('unitPurchased').invalid && form.get('unitPurchased').dirty">Quantity Required</span>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mbxlg">
+
+                                            <input type="number" formControlName="purchasePrice" placeholder="{{'dashboard.Purchase-Price'|translate}}" [ngClass]="{'has-error':form.get('purchasePrice').invalid && form.get('purchasePrice').dirty}">
+                                            <span class="text-danger" *ngIf="form.get('purchasePrice').invalid && form.get('purchasePrice').dirty">{{'share.required' |translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" (click)="save()" class="btn btn-green btn-bigger width100 mbxxlg">{{'dashboard.Add-ingeridiant'|translate}}</button>
+
+                            </div>
+                        </form>
+                        <div class="col-sm-12" *ngIf="ingredient.length!=0">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <div class="feature text-center">
+                                        <div class="feature-img">
+                                            <img src="assets/img/icons/money.svg" alt="">
+                                        </div>
+                                        <h3>Total Amount</h3>
+                                        <h3 class="text-bold mtsm">
+                                            {{'share.SAR' |translate}} {{ingredient.totalAmmount}}
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="feature text-center">
+                                        <div class="feature-img">
+                                            <img src="assets/img/icons/min-amount.svg" alt="">
+                                        </div>
+                                        <h3>Min Dish Price</h3>
+                                        <h3 class="text-bold mtsm">
+                                            {{'share.SAR' |translate}} {{ingredient.minDishPrice}}
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 mtxlg" *ngIf="ingredient.length!=0">
+                            <div class="row">
+
+                                <div class="col-sm-6" *ngFor="let row of ingredient.ingredients">
+                                    <div class="ingredient mbxxlg">
+                                        <h3 class="text-bold text-center capitalize no-margin mbxlg">{{row.ingredientName}}</h3>
+                                        <ul class="in-data">
+                                            <li class="bb">
+                                                <label class="pull-left text-bold">{{'dashboard.Quantity-Purchased'|translate}}</label>
+                                                <span class="pull-right">{{row.quantityPurchased}}{{row.unitPurchased}}</span>
+                                            </li>
+                                            <li class="bb">
+                                                <label class="pull-left text-bold">Purchased Price</label>
+                                                <span class="pull-right">{{row.purchasePrice}}  {{'share.SAR' |translate}}</span>
+                                            </li>
+                                            <li class="bb">
+                                                <label class="pull-left text-bold">Used Qty</label>
+                                                <span class="pull-right">{{row.quantityUsed}}  {{row.unitUsed}} </span>
+                                            </li>
+                                            <li>
+                                                <label class="pull-left text-bold">Price for Used Qty</label>
+                                                <span class="pull-right">{{row.UsedPrice}}  {{'share.SAR' |translate}}</span>
+                                            </li>
+                                        </ul>
+                                        <div class="text-center">
+                                            <button (click)="Delete(row.id)" type="button" class="btn btn-delete mtxlg d-inline">Delete Ingredient</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

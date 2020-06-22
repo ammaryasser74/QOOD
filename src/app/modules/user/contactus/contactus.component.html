@@ -1,0 +1,65 @@
+<main>
+    <div *ngIf="loading" class="m-loading">
+        <div>
+            <i class="fas fa-spinner fa-spin color-green"></i>
+        </div>
+    </div>
+    <div *ngIf="!loading">
+        <section class="sec-pad">
+            <div class="container">
+                <div class="sec-title">
+                    <div class="title-icon text-center mblg">
+                        <img src="assets/img/icons/message.svg">
+                    </div>
+                    <h2 class="no-margin mbmd text-semibold text-center text-upper">
+                        {{'contact.SEND'|translate}}
+                    </h2>
+                    <p class="no-margin text-center">
+                        {{'contact.content'|translate}} <br> WeCare@qoot.online.
+                    </p>
+                </div>
+                <div class="contact mtxlg">
+                    <form [formGroup]="form">
+                        <div class="form-group">
+                            <input formControlName="Name" type="text" placeholder="  {{'contact.Name'|translate}}" [ngClass]="{'has-error':form.get('Name').invalid && form.get('Name').dirty}">
+                            <span class="text-danger" *ngIf="form.get('Name').invalid && form.get('Name').dirty">{{'share.required' |translate}}</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input formControlName="Mobile" type="tel" placeholder="{{'contact.Mobile'|translate}}" [ngClass]="{'has-error':form.get('Mobile').invalid && form.get('Mobile').dirty}">
+                                    <span class="text-danger" *ngIf="form.get('Mobile').invalid && form.get('Mobile').dirty">{{'share.required' |translate}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input formControlName="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" type="email" placeholder="{{'contact.Email'|translate}}" [ngClass]="{'has-error':form.get('Email').invalid && form.get('Email').dirty}">
+                                    <span class="text-danger" *ngIf="form.get('Email').invalid && form.get('Email').dirty">{{'share.required' |translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-container mbxlg">
+                            <div class="custom-select" for="category">
+                                <select id="msgType" formControlName="msgType">
+
+                                    <option value="null">{{'contact.Reason'|translate}}</option>
+                            <ng-container *ngFor="let row of messageType">
+                                    <option value="{{row.id}}">
+                                            {{languageService.getLanguageOrDefault()=='ar' ? row.NameArabic :row.NameEnglish}}
+                                    </option>
+                            </ng-container>
+                        </select>
+                            </div>
+                        </div>
+                        <textarea formControlName="Message" id="" cols="30" rows="10" placeholder="{{'contact.Message'|translate}}" [ngClass]="{'has-error':form.get('Message').invalid && form.get('Message').dirty}"></textarea>
+                        <button (click)="save()" class="btn btn-green mtxxlg">
+                    {{'share.send'|translate}}
+                </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</main>

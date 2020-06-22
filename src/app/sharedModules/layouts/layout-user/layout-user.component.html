@@ -1,0 +1,331 @@
+<div dir="{{mydir}}">
+  <header class="ball">
+    <nav class="navbar ">
+      <div class="top-header">
+        <div class="container">
+          <ul class="nav navbar-nav top-menu">
+            <li><a routerLink="/user/privacy">{{'share.privacy' | translate}}</a></li>
+            <li><a routerLink="/user/terms">{{'share.terms' | translate}}</a></li>
+            <li><a routerLink="/user/help">{{'share.help' | translate}}</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="icon">
+              <img src="assets/img/icons/phone.svg">
+              <span>
+                <a href="tel:966509300666">
+                  {{'share.Call' | translate}}:
+                  <span *ngIf="mydir=='rtl'">0666 </span><span *ngIf="mydir=='rtl'">930 </span><span
+                    *ngIf="mydir=='rtl'">50 </span><span *ngIf="mydir=='rtl'">966+</span>
+                  <span *ngIf="mydir=='ltr'">+966 </span><span *ngIf="mydir=='ltr'">50 </span> <span
+                    *ngIf="mydir=='ltr'">930 </span><span *ngIf="mydir=='ltr'">0666</span>
+                </a>
+
+              </span>
+            </li>
+            <li class="mobile-block">
+              <a (click)="languageService.setLanguage('en')">
+                <img src="assets/img/icons/uk.svg">
+                <span>EN</span>
+              </a>
+            </li>
+            <li class=" mobile-block">
+              <a (click)="languageService.setLanguage('ar')">
+                <img class="sa-img" src="assets/img/icons/sa.png">
+                <span>عربي</span>
+              </a>
+            </li>
+            <li class="hidden-xs ">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">
+                <img class="sa-img" src="{{imgLan}}">
+                <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <a (click)="languageService.setLanguage('en')">
+                    <img src="assets/img/icons/uk.svg">
+                    <span>EN</span>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="languageService.setLanguage('ar')">
+                    <img class="sa-img" src="assets/img/icons/sa.png">
+                    <span>عربي</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <div class="nav-con">
+          <div class="navbar-header" *ngIf="!isChief || !isLogin ">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/user/home">
+              <img src="assets/img/logo.png">
+            </a>
+          </div>
+          <div class="navbar-header" *ngIf="isChief">
+            <button type="button" (click)="toggleMenu()" class="navbar-toggle side-toggle ">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/user/home">
+              <img src="assets/img/logo.png">
+            </a>
+            <button type="button" class="navbar-toggle bullets collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li> <a routerLink="/chief/become-chef" class="btn navbar-btn btn-green"
+                  *ngIf="!isChief">{{'share.become-chef' | translate}}</a>
+              </li>
+              <li class="dropdown cart-dropdown max-height" *ngIf="!isChief">
+
+                <a href="checkout.html" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                  aria-haspopup="true" aria-expanded="false"
+                  [ngClass]="{'has-items' :getFromLocalStorage('mycarttotal')!=0 && getFromLocalStorage('mycarttotal')!=null}">
+                  <img src="assets/img/icons/cart.svg">
+                </a>
+
+                <ul class="dropdown-menu cart m-t-25">
+                  <div *ngIf="getFromLocalStorage('mycart')!=null">
+                    <div *ngIf="getFromLocalStorage('mycart').dishes!=null">
+                      <li class="cart-item single-item" *ngFor="let row of getFromLocalStorage('mycart').dishes">
+                        <a>
+                          <div class="item-shop cart-img cover"
+                            [ngStyle]="{'background':'url('+ myUrl+row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                          </div>
+                        </a>
+                        <div class="cart-content">
+                          <h4 class="no-margin">
+                            <a>
+                              {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                            </a>
+                          </h4>
+                          <span class="d-block">{{'share.Qty' | translate}}:{{row.pivot.quantity}}</span>
+                          <p class="price no-margin mtxs text-bold"><span>{{'share.price' | translate}}:
+                            </span>{{row.pivot.price * row.pivot.quantity }} {{'share.SAR' | translate}}</p>
+                        </div>
+                      </li>
+                    </div>
+                    <div *ngIf="getFromLocalStorage('mycart').weeklydeals!=null">
+                      <li class="cart-item single-item" *ngFor="let row of getFromLocalStorage('mycart').weeklydeals">
+                        <a>
+                          <div class="item-shop cart-img cover"
+                            [ngStyle]="{'background':'url(' + myUrl+row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                          </div>
+                        </a>
+                        <div class="cart-content">
+                          <h4 class="no-margin">
+                            <a>
+                              {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                            </a>
+                          </h4>
+                          <span class="d-block">Qty:{{row.pivot.quantity}}</span>
+                          <p class="price no-margin mtxs text-bold"><span>{{'share.price' | translate}}:
+                            </span>{{row.pivot.price * row.pivot.quantity }} {{'share.SAR' | translate}}</p>
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+
+                  <li class="cart-item cart-total">
+                    <div class="d-inline pull-left">
+                      <span>{{'share.total' | translate}}:</span>
+                    </div>
+                    <div class="shop-content d-inline pull-right">
+                      <span
+                        class="price total text-right no-margin text-bold text-upper ">{{getFromLocalStorage('mycarttotal')}}
+                        {{'share.SAR' | translate}}</span>
+                    </div>
+                  </li>
+                  <li class="cart-btn">
+                    <a routerLink="/user/checkout" class="btn btn-green text-upper"
+                      *ngIf="getFromLocalStorage('currentUser')!=null && getFromLocalStorage('mycarttotal')!=0 && getFromLocalStorage('mycarttotal')!=null">{{'share.checkout'|translate}}</a>
+                    <a routerLink="/user/shopping" class="btn btn-green-outline text-upper">{{'share.view-cart' | translate}}</a>
+                  </li>
+                </ul>
+              </li>
+
+              <button type="button" class="btn navbar-btn mrsm" (click)="login()"
+                *ngIf="getFromLocalStorage('currentUser')==null">{{'share.signin' | translate}}</button>
+              <button type="button" class="btn navbar-btn" (click)="signUp()"
+                *ngIf="getFromLocalStorage('currentUser')==null">{{'share.signup' | translate}}</button>
+
+                <li class="dropdown notification" *ngIf="getFromLocalStorage('currentUser')?.type=='chief'"  >
+                  <a  class="dropdown-toggle has-items" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <img src="assets/img/icons/notification.svg" >
+                  </a>
+                  <ul class="dropdown-menu" *ngIf="listNotification">
+                      <li *ngFor="let row of listNotification">
+                          <a (click)="readNotigication(row.id)" class="notification-item">
+                              <div class="notification-img pull-left mrsm">
+                                  <img src="assets/img/icons/plate-1.svg">
+                              </div>
+                              <div class="notification-msg pull-left">
+                                  <span class="d-block text-semibold">New order</span>
+                                  <p class="no-margin text-semibold">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_text :row.en_text}}</p>
+                              </div>
+                          </a>
+                      </li>
+                     
+                  </ul>
+              </li>
+              <li class="dropdown cart-dropdown user-dropdown" *ngIf="getFromLocalStorage('currentUser')!=null">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">
+                  <img src="assets/img/icons/user.svg">
+                </a>
+                <ul class="dropdown-menu user-menu" *ngIf="getFromLocalStorage('currentUser').type=='customer'">
+                  <li><a tab routerLink="/user/account/1">{{'share.account' | translate}}</a></li>
+                  <li><a routerLink="/user/account/2">{{'share.orders' | translate}}</a></li>
+                  <li><a routerLink="/user/account/3">{{'share.favourite' | translate}}</a></li>
+                  <li><a (click)="logout()">{{'share.sign-out' | translate}}</a></li>
+                </ul>
+                <ul class="dropdown-menu user-menu" *ngIf="getFromLocalStorage('currentUser').type=='chief' || getFromLocalStorage('currentUser').type=='grocery'">
+                  <li><a routerLink="/chief/chef-account">{{'share.account' | translate}}</a></li>
+                  <li><a (click)="logout()">{{'share.sign-out' | translate}}</a></li>
+                </ul> 
+              </li>
+            </ul>
+            <ul class="nav navbar-nav main-nav" *ngIf="!isChief">
+              <li [class.active]="nav==1"><a (click)="nav=1" routerLink="/user/home">{{'share.home' | translate}}</a>
+              </li>
+              <li [class.active]="nav==2"><a (click)="nav=2"
+                  routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
+              <li [class.active]="nav==3"><a (click)="nav=3"
+                  routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}}</a></li>
+           
+                  
+              <li [class.active]="nav==4"><a (click)="nav=4"
+                  routerLink="/user/book-event">{{'share.book-event' | translate}}</a></li>
+              <li [class.active]="nav==5"><a (click)="nav=5"
+                  routerLink="/user/contact-us">{{'share.contact-us' | translate}}</a></li>
+                  <li class="grocery" ><a class="grocery" 
+                    href="http://grocery.qoot.online/" target="_blank">{{'share.grocery' | translate}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <aside class="col-sm-3 d-aside no-padding sticky active" id="sidebar-menu" (click)="closeMenu()" *ngIf="isOpen">
+    <app-chief-layout></app-chief-layout>
+  </aside>
+  <router-outlet>
+  </router-outlet>
+
+  <footer class="bt">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 col-xs-12">
+          <div class="logo-footer mbxlg">
+            <img src="assets/img/logo.png">
+          </div>
+          <p class="mbmd">
+            {{'share.Qoot-text'|translate}}
+          </p>
+          <ul class="footer-social" *ngIf="!loadingdata">
+            <li><a href="{{settings.facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="{{settings.twitter}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="{{settings.instagram}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-sm-2 col-xs-6">
+          <div class="quick-links">
+            <h3 class="mblg">{{'share.Qoot'|translate}}</h3>
+            <ul>
+              <li><a (click)="closeMenu()" routerLink="/user/home">{{'share.home' | translate}}</a></li>
+              <li><a (click)="closeMenu()" routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
+              <li><a (click)="closeMenu()" routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}} </a>
+              </li>
+              <li><a (click)="closeMenu()" routerLink="/user/contact-us">{{'share.contact-us' | translate}}</a></li>
+              <li><a (click)="closeMenu()" routerLink="/user/help">{{'share.help' | translate}}</a></li>
+              <li><a  (click)="closeMenu()" href="http://grocery.qoot.online/" target="_blank">{{'share.grocery' | translate}} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-2 col-xs-6">
+          <div class="quick-links">
+            <h3 class="mblg">{{'share.Cusines'|translate}}</h3>
+            <ul *ngIf="!loadingdata">
+              <ng-container *ngFor="let row of cusines ; let i=index">
+                <li *ngIf="i<6"><a> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</a></li>
+              </ng-container>
+
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-2 col-xs-6">
+          <div class="quick-links mob-off">
+            <h3 class="mblg">{{'share.Brands'|translate}}</h3>
+            <ul>
+              <ng-container *ngFor="let row of brands">
+                <li><a href="{{row.url}}" target="_blank"> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</a></li>
+              </ng-container>
+
+
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <div class="quick-links">
+            <h3 class="mblg"> {{'share.Subscribe'|translate}}</h3>
+            <p>
+              {{'share.Subscribe-text'|translate}}
+            </p>
+            <form [formGroup]="form">
+              <div class="select-container mtmd">
+                <input formControlName="email" type="text"
+                  [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
+                <span class="text-danger"
+                  *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.required' |translate}}</span>
+                <button class="btn btn-green btn-search" (click)="subscribe()">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+            <div class="payment-methods mtxlg">
+              <ul>
+                <li>
+                  <img src="assets/img/icons/maestro.svg">
+                </li>
+                <li>
+                  <img src="assets/img/icons/mastercard.svg">
+                </li>
+                <li>
+                  <img src="assets/img/icons/visa.svg">
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright mtxlg">
+      <h4 class="no-margin text-center">
+        {{'share.Copyright'|translate}}
+      </h4>
+    </div>
+  </footer>
+</div>

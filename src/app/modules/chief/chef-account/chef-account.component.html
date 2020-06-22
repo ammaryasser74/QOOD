@@ -1,0 +1,177 @@
+<main>
+  <div class="container">
+    <aside class="col-sm-3 d-aside no-padding sticky">
+      <app-chief-layout></app-chief-layout>
+    </aside>
+    <div class="col-sm-9 d-content">
+      <div *ngIf="loading" class="m-loading">
+        <i class="fas fa-spinner fa-spin color-green"></i>
+      </div>
+      <div *ngIf="!loading">
+        <div class="d-content-c plmd">
+          <div class="avatar-img text-center mbmd">
+            <form (ngSubmit)="onSubmit()" class="m-b-25">
+              <label tabindex="0" class="lbl-img res-img" for="my-file-1">
+                <a>
+                  <div class="avatar-img text-center mbmd " style="min-height: 125px;">
+                    <div class="a-img text-center cover " style="background-image: url('assets/img/kitchen.jpg');"
+                      *ngIf="myavatar==null"></div>
+                    <!-- <img src='assets/img/kitchen.jpg' class="m-t-15 profile"  for="my-file-1" *ngIf="myavatar==null"> -->
+                    <img [src]='myavatar' class="profile text-center mbmd " for="my-file-1" for="my-file-1"
+                      *ngIf="myavatar!=null">
+
+                    <input class="input-file " id="my-file-1" type="file" style="display :none"
+                      accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event)"
+                      class="select-profile-picture">
+
+                  </div>
+                </a>
+              </label>
+              <button class="btn btn-primary save-photo">
+                {{'account.save-photo'|translate}}
+
+              </button>
+            </form>
+          </div>
+          <div class="text-center m-t-15">
+            <form (ngSubmit)="onSaveCover()">
+              <label tabindex="0" for="my-file" style="outline-width: 0;width:100%">
+                <a>
+                  <div for="my-file" class="kitchen-img" style="background-image: url('assets/img/cover/homepage.jpg')"
+                    *ngIf="img==null"></div>
+                  <div for="my-file" class="kitchen-img cover-photo"
+                    [ngStyle]="{'background':'url(' + img + ')', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center'}"
+                    *ngIf="img!=null"></div>
+                  <input class="input-file" id="my-file-1" type="file" style="display :none"
+                    accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event)"
+                    class="select-profile-picture">
+
+                  <input class="input-file" id="my-file" type="file" style="display :none"
+                    (change)="onSelectCover($event)" class="select-profile-picture">
+
+                </a>
+              </label>
+              <div class="text-center"><button class="btn btn-primary save-photo m-t-10">
+
+                  {{'account.save-cover'|translate}}
+                </button></div>
+
+            </form>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="text-center text-semibold">
+
+                {{'account.Personal-information'|translate}}
+              </h3>
+              <form [formGroup]="form" class="mtxxlg">
+                <div class="feature text-center">
+                  <div class="checkbox-custom mtlg">
+                    <ng-container *ngFor="let row of cities">
+                      <input type="radio" formControlName="city_id" [checked]="row.id==form.get('city_id').value"
+                        value="{{row.id}}" class="form-radio">
+                      <label class="mrlg"
+                        for="jeddah">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                    </ng-container>
+                  </div>
+                </div>
+                <br>
+                <agm-map [latitude]="lat" [longitude]="lng" [fullscreenControl]="true" (mapClick)="placeMarker($event)">
+                  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
+
+                <input type="text" formControlName="address" placeholder="{{'share.please-mark'|translate}}"
+                  class="input-field input-normal mtlg"
+                  [ngClass]="{'has-error':form.get('address').invalid && form.get('address').dirty}" readonly>
+                <span class="text-danger" *ngIf="form.get('address').invalid && form.get('address').dirty">change mark
+                  to locate your location</span>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd">{{'account.Kitchen-Name'|translate}}</label>
+                      <input type="text" formControlName="kitchen_name" placeholder="Kitchen Name"
+                        [ngClass]="{'has-error':form.get('kitchen_name').invalid && form.get('kitchen_name').dirty}">
+                      <span class="text-danger"
+                        *ngIf="form.get('kitchen_name').invalid && form.get('kitchen_name').dirty">Required</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd">{{'account.Owner-Name'|translate}}</label>
+                      <input type="text" formControlName="kitchen_owner_name" placeholder="Owner Name"
+                        [ngClass]="{'has-error':form.get('kitchen_owner_name').invalid && form.get('kitchen_owner_name').dirty}">
+                      <span class="text-danger"
+                        *ngIf="form.get('kitchen_owner_name').invalid && form.get('kitchen_owner_name').dirty">{{'share.required' |translate}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd">{{'account.Kitchen-Slug'|translate}} </label>
+                      <input type="text" formControlName="slug" placeholder="Kitchen Slug"
+                        [ngClass]="{'has-error':form.get('slug').invalid && form.get('slug').dirty}">
+                      <span class="text-danger" *ngIf="form.get('slug').invalid && form.get('slug').dirty">
+                      {{'share.englishandnospace' |translate}}</span>
+
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd">{{'account.Kitchen-info'|translate}}</label>
+                      <textarea formControlName="info" cols="30" rows="5"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd">{{'account.Phone-Number'|translate}}</label>
+                      <input type="tel" formControlName="phone" placeholder="Phone Number" readonly>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd">{{'account.Maroof-Number'|translate}}</label>
+                      <input type="text" formControlName="maroof_number" placeholder="{{'account.Maroof-Number'|translate}}"
+                        [ngClass]="{'has-error':form.get('maroof_number').invalid && form.get('maroof_number').dirty}">
+                      <span class="text-danger"
+                        *ngIf="form.get('maroof_number').invalid && form.get('maroof_number').dirty">{{'share.required' |translate}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd"> {{'account.Health-Card'|translate}}</label>
+                      <input type="number" formControlName="health_card" placeholder="{{'account.Health-Card'|translate}}"
+                        [ngClass]="{'has-error':form.get('health_card').invalid && form.get('health_cards').dirty}">
+                      <span class="text-danger"
+                        *ngIf="form.get('health_card').invalid && form.get('health_card').dirty">{{'share.required' |translate}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd"> {{'account.E-mail'|translate}}</label>
+                      <input type="email" formControlName="email" placeholder="E-mail" readonly>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="text-semibold mlmd"
+                      style="visibility: hidden;">{{'account.change-passowrd'|translate}}</label>
+                    <div class="ptmd pbxxlg">
+                      <a (click)="changePasswort()" class="ptlg">{{'account.change-passowrd'|translate}}</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="text-semibold mlmd">{{'account.Instagram-Page'|translate}}</label>
+                      <input type="text" formControlName="instagram_page" placeholder="{{'account.Instagram-Page'|translate}}" required>
+                    </div>
+                  </div>
+                </div>
+                <button (click)="update()" class="btn btn-green mtxxlg pull-right">{{'share.Save'|translate}}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,77 @@
+<main>
+    <div *ngIf="loading" class="m-loading">
+        <div>
+            <i class="fas fa-spinner fa-spin color-green"></i>
+        </div>
+    </div>
+    <div *ngIf="!loading">
+        <section class="sec-pad hero-img cover" style="background-image: url('assets/img/cover/about.jpg')"></section>
+        <section class="sec-pad about">
+            <div class="container">
+                <div class="about-con">
+                    <h2 class="no-margin mbmd"> {{'about.about-us' | translate}}</h2>
+                    <p class="mbmd">
+                        <strong> {{'about.qoot' | translate}}</strong> {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_text_1 :Data.en_text_1}}
+                    </p>
+                    <p>
+                        {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_text_about :Data.en_text_about}}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec-pad ptsm">
+            <div class="container">
+                <div class="features mtxxlg">
+                    <div class="row">
+                        <div class="col-sm-3 br">
+                            <div class="feature text-center">
+                                <div class="feature-img">
+                                    <img src="assets/img/icons/location.svg" alt="">
+                                </div>
+                                <h3>{{'about.Location' | translate}}</h3>
+                                <p>
+                                    {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_text_location :Data.en_text_location}}
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 br">
+                            <div class="feature text-center">
+                                <div class="feature-img">
+                                    <img src="assets/img/icons/search.svg" alt="">
+                                </div>
+                                <h3> {{'about.Search' | translate}}</h3>
+                                <p>
+                                    {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_text_search :Data.en_text_search}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 br">
+                            <div class="feature text-center">
+                                <div class="feature-img">
+                                    <img src="assets/img/icons/order.svg" alt="">
+                                </div>
+                                <h3> {{'about.Order' | translate}}</h3>
+                                <p>
+                                    {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_text_order :Data.en_text_order}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="feature text-center">
+                                <div class="feature-img">
+                                    <img src="assets/img/icons/enjoy.svg" alt="">
+                                </div>
+                                <h3> {{'about.Enjoy' | translate}}</h3>
+                                <p>
+                                    {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_text_1 :Data.en_text_1}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

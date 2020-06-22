@@ -1,0 +1,26 @@
+<div class="sign" tabindex="-1" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header m-bottom-20">
+
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group text-left">
+                        <label>
+                                    {{boxObj.msg}}
+                                </label>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center m-bottom-20">
+                    <button type="button" class="btn btn-green d-inline" aria-label="Close" (click)="onClose(true)">
+                                {{boxObj.yes}}
+                            </button>
+                    <button type="button" class="btn bg-white d-inline" (click)="warningModel.hide()">
+                        {{boxObj.no}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

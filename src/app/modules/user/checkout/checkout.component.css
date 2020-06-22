@@ -1,0 +1,18 @@
+.k-icon-32 {
+    font-size: 32px;
+    /* Sets icon size to 32px */
+}
+
+.k-icon-48 {
+    font-size: 48px;
+    /* Sets icon size to 48px */
+}
+
+.k-icon-64 {
+    font-size: 64px;
+    /* Sets icon size to 64px */
+}
+
+.k-icon.my-custom-icon-class:before {
+    content: "\\e13a";
+}

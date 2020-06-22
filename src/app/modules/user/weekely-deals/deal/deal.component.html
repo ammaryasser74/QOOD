@@ -1,0 +1,202 @@
+<main>
+  <div *ngIf="loading" class="m-loading">
+    <div>
+      <i class="fas fa-spinner fa-spin color-green"></i>
+    </div>
+  </div>
+  <section class="meal sec-pad" *ngIf="!loading">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="meal-hero cover"
+            [ngStyle]="{'background':'url(' +myURL+Data.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="product-info text-center mtxxlg">
+                <div class="rate-con mtmd">
+                  <star-rating value="{{Data.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px"
+                    readonly="true">
+                  </star-rating>
+                </div>
+                <h3 class="no-margin mtmd mbsm">
+                  <a>
+                    {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_name :Data.en_name}}
+                  </a>
+                </h3>
+                <div class="price mbsm">{{Data.price}} {{'share.SAR'|translate}}</div>
+                <div class="meal-data mtmd mbmd">
+                  <!-- <span class="mrlg"><img class="mrsm" src="assets/img/icons/time.svg" alt="">In 50 min</span> -->
+                  <span><img class="mrsm" src="assets/img/icons/person.svg" alt="">{{Data.no_persons}} Person</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="mtxxlg">
+                <p>{{languageService.getLanguageOrDefault()=='ar' ? Data.ar_description :Data.en_description}}</p>
+                <div class="action-btn mtxxlg">
+                  <!-- <button type="button" class="btn btn-secondary d-inline">Add to favourite</button> -->
+                  <button type="button" (click)="SubscribDeal(Data)" class="btn btn-green d-inline">{{'share.subscribe'|translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="weekly-meals mtxxlg">
+            <div class="row">
+
+              <div class="col-sm-4" *ngFor="let day of Data.days">
+                <div class="meal-img cover"
+                  [ngStyle]="{'background':'url(' +myURL+ day.pivot.path + ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                </div>
+                <div class="meal-data mbmd">
+                  <h4 class="text-semibold mtlg"><a
+                      (click)="openDishDayModal(day)">{{languageService.getLanguageOrDefault()=='ar' ? day.ar_name :day.en_name}}</a>
+                  </h4>
+                  <!-- <p>Chicken margaritas with salad with fruit</p> -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="share-social mtxlg ptlg pblg plmd bt bb">
+            <span class="mrxs">Share this meal:</span>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+
+          <div class="menu mtxxlg">
+            <div class="section-title mbxxlg">
+              <h2 class="text-capitalize text-center no-margin">Menu</h2>
+            </div>
+            <div class="row">
+
+
+              <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4" *ngFor="let row of Data.allDishes">
+
+                <div class="product-item">
+
+                  <figure class="cover"
+                    [ngStyle]="{'background':'url('+myURL+row.img1+')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                    <div class="btn-group">
+                      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-ellipsis-h"></i>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li *ngIf="!row.favorite"><a (click)="addToFavourite(row.id)">Add To favourite</a></li>
+                        <li *ngIf="row.favorite"><a (click)="addToFavourite(row.id)">Remove From favourite</a></li>
+                        <li><a href="#">Share</a></li>
+                      </ul>
+                    </div>
+                  </figure>
+                  <a routerLink="/user/search/0/0/{{row.chief_id}}" class="btn btn-green text-upper">order</a>
+                  <div class="product-info">
+                    <star-rating value="{{row.rate}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px"
+                      readonly="false">
+                    </star-rating>
+                    <h3 class="no-margin mtmd mbmd">
+                      <a routerLink="/user/meal-details/{{row.id}}">
+                        {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                      </a>
+                    </h3>
+                    <div class="price">{{row.price}}</div>
+                    <div class="meal-data mtmd mbmd">
+                      <span class="mrlg">
+                        <img class="mrsm" src="assets/img/icons/time.svg" alt="">
+                        In {{row.preparation_time_value}} min
+                      </span>
+                      <span>
+                        <img class="mrsm" src="assets/img/icons/person.svg" alt="">
+                        {{row.no_persons}} Person
+                      </span>
+                    </div>
+                  </div>
+                  <!-- <a (click)="openMealModal(row)" class="more-details">More details long details</a> -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/fast.svg" alt="">
+              </div>
+              <h3>{{'home-four.Fast-Delivery'|translate}}</h3>
+              <p>
+                {{'home.delivery-text'|translate}}
+              </p>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/plate.svg" alt="">
+              </div>
+              <h3>{{'home-four.Various-Cusines'|translate}}</h3>
+              <p>
+                {{'home.different-Kitchen'|translate}}
+              </p>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/quality.svg" alt="">
+              </div>
+              <h3>{{'home-four.Quality'|translate}}</h3>
+              <p>
+                {{'home.quality-text'|translate}}
+              </p>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/message.svg" alt="">
+              </div>
+              <h3 class="text-semibold">Subscribe</h3>
+              <p>
+                Receive deals from our restaurants via e-mail
+              </p>
+              <form class="hero-form hero-subscribe mtxlg" [formGroup]="form">
+                <div class="input-group mtxlg">
+                  <input type="email" formControlName="email"
+                    [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}" class="form-control">
+                  <span class="text-danger"
+                    *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.required' |translate}}</span>
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="subscribe()" type="button"><i
+                        class="fa fa-paper-plane"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="faq-card mblg">
+            <div class="feature text-center">
+              <div class="feature-img">
+                <img src="assets/img/icons/chat.svg" alt="">
+              </div>
+              <h3 class="text-semibold">Get our app</h3>
+              <p>
+                it's the fastest way to order food on the go.
+              </p>
+              <div class="download">
+                <a href="#" class="mbmd">
+                  <img src="assets/img/icons/play_store.svg" alt="">
+                </a>
+                <a href="#">
+                  <img src="assets/img/icons/app_store.svg" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

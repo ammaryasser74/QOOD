@@ -1,0 +1,117 @@
+.lds-facebook {
+    margin-top: 10%;
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    width: 13px;
+    background: #7FB017;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+    left: 6px;
+    animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+    left: 26px;
+    animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+    left: 45px;
+    animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+    0% {
+        top: 6px;
+        height: 51px;
+    }
+    50%,
+    100% {
+        top: 19px;
+        height: 26px;
+    }
+}
+
+.loading-screen-wrapper {
+    z-index: 100000;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.loading-screen-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.color-green {
+    color: #7FB017;
+    font-size: 3em;
+}
+
+.min-modal {
+    width: 650px;
+}
+
+.m-loading {
+    margin: 10% 0px 10% 0%;
+    text-align: center;
+}
+
+
+/* -------------------------------Color-------------------------------- */
+
+.color-red {
+    color: red
+}
+
+.color-white {
+    color: white
+}
+
+.text-danger,
+.text-danger:hover,
+.text-danger:focus {
+    color: #F44336 !important;
+}
+
+.has-error {
+    border-color: #D84315 !important;
+}
+
+.has-error .form-control {
+    border-color: #D84315 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.del-red {
+    color: red;
+    padding-right: 10px;
+}
+
+.has-error.select-container .custom-select select {
+    border-color: #D84315 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.has-error .form-control:focus {
+    border-color: #D84315 !important;
+    -webkit-box-shadow: 0 1px 0 #D84315;
+    box-shadow: 0 1px 0 #D84315;
+}

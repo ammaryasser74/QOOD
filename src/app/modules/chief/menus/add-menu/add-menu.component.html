@@ -1,0 +1,81 @@
+<div class="sign">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="content-head text-center mbxlg m-t-20">
+                <img src="assets/img/icons/fork.svg">
+                <h3 class="no-margin mtmd mbsm text-semibold" *ngIf="isEdit">{{'menu.update-menu'|translate}}</h3>
+                <h3 class="no-margin mtmd mbsm text-semibold" *ngIf="!isEdit">{{'menu.add-menu'|translate}}</h3>
+            </div>
+            <div *ngIf="loading" class="m-loading">
+                <i class="fas fa-spinner fa-spin color-green"></i>
+            </div>
+
+            <form [formGroup]="form" class="m-b-20" *ngIf="!loading">
+                <div class="form-group">
+                    <div class="select-container mbmd" *ngIf="!isEdit">
+                        <div class="custom-select">
+                            <select id="dishes" formControlName="dish_id" (change)="changeDish($event.target.value)" readonly>
+                                <option value="0">
+                                    {{'menu.Select-Dish'|translate}}
+                                </option>
+                                <option *ngFor="let row of allDish" value="{{row.id}}">
+                                    {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                </option>
+                            </select>
+                        </div>
+                        <span class="text-danger" *ngIf="form.get('dish_id').invalid && form.get('dish_id').dirty">{{'share.required' |translate}}</span>
+                    </div>
+                    <div class="row" *ngIf="isEdit">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="color-grey" formControlName="dishName">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>{{'menu.price'|translate}}  </label>
+                            <input type="number" class="color-grey" formControlName="price" placeholder="{{'menu.price'|translate}}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label> {{'menu.Discount'|translate}}</label>
+                            <input type="number" formControlName="dis_count_value" [ngClass]="{'has-error':invalidquatity}" placeholder="{{'menu.Discount'|translate}} " (change)="calculate()" (keyup)="calculate()" (keydown)="calculate()" (keypress)="calculate()">
+                            <span class="text-danger" *ngIf="invalidquatity">{{'menu.invalid-quantity'|translate}}</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="!isEdit && form.get('dish_id').value!=0">
+                    <label class="text-bold">{{'menu.Pick-Days'|translate}}</label>
+                    <div class="days">
+                        <ng-container *ngFor="let row of Days">
+                            <!-- <label class="form-radio" *ngIf='!row.enable'> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                             -->
+                            <div class="checkbox-custom black d-inline mrlg" *ngIf='!row.enable'>
+                                <input type="checkbox" disabled checked class="form-radio">
+                                <label for="Fri">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                            </div>
+                            <div class="checkbox-custom black d-inline mrlg" *ngIf='row.enable'>
+                                <input type="checkbox" value="row.id" class="form-radio" (change)="DaySelect($event,row.id)">
+                                <label for="Fri">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</label>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <button (click)="save()" class="btn btn-green mtxxlg ">
+                    {{'share.Save'|translate}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

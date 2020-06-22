@@ -1,0 +1,127 @@
+<main>
+  <div class="container">
+    <aside class="col-sm-3 d-aside no-padding sticky">
+      <app-chief-layout></app-chief-layout>
+    </aside>
+    <div class="col-sm-9 d-content">
+      <div *ngIf="loading" class="m-loading">
+        <i class="fas fa-spinner fa-spin color-green"></i>
+      </div>
+      <div *ngIf="!loading">
+        <div class="d-content-c plmd wallet">
+          <div class="row mbxxlg">
+            <div class="col-sm-4">
+              <div class="feature faq-card text-center mbxxlg">
+                <div class="feature-img">
+                  <img src="assets/img/icons/money-1.svg" alt="">
+                </div>
+                <h3 class="capitalize">{{'dashboard.Revenu'|translate}} </h3>
+                <h3 class="text-bold mtsm">
+                  {{'share.SAR' |translate}} {{transactiontotal.revenu}}
+                </h3>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="feature faq-card text-center mbxxlg">
+                <div class="feature-img">
+                  <img src="assets/img/icons/wallet-1.svg" alt="">
+                </div>
+                <h3 class="capitalize">{{'dashboard.Received'|translate}}</h3>
+                <h3 class="text-bold mtsm">
+                  {{'share.SAR' |translate}} {{transactiontotal.recieved_amount}}
+                </h3>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="feature faq-card text-center">
+                <div class="feature-img">
+                  <img src="assets/img/icons/payment-1.svg" alt="">
+                </div>
+                <h3 class="capitalize">{{'dashboard.Qoot-Balance'|translate}}</h3>
+                <h3 class="text-bold mtsm">
+                  {{'share.SAR' |translate}} {{transactiontotal.qoot_balance}}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class="tab-g">
+            <ul class="nav nav-tabs text-center" role="tablist">
+              <li role="presentation" class="active"><a class="btn" href="#details" aria-controls="details" role="tab"
+                  data-toggle="tab" aria-expanded="true">  {{'wallet.Account-Details' |translate}}</a></li>
+              <li role="presentation" class=""><a class="btn" href="#history" aria-controls="history" role="tab"
+                  data-toggle="tab" aria-expanded="false">  {{'wallet.Transcation-History' |translate}}</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="details">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <form [formGroup]="form">
+                      <div class="select-container mbmd">
+                        <div class="custom-select">
+                          <select id="bank" formControlName="bank_id">
+                            <option value="null">
+                              {{'wallet.Select-Bank' |translate}}
+                            </option>
+                            <option *ngFor="let row of banks" value="{{row.id}}">
+                              {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                            </option>
+
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group mbmd">
+                        <input type="text" formControlName="branch" placeholder="{{'wallet.BRNCH-Name' |translate}}"
+                          [ngClass]="{'has-error':form.get('branch').invalid && form.get('branch').dirty}">
+                        <span class="text-danger"
+                          *ngIf="form.get('branch').invalid && form.get('branch').dirty">{{'share.required' |translate}}</span>
+                      </div>
+                      <div class="form-group mbmd">
+                        <input type="number" formControlName="iban_no" placeholder="{{'wallet.IBAN-Number' |translate}}"
+                          [ngClass]="{'has-error':form.get('iban_no').invalid && form.get('iban_no').dirty}">
+                        <span class="text-danger"
+                          *ngIf="form.get('iban_no').invalid && form.get('iban_no').dirty">{{'share.required' |translate}}</span>
+                      </div>
+                      <div class="form-group mbmd">
+                        <input type="text" formControlName="account_name" placeholder="{{'wallet.Account-Name' |translate}}"
+                          [ngClass]="{'has-error':form.get('account_name').invalid && form.get('account_name').dirty}">
+                        <span class="text-danger"
+                          *ngIf="form.get('account_name').invalid && form.get('account_name').dirty">{{'share.required' |translate}}</span>
+                      </div>
+                      <div class="form-group mbmd">
+                        <input type="number" formControlName="account_no" placeholder="{{'wallet.Account-Number' |translate}}"
+                          [ngClass]="{'has-error':form.get('account_no').invalid && form.get('account_no').dirty}">
+                        <span class="text-danger"
+                          *ngIf="form.get('account_no').invalid && form.get('account_no').dirty">{{'share.required' |translate}}</span>
+                      </div>
+                      <button (click)="save()" class="btn btn-green mtxxlg pull-right"> {{'share.Save'|translate}}</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="history">
+                <div class="last-orders order-items">
+                  <div class="main-timeline4">
+                    <div class="timeline" *ngFor="let row of TransactionHistory">
+                      <div class="timeline-content">
+                        <div class="avatar-img text-center mbmd"></div>
+                        <div class="inner-content">
+                          <h3 class="title text-bold">{{'share.SAR' |translate}} {{row.value}}</h3>
+                          <p class="text-semibold date no-margin">{{row.created_at }}</p>
+                          <span class="time">7:53 PM</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>

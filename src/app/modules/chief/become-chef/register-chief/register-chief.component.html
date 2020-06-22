@@ -1,0 +1,153 @@
+<div class="sign">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div *ngIf="loading" class="m-loading">
+            <div>
+                <i class="fas fa-spinner fa-spin color-green"></i>
+            </div>
+        </div>
+        <div class="modal-body" *ngIf="!loading">
+            <form [formGroup]="form">
+                <div>
+                    <div class="tab-pane" *ngIf="first">
+                        <h3 class="text-center text-semibold">{{'share.become-chef' | translate}}</h3>
+                        <div class="row mtxlg">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input formControlName="kitchen_owner_name" type="text" placeholder="{{'become-chief.Kitchen-owner-name' | translate}}" [ngClass]="{'has-error':form.get('kitchen_owner_name').invalid && form.get('kitchen_owner_name').dirty}">
+                                        <span class="text-danger" *ngIf="form.get('kitchen_owner_name').invalid && form.get('kitchen_owner_name').dirty">{{'share.required' |translate}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input formControlName="kitchen_name" type="text" placeholder="{{'become-chief.Kitchen-name' | translate}}" [ngClass]="{'has-error':form.get('kitchen_name').invalid && form.get('kitchen_name').dirty}">
+                                        <span class="text-danger" *ngIf="form.get('kitchen_name').invalid && form.get('kitchen_name').dirty">{{'share.required' |translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <input formControlName="phone" type="tel" placeholder="{{'become-chief.Phone-number' | translate}}" [ngClass]="{'has-error':form.get('phone').invalid && form.get('phone').dirty}">
+                                            <span class="text-danger" *ngIf="form.get('phone').invalid && form.get('phone').dirty">{{'share.required' |translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input formControlName="maroof_number" type="number" placeholder="{{'become-chief.Maroof-number' | translate}}" [ngClass]="{'has-error':form.get('maroof_number').invalid && form.get('maroof_number').dirty}">
+                                        <span class="text-danger" *ngIf="form.get('maroof_number').invalid && form.get('maroof_number').dirty">{{'share.required' |translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input formControlName="slug" type="text" placeholder="{{'become-chief.Your-link' | translate}}" [ngClass]="{'has-error':form.get('slug').invalid && form.get('slug').dirty}">
+                                        <span class="text-danger" *ngIf="form.get('slug').invalid && form.get('slug').dirty">Required and no space</span>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" type="text" placeholder="{{'become-chief.Email' | translate}}" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
+                                        <span class="text-danger" *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.emailerror'|translate}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input formControlName="password" type="password" placeholder="{{'become-chief.Passward' | translate}}" [ngClass]="{'has-error':form.get('password').invalid && form.get('password').dirty}">
+                                        <span class="text-danger" *ngIf="form.get('password').invalid && form.get('password').dirty">{{'share.required' |translate}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input formControlName="password_confirmation" type="password" placeholder="{{'become-chief.Repeat-pwassward' | translate}}" [ngClass]="{'has-error':form.get('password_confirmation').invalid && form.get('password_confirmation').dirty}">
+                                        <span class="text-danger" *ngIf="form.get('password_confirmation').invalid && form.get('password_confirmation').dirty">{{'share.required' |translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                <div class="select-container">
+                                    <div class="custom-select" for="category">
+                                        <select id="city_id" formControlName="city_id">
+                                                <option value="null">{{'become-chief.Select-city' | translate}}</option>
+                                                <ng-container *ngFor="let row of cities">
+                                                <option  value="{{row.id}}">
+                                                    {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                                </option>
+                                                </ng-container>            
+                                            </select>
+                                    </div>
+                                    <span class="text-danger" *ngIf="form.get('city_id').invalid && form.get('city_id').dirty">{{'share.required' |translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <h4 class="text-semibold m-t-15">{{'become-chief.have-health' | translate}}</h4>
+                                <div class="checkbox-custom">
+                                    <input type="radio" name="health" (change)="haveHealthCard(1)" [checked]="form.get('health').value" id="health-yes" class="form-radio"><label class="mrlg" for="health-yes">{{'become-chief.yes' | translate}}</label>
+                                    <input type="radio" name="health" (change)="haveHealthCard(0)" [checked]="!form.get('health').value" id="health-no" class="form-radio"><label for="health-no">{{'become-chief.no' | translate}}</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12" *ngIf="Card">
+                                <div class="form-group mtxlg">
+                                    <input type="number" formControlName="health_card" placeholder="{{'become-chief.health-card' | translate}}" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <h4 class="text-semibold no-margin mtxlg">{{'become-chief.consumer-subscriptions' | translate}}</h4>
+                                <div class="checkbox-custom">
+                                    <input type="radio" name="is_subscriptions" (change)="getsubscribe(1)" [checked]="form.get('is_subscriptions').value" id="will-yes" class="form-radio"><label class="mrlg" for="will-yes">{{'become-chief.yes' | translate}}</label>
+                                    <input type="radio" name="is_subscriptions" (change)="getsubscribe(0)" [checked]="!form.get('is_subscriptions').value" id="will-yes" class="form-radio"><label for="will-no">{{'become-chief.no' | translate}}</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12" *ngIf="subscribe">
+                                <h4 class="text-semibold no-margin mtxlg">Subscription</h4>
+                                <div class="checkbox-custom">
+                                    <input type="radio" formControlName="years" value="1" id="one-year-sub" class="form-radio"><label class="mrlg" for="one-year-sub">{{'become-chief.One-year' | translate}} (250 SAR)</label>
+                                    <input type="radio" formControlName="years" value="2" id="two-year-sub" class="form-radio"><label class="mrlg" for="two-year-sub">{{'become-chief.Two-years' | translate}} (450 SAR)</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <div class="select-container mtxlg">
+                                    <div class="custom-select" for="category">
+                                        <select id="category" formControlName="qoot_reference_id">
+                                            <option value="null" >
+                                              {{'become-chief.hear-qoot' | translate}}
+                                            </option>
+                                            <ng-container *ngFor="let row of qootReference">
+                                                <option  value="{{row.id}}">
+                                                    {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                                </option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+                                    <span class="text-danger" *ngIf="form.get('qoot_reference_id').invalid && form.get('qoot_reference_id').dirty">{{'share.required' |translate}}</span>
+                                </div>
+                            </div></div>
+                        </div>
+
+                        <div class="modal-footer mtxlg m-b-20">
+                            <button type="button" (click)="save()" class="btn btn-green next-step">{{'share.Save'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

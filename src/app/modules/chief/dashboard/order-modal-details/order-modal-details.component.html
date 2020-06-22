@@ -1,0 +1,65 @@
+<div class="sign">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body menu-items">
+
+            <div class="me-c">
+                <div class="text-center menu-item">
+                    <figure class="cover" style="height: 80px;">
+                        <h3 class="no-margin mtmd mbxs text-bold ptlg pblg">{{Data.code}}</h3>
+                    </figure>
+
+                    <div class="meal-data bt bb mtmd mbmd">
+                        <span class="br d-inline">
+                                    Total <br>
+                    
+                                    <label>
+                                            {{Data.NetTotal}} SAR
+                                    </label>
+                                </span>
+                        <span class="br d-inline">
+                                    Customer <br>
+                                    <label>
+                                            {{Data.customer.firstname}}
+                                    </label>
+                                </span>
+                        <span class=" d-inline">
+                                    phone <br>
+                    
+                                    <label>
+                                            {{Data.customer.user.phone}}
+                                    </label>
+                                </span>
+                    </div>
+                    <div class="meal-data bt bb mtmd mbmd note-height-table">
+                        <table border="1px">
+                            <thead>
+                                <th class="text-center">dish</th>
+                                <th class="text-center">quantity</th>
+                                <th class="text-center">price</th>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" *ngFor="let dish of Data.dishes">
+                                    <td>{{languageService.getLanguageOrDefault()=='ar' ? dish.ar_name :dish.en_name}}</td>
+                                    <td>{{dish.pivot.quantity}}</td>
+                                    <td>{{dish.pivot.price}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="description bb plxxlg prxxlg pblg">
+                        <h4 class="no-margin mtxs mbmd text-bold">{{Data.note!=null ? Data.note :'No Note'}}</h4>
+                        <p class="text-center">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

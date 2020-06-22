@@ -1,0 +1,13 @@
+table {
+    border: 2px solid #7FB017;
+    width: 100%;
+    text-align: center;
+}
+
+.img-circle {
+    color: #7FB017
+}
+
+.note-height {
+    min-height: 50px
+}

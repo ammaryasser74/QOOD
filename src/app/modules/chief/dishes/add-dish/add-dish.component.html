@@ -1,0 +1,185 @@
+<div class="sign">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="content-head text-center mbxlg" *ngIf="!loading">
+                <h4 class="no-margin mtmd mbsm text-semibold capitalize" *ngIf="!isEdit">{{'add-dish.add-new-dish'|translate}}</h4>
+                <h4 class="no-margin mtmd mbsm text-semibold capitalize" *ngIf="isEdit"> {{'add-dish.update-dish'|translate}} </h4>
+            </div>
+            <div *ngIf="loading" class="m-loading">
+                <i class="fas fa-spinner fa-spin color-green"></i>
+            </div>
+
+            <form [formGroup]="form" *ngIf="!loading">
+                <div class="col-xs-12 m-b-10" >
+                    <div class="col-sm-4">
+                        <label tabindex="0" class="lbl-img res-img" for="my-file-1">
+                            <a>  
+                            <div class="avatar-img text-center mbmd" style="width: 100%;min-height: 125px;">
+                                <img src='assets/img/icons/photo.svg' class="m-t-15" for="my-file-1" width="50%"  *ngIf="img1==null">
+                                <img [src]='img1' for="my-file-1" for="my-file-1" width="100%" height="125px"
+                                 *ngIf="img1!=null">
+
+                                    <input class="input-file" id="my-file-1" type="file" style="display :none" accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event,1)" class="select-profile-picture">
+                                    <input class="input-file" id="my-file-1" type="file" style="display :none" (change)="onSelectFile($event,1)" class="select-profile-picture">
+                                </div>
+                            </a>
+                    </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label tabindex="0" class="lbl-img res-img" for="my-file-2">
+                                <a>  
+                                <div class="avatar-img text-center mbmd" style="width: 100%;min-height: 125px;">
+                                    <img src='assets/img/icons/photo.svg' class="m-t-15" for="my-file-2" width="50%"  *ngIf="img2==null">
+                                    <img [src]='img2' for="my-file-2" for="my-file-2" width="100%" height="125px"*ngIf="img2!=null">
+    
+                                        <input class="input-file" id="my-file-2" type="file" style="display :none" accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event,2)" class="select-profile-picture">
+                                        <input class="input-file" id="my-file-2" type="file" style="display :none" (change)="onSelectFile($event,1)" class="select-profile-picture">
+                                    </div>
+                                </a>
+                        </label>
+                    </div>
+                  
+                    <div class="col-sm-4">
+                        <label tabindex="0" class="lbl-img res-img" for="my-file-3">
+                                    <a>  
+                                    <div class="avatar-img text-center mbmd" style="width: 100%;min-height: 125px;">
+                                        <img src='assets/img/icons/photo.svg' class="m-t-15" for="my-file-3" width="50%"  *ngIf="img3==null">
+                                        <img [src]='img3' for="my-file-3" for="my-file-3" width="100%" height="125px"
+                                         *ngIf="img3!=null">
+                                            <input class="input-file" id="my-file-3" type="file" style="display :none" accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event,3)" class="select-profile-picture">
+                                            <input class="input-file" id="my-file-3" type="file" style="display :none" (change)="onSelectFile($event,1)" class="select-profile-picture">
+                                        </div>
+                                    </a>
+                            </label>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" formControlName="ar_name" placeholder="{{'add-dish.Dish-Arabic-Name'|translate}}" [ngClass]="{'has-error':form.get('ar_name').invalid && form.get('ar_name').dirty}">
+                            <span class="text-danger" *ngIf="form.get('ar_name').invalid && form.get('ar_name').dirty">{{'share.arabic-letters'|translate}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" formControlName="en_name" placeholder="{{'add-dish.Dish-English-Name'|translate}}" [ngClass]="{'has-error':form.get('en_name').invalid && form.get('en_name').dirty}">
+                            <span class="text-danger" *ngIf="form.get('en_name').invalid && form.get('en_name').dirty">{{'share.english-letters'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 m-t-10">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <textarea formControlName="ar_description" cols="30" rows="2" placeholder="{{'add-dish.Description-arabic'|translate}}" [ngClass]="{'has-error':form.get('ar_description').invalid && form.get('ar_description').dirty}">
+                    </textarea>
+                            <span class="text-danger" *ngIf="form.get('ar_description').invalid && form.get('ar_description').dirty">{{'share.arabic-letters'|translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <textarea formControlName="en_description" cols="30" rows="2" placeholder="{{'add-dish.Description-Elglish'|translate}}" [ngClass]="{'has-error':form.get('en_description').invalid && form.get('en_description').dirty}"></textarea>
+                            <span class="text-danger" *ngIf="form.get('en_description').invalid && form.get('en_description').dirty">{{'share.english-letters'|translate}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 m-t-10">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="number" formControlName="preparation_time_value" placeholder="{{'add-dish.preparation-time'|translate}}" [ngClass]="{'has-error':form.get('preparation_time_value').invalid && form.get('preparation_time_value').dirty}">
+                            <span class="text-danger" *ngIf="form.get('preparation_time_value').invalid && form.get('preparation_time_value').dirty">{{'share.required' |translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="checkbox-custom">
+                            <input type="radio" formControlName="preparation_time_type" [checked]="form.get('preparation_time_type').value=='min'" value="min" class="form-radio">
+                            <label class="mrlg" for="jeddah">{{languageService.getLanguageOrDefault()=='ar' ? 'دقيقة':'MIN'}}</label>
+                            <input type="radio" formControlName="preparation_time_type" [checked]="form.get('preparation_time_type').value=='day'" value="day" class="form-radio">
+                            <label class="mrlg" for="jeddah">{{languageService.getLanguageOrDefault()=='ar' ? 'يوم':'Day'}}</label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-xs-12 m-t-10">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="number" formControlName="no_persons" placeholder="{{'share.persons'|translate}}" [ngClass]="{'has-error':form.get('no_persons').invalid && form.get('no_persons').dirty}">
+                            <span class="text-danger" *ngIf="form.get('no_persons').invalid && form.get('no_persons').dirty">{{'share.required' |translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="number" formControlName="price" placeholder="{{'add-dish.price'|translate}}" [ngClass]="{'has-error':form.get('price').invalid && form.get('price').dirty}">
+                            <span class="text-danger" *ngIf="form.get('price').invalid && form.get('price').dirty">{{'share.required' |translate}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="number" formControlName="quantity" placeholder="{{'add-dish.quantity'|translate}}" [ngClass]="{'has-error':form.get('quantity').invalid && form.get('quantity').dirty}">
+                            <span class="text-danger" *ngIf="form.get('quantity').invalid && form.get('quantity').dirty">{{'share.required' |translate}}</span>
+                        </div>
+                    </div>
+                  
+                    <div class="col-sm-6">
+                        <div class="select-container mbmd">
+                            <div class="custom-select" style="min-width: 100%;max-width: 100%;">
+                                <select id="category" formControlName="unit_id">
+                                    <option value="null">
+                                              {{'add-dish.Select-unit'|translate}}
+                                    </option>
+                                    <option *ngFor="let row of units" value="{{row.id}}">
+                                        {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                    </option>
+                            </select>
+    
+                            </div>
+                            <span class="text-danger" *ngIf="form.get('unit_id').invalid && form.get('unit_id').dirty">{{'share.required' |translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 m-t-10">
+                    <div class="select-container mbmd">
+                        <div class="custom-select">
+                            <select id="category" formControlName="category_id">
+                                <option value="null">
+                                          {{'add-dish.Select-Category'|translate}}
+                                        
+                                        </option>
+                            <option *ngFor="let row of categories" value="{{row.id}}">
+                                    {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                </option>
+                        </select>
+
+                        </div>
+                        <span class="text-danger" *ngIf="form.get('category_id').invalid && form.get('category_id').dirty">{{'share.required' |translate}}</span>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 m-b-10">
+                    <ng-select placeholder="{{'add-dish.Select-Cusines'|translate}}" [multiple]="true" formControlName="cusines_ids">
+                        <ng-option *ngFor="let row of cusines" [value]="row.id" [disabled]="row.disabled">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</ng-option>
+                    </ng-select>
+                    <span class="text-danger" *ngIf="form.get('cusines_ids').invalid && form.get('cusines_ids').dirty">{{'share.required' |translate}}</span>
+                </div>
+
+                <button (click)="save()" class="btn btn-green mtxxlg m-b-10" *ngIf="!isEdit">
+                            {{'share.Save'|translate}}
+                </button>
+                <button (click)="save()" class="btn btn-green mtxxlg m-b-10" *ngIf="isEdit">
+                  {{'share.Edit'|translate}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

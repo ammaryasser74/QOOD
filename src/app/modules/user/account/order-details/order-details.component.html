@@ -1,0 +1,123 @@
+<main>
+    <div *ngIf="loading" class="m-loading">
+        <div>
+            <i class="fas fa-spinner fa-spin color-green"></i>
+        </div>
+    </div>
+    <section class="sec-pad" *ngIf="!loading">
+        <div class="container">
+            <div class="order-details">
+                <h2 class="no-margin text-semibold mblg text-center" *ngIf="Data.status=='pending'">{{'order-details.confirmation'|translate}}</h2>
+                <h2 class="no-margin text-semibold mblg text-center" *ngIf="Data.status=='canceled-by-customer'"> {{'order-details.cancel-order'|translate}}</h2>
+                <div class="text-center mtlg mbxlg">
+                    <h4 class="text-center text-semibold" *ngIf="Data.status!='canceled-by-customer'"> {{'order-details.being'|translate}} {{Data.status}}</h4>
+                    <a (click)="cancelOrder()" class="btn btn-delete d-inline mtsm" *ngIf="Data.status=='pending'">{{'order-details.cancelorder'|translate}} </a>
+                </div>
+                <div class="row multi-steps-wrap">
+                    <ul class="list-unstyled multi-steps">
+                        <li class="job-status job-closed is-active" [ngClass]="{'job-status step-done': Data.status=='pending' || Data.status=='rejected' || Data.status=='ontheway' || Data.status=='completed' || Data.status=='confirmed' }"> {{'order-details.Ordered'|translate}}</li>
+                        <li class="job-status job-closed is-active" [ngClass]="{'job-status job-completed step-don': Data.status=='ontheway' || Data.status=='completed' || Data.status=='confirmed'}" *ngIf="Data.status!='rejected'"> {{'order-details.confirmed'|translate}}</li>
+                        <li class="job-status job-closed is-active" [ngClass]="{'job-status job-completed step-done':Data.status=='ontheway'|| Data.status=='completed' }" *ngIf="Data.status!='rejected'">{{'order-details.On-the-way'|translate}}</li>
+                        <li class="job-status job-closed is-active" [ngClass]="{'job-status job-completed step-done': Data.status=='completed' }" *ngIf="Data.status!='rejected'"> {{'order-details.Delivered'|translate}}</li>
+
+                        <li class="job-status job-inprogress canceled" [ngClass]="{'job-status job-closed is-active': Data.status=='ontheway' || Data.status=='completed' || Data.status=='confirmed'}" *ngIf="Data.status=='rejected'"> {{'order-details.chief-Rejected'|translate}}</li>
+                    </ul>
+                </div>
+
+                <div class="row mtxxlg">
+                    <div class="col-md-9 col-sm-8">
+                        <div class="faq-card order-summery">
+                            <h3 class="no-margin mbxlg text-semibold capitalize"> {{'order-details.order-details'|translate}}</h3>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="order-de mbxlg">
+                                        <div class="label-img pull-left mrmd">
+                                            <img src="../../../../../assets/img/icons/receipt.svg">
+                                        </div>
+                                        <div class="order-label pull-left">
+                                            <label> {{'order-details.Order-ID'|translate}}</label>
+                                            <p class="no-margin">{{Data.code}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="order-de mbxlg">
+                                        <div class="label-img pull-left mrmd">
+                                            <img src="../../../../../assets/img/icons/plate-1.svg">
+                                        </div>
+                                        <div class="order-label pull-left">
+                                            <label>  {{'order-details.Order-from'|translate}}</label>
+                                            <p class="no-margin">{{Data.chief.kitchen_owner_name}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="order-de mbxlg">
+                                        <div class="label-img pull-left mrmd">
+                                            <img src="../../../../../assets/img/icons/calender.svg">
+                                        </div>
+                                        <div class="order-label pull-left">
+                                            <label> {{'order-details.Delivery-date'|translate}}</label>
+                                            <p class="no-margin">{{Data.date}} {{Data.time}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="order-de mbxlg">
+                                        <div class="label-img pull-left mrmd">
+                                            <img src="../../../../../assets/img/icons/fast.svg">
+                                        </div>
+                                        <div class="order-label pull-left">
+                                            <label> {{'order-details.Order-date'|translate}}</label>
+                                            <p class="no-margin">{{Data.created_at}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="order-de mbxlg">
+                                        <div class="label-img pull-left mrmd">
+                                            <img src="../../../../../assets/img/icons/location.svg">
+                                        </div>
+                                        <div class="order-label pull-left">
+                                            <label>{{'order-details.Delivery-address'|translate}}</label>
+                                            <p class="no-margin">
+                                                {{Data.address.address}}
+                                                <br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="faq-card mblg">
+                            <ul class="product-list text-center">
+                                <li>
+                                    <a class="btn btn-green d-inline" (click)="showInvoice(Data.id)">
+                                        {{'order-details.Show-invoice'|translate}}  
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="faq-card mblg">
+                            <div class="info">
+                                <div class="mbmd">
+                                    <strong class="mrsm">  {{'order-details.Delivary-Fee'|translate}} </strong> {{'share.SAR'|translate}} 20
+                                </div>
+
+                                <div class="mbmd">
+                                    <strong class="mrsm"> {{'order-details.Total-Amount'|translate}}</strong> {{'share.SAR'|translate}} {{Data.NetTotal}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="16px" viewBox="0 0 22 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>GB Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="21" height="15" rx="2"></rect>
+        <rect id="path-3" x="1" y="1" width="20" height="14" rx="1"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-" transform="translate(-1435.000000, -8.000000)">
+            <g id="Group-2">
+                <g id="GB-Copy" transform="translate(1435.000000, 8.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="background" fill="#22438B" xlink:href="#path-1"></use>
+                    <polygon id="band" fill="#FFFFFF" mask="url(#mask-2)" points="3.02156379 1 1 1.02631037 1.02630472 2.99568865 17.9678114 14 20 13.9630634 19.9630715 12.004312"></polygon>
+                    <polygon id="band" fill="#C7152A" mask="url(#mask-2)" points="2.00000002 1 1 1.99999996 18.9999988 14 20 13.0000008"></polygon>
+                    <path d="M18.0141309,1.00000002 L19.9999999,1 L20,2.99255565 C20,2.99255565 8.33367756,10.3612381 3.13822299,13.9795924 C3.07505793,14.0235834 1.15440289,13.9827586 1.15440289,13.9827586 L1,12.0863097 L18.0141309,1.00000002 L18.0141309,1.00000002 Z" id="band" fill="#FFFFFF" mask="url(#mask-2)"></path>
+                    <polygon id="band" fill="#C7152A" mask="url(#mask-2)" points="19.0428543 1 20 2.02563425 1.99999969 14 1 13.002136"></polygon>
+                    <polygon id="cross" fill="#FFFFFF" mask="url(#mask-2)" points="8 1 13 1 13 5 20 5 20 10 13 10 13 14 8 14 8 10 1 10 1 5 8 5"></polygon>
+                    <polygon id="cross" fill="#C7152A" mask="url(#mask-2)" points="9 1 12 1 12 6 20 6 20 9 12 9 12 14 9 14 9 9 1 9 1 6 9 6"></polygon>
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="overlay" stroke-opacity="0.156646286" stroke="#2F343A" xlink:href="#path-3"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,86 @@
+<div class="sign" tabindex="-1" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="myModel.hide()" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="tab-g">
+                <h3 class="text-center text-semibold">{{'share.signup' | translate}}</h3>
+                <p class="text-center">{{'sign.faceorgoogle'|translate}}</p>
+                <div class="social text-center">
+                    <a (click)="signInWithFB()" class="facebook">
+                        <i class="fab fa-facebook-f mrxs"></i>{{'sign.withface'|translate}} 
+                    </a>
+                    <a (click)="signInWithGoogle()" class="google">
+                        <i class="fab fa-google mrxs"></i> {{'sign.withgoogle'|translate}}
+                    </a>
+                </div>
+                <div class="dvider-or mtxlg mbxlg text-center">
+                    <span class="text-upper">{{'sign.or'|translate}}</span>
+                </div>
+                <form [formGroup]="form" autocomplete="off">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input formControlName="firstname" type="text" placeholder="{{'sign.First-name'|translate}}" autocomplete="off" [ngClass]="{'has-error':form.get('firstname').invalid && form.get('firstname').dirty}">
+                                <span class="text-danger" *ngIf="form.get('firstname').invalid && form.get('firstname').dirty">{{'share.required' |translate}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input formControlName="lastname" type="text" placeholder="{{'sign.Last-name'|translate}}" autocomplete="off" [ngClass]="{'has-error':form.get('lastname').invalid && form.get('lastname').dirty}">
+                                <span class="text-danger" *ngIf="form.get('lastname').invalid && form.get('lastname').dirty">{{'share.required' |translate}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input formControlName="phone" type="tel" autocomplete="off" placeholder="{{'sign.Phone-number'|translate}}" [ngClass]="{'has-error':form.get('phone').invalid && form.get('phone').dirty}">
+                                <span class="text-danger" *ngIf="form.get('phone').invalid && form.get('phone').dirty">{{'share.required' |translate}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input formControlName="email" autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" type="text" placeholder="{{'sign.email'|translate}}" autocomplete="doNotAutoComplete" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
+                                <span class="text-danger" *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.emailerror'|translate}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input formControlName="password" autocomplete="off" type="password" placeholder="{{'sign.password'|translate}}" [ngClass]="{'has-error':form.get('password').invalid && form.get('password').dirty}">
+                                <span class="text-danger" *ngIf="form.get('password').invalid && form.get('password').dirty">{{'share.required' |translate}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input formControlName="password_confirmation" autocomplete="off" type="password" placeholder="{{'sign.Repeat-Password'|translate}}" [ngClass]="{'has-error':form.get('password_confirmation').invalid && form.get('password_confirmation').dirty}">
+                                <span class="text-danger" *ngIf="form.get('password_confirmation').invalid && form.get('password_confirmation').dirty">{{'share.required' |translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 m-b-10">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" formControlName="agree" value="agree" id="agree" class="form-radio">
+                        </div>
+                    </div>
+                    <div class="col-sm-11 m-t-10">
+                        <a routerLink="/user/privacy">
+                            <label class="mrlg" for="agree">{{'sign.agree'|translate}}</label>
+                    </a>
+                </div>
+                  
+
+                    <div class="modal-footer mtxlg m-t-20">
+                        <button type="button" (click)="save()" [disabled]="form.invalid || form.get('agree').value==false" class="btn btn-green ">{{'share.signup' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="modal-body reciept">
+    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 m-top-20">
+        <h6 class="date-order">{{Date | date:'dd-MM-yyyy HH:mm:ss'}}</h6>
+    </div> -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 m-top-20">
+        <img src="assets/img/logo.png" alt="">
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 m-top-20 text-center">
+        <h3 class="title-order">
+            شركة اسرة قوت للتسويق الإلكتروني</h3>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 m-top-20 text-center">
+        <h5 class="title-order">
+            7453 Abdul Mohsen Al Halabi- Al Marwah Dist,
+            <br> Unit No 8, Jeddah 23545-4834 , Kingdom of Saudi Arabia.</h5>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 m-top-20 text-right">
+        <!-- <div class="col-md-3 "> 310160288500003</div>
+        <div class="col-md-3  txt-style">
+            رقم التعريف الضريبي</div> -->
+        <p> رقم التعريف الضريبى : 310160288500003 </p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 m-top-20 text-right">
+
+        <p> التاريخ : <span> {{order.date}} </span></p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 m-top-20 text-right">
+
+        <p> رقم الطلب : <span> {{order.code}} </span></p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 margin-top">
+        <table border="1px">
+            <thead class="border-top color">
+                <tr>
+                    <th class="text-bold text-center th-heigt">الاجمالي</th>
+                    <th class="text-bold text-center th-heigt"> الكمية</th>
+                    <th class="text-bold text-center th-heigt">السعر</th>
+                    <th class="text-bold text-center th-heigt"> الصنف</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="border-bottom " *ngFor="let item of order.dishes">
+                    <td class="text-center">
+                        {{item.pivot.quantity * item.price}}
+
+                    </td>
+                    <td class="text-center">
+                        {{item.pivot.quantity}}
+                    </td>
+                    <td class="text-center">
+                        {{item.price}}
+                    </td>
+                    <td class="text-center">
+                        {{languageService.getLanguageOrDefault()=='ar' ? item.ar_name : item.en_name}}
+                    </td>
+                </tr>
+                <tr class="border-bottom " *ngFor="let item of order.allweeklydeals">
+                    <td class="text-center">
+                        {{item.pivot.quantity * item.price}}
+
+                    </td>
+                    <td class="text-center">
+                        {{item.pivot.quantity}}
+                    </td>
+                    <td class="text-center">
+                        {{item.price}}
+                    </td>
+                    <td class="text-center">
+                        {{languageService.getLanguageOrDefault()=='ar' ? item.ar_name : item.en_name}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 margin-top-10 text-right">
+
+        <p> المجموع : <span>  {{order.NetTotal}}</span></p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 margin-top-10 text-right">
+
+        <p> خدمة التوصيل : <span>  60 </span></p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 margin-top-10 text-right">
+
+        <p> الصافي: <span>   {{order.NetTotal + 60 }} </span></p>
+
+    </div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="64px" viewBox="0 0 74 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Page 1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Cart_checkout" transform="translate(-780.000000, -1243.000000)" stroke="#94BB21" stroke-width="4">
+            <g id="Page-1" transform="translate(782.000000, 1245.000000)">
+                <path d="M51.3617021,12 L37.7659574,12 C33.0920426,12 30.8260851,14.5785 28.7021277,16.5 C26.5781702,18.4215 11.8162128,31.5 11.8162128,31.5" id="Stroke-1"></path>
+                <path d="M28.7021277,48 L33.2340426,43.5 C38.269,43.5 42.7027234,43.098 46.8297872,39 C48.4038723,37.437 52.398,33.396 52.398,33.396" id="Stroke-3"></path>
+                <polygon id="Stroke-5" points="0 37.5 9.06382979 28.5 31.7234043 51 22.6595745 60"></polygon>
+                <path d="M9.06382979,37.5 L12.0851064,40.5" id="Stroke-7"></path>
+                <polyline id="Stroke-9" points="61.9361702 40.5 61.9361702 45 69.4893617 45 69.4893617 0 61.9361702 0 61.9361702 4.5"></polyline>
+                <path d="M36.2553191,21 L52.8723404,21 C56.0492128,21 57.4042553,21.9375 57.4042553,24 C57.4042553,27.75 53.4856596,30 49.8510638,30 L45.7345745,30 C44.6136809,30 43.6000426,30.633 43.0682979,31.6125 C40.3264894,36.6645 35.4350426,37.5 33.2340426,37.5 L30.212766,37.5" id="Stroke-11"></path>
+                <path d="M46.9124191,21 C47.664717,14.25 53.4262915,9 60.4250787,9 C63.9071,9 67.085483,10.299 69.4889085,12.438" id="Stroke-13"></path>
+                <path d="M69.4908723,32.562 C67.0844255,34.6995 63.9090638,36 60.4255319,36 C55.7108298,36 51.5565745,33.6165 49.1184043,29.997" id="Stroke-15"></path>
+            </g>
+        </g>
+    </g>
+</svg>

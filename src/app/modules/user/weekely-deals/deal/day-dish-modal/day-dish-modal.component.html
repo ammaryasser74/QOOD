@@ -1,0 +1,59 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" (click)="myModel.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="loading" class="m-loading">
+      <div>
+        <i class="fas fa-spinner fa-spin color-green"></i>
+      </div>
+    </div>
+    <div *ngIf="!loading">
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" (init)="slickInit($event)"
+        [config]="slideConfig">
+        <div class="col-md-12 col-xs-12 col-ms-12" ngxSlickItem *ngFor="let row of Data">
+
+          <div class="product-item">
+            <figure class="cover cove-meal"
+              [ngStyle]="{'background':'url(' +myURL+ row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+              <div class="btn-group">
+                <ul class="dropdown-menu" role="menu">
+                  <!-- <li *ngIf="!row.favorite"><a (click)=addToFavourite(row.id)>Add To favourite</a></li>
+                                    <li *ngIf="row.favorite"><a (click)=addToFavourite(row.id)>Remove from favourite</a></li> -->
+                  <li><a href="#">Share</a></li>
+                </ul>
+              </div>
+            </figure>
+
+            <div class="product-info">
+              <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px"
+                readonly="false">
+              </star-rating>
+              <h3 class="no-margin mtmd mbmd">
+                <a (click)="openDetails(row.id)">
+                  {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                </a>
+              </h3>
+              <div class="price">{{row.price}}</div>
+              <div class="meal-data mtmd mbmd">
+                <span class="mrlg">
+                  <img class="mrsm" src="assets/img/icons/time.svg" alt="">
+                  In {{row.preparation_time}} min
+                </span>
+                <span>
+                  <img class="mrsm" src="assets/img/icons/person.svg" alt="">
+                  {{row.no_persons}} Person
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
