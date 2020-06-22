@@ -211,8 +211,8 @@
               </li>
               <li [class.active]="nav==2"><a (click)="nav=2"
                   routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
-              <li [class.active]="nav==3"><a (click)="nav=3"
-                  routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}}</a></li>
+              <!-- <li [class.active]="nav==3"><a (click)="nav=3"
+                  routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}}</a></li> -->
            
                   
               <li [class.active]="nav==4"><a (click)="nav=4"
@@ -250,14 +250,14 @@
             <li><a href="{{settings.instagram}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
-        <div class="col-sm-2 col-xs-6">
+        <div class="col-sm-3 col-xs-6">
           <div class="quick-links">
             <h3 class="mblg">{{'share.Qoot'|translate}}</h3>
             <ul>
               <li><a (click)="closeMenu()" routerLink="/user/home">{{'share.home' | translate}}</a></li>
               <li><a (click)="closeMenu()" routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
-              <li><a (click)="closeMenu()" routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}} </a>
-              </li>
+              <!-- <li><a (click)="closeMenu()" routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}} </a>
+              </li> -->
               <li><a (click)="closeMenu()" routerLink="/user/contact-us">{{'share.contact-us' | translate}}</a></li>
               <li><a (click)="closeMenu()" routerLink="/user/help">{{'share.help' | translate}}</a></li>
               <li><a  (click)="closeMenu()" href="http://grocery.qoot.online/" target="_blank">{{'share.grocery' | translate}} </a>
@@ -265,7 +265,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-2 col-xs-6">
+        <!-- <div class="col-sm-2 col-xs-6">
           <div class="quick-links">
             <h3 class="mblg">{{'share.Cusines'|translate}}</h3>
             <ul *ngIf="!loadingdata">
@@ -275,8 +275,8 @@
 
             </ul>
           </div>
-        </div>
-        <div class="col-sm-2 col-xs-6">
+        </div> -->
+        <div class="col-sm-3 col-xs-6">
           <div class="quick-links mob-off">
             <h3 class="mblg">{{'share.Brands'|translate}}</h3>
             <ul>
