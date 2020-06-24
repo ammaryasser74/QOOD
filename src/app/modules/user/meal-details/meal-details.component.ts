@@ -11,6 +11,7 @@ import { SettingService } from 'src/app/services/user/setting.service';
 import { MealModalComponent } from './meal-modal/meal-modal.component';
 import { BsModalService } from 'ngx-bootstrap';
 import { environment } from 'src/environments/environment';
+import { MenuService } from 'src/app/services/user/menu.service';
 
 @Component({
   selector: 'app-meal-details',
@@ -51,7 +52,8 @@ export class MealDetailsComponent implements OnInit {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     public settingService: SettingService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private menuService:MenuService
   ) {}
 
   ngOnInit() {
@@ -66,8 +68,8 @@ export class MealDetailsComponent implements OnInit {
       this.userID = this.userService.currentUser.id;
     }
     this.initForm();
-    this.mealsService
-      .MealDetails(+this.activeRoute.snapshot.paramMap.get('id'), this.userID)
+    this.menuService
+      .GetByID(+this.activeRoute.snapshot.paramMap.get('id'), this.userID)
       .subscribe(res => {
         res.Data.img1 = environment.api_imges + res.Data.img1;
         res.Data.img2 = environment.api_imges + res.Data.img2;

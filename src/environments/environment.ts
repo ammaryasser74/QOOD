@@ -6,9 +6,9 @@ export const environment = {
   production: false,
   defaultDateFormat: 'DD-MM-YYYY',
   defaultPageSize: 20,
- // api_url: 'https://backend-qoot.qoot.onlineapi',
-  api_imges: 'https://backend-qoot.qoot.online/',
-  api_url: 'https://backend-qoot.qoot.online/api',
+  //  api_url: 'https://backend-qoot.qoot.onlineapi',
+  api_imges: 'https://catering.qoot.online/',
+  api_url: 'https://catering.qoot.online/api',
   defaultLanguage: 'en',
 };
 

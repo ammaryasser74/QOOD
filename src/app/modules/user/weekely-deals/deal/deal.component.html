@@ -24,10 +24,12 @@
                     {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_name :Data.en_name}}
                   </a>
                 </h3>
-                <div class="price mbsm">{{Data.price}} {{'share.SAR'|translate}}</div>
+                <div class="price mbsm">{{Data.price_of_person}} {{'share.SAR'|translate}}</div>
                 <div class="meal-data mtmd mbmd">
                   <!-- <span class="mrlg"><img class="mrsm" src="assets/img/icons/time.svg" alt="">In 50 min</span> -->
-                  <span><img class="mrsm" src="assets/img/icons/person.svg" alt="">{{Data.no_persons}} Person</span>
+                  <span><img class="mrsm" src="assets/img/icons/person.svg" alt="">
+                    {{'share.person'|translate}} {{Data.min_no_persons}}  الي  {{Data.max_no_persons}}  
+                  </span>
                 </div>
               </div>
             </div>
@@ -44,13 +46,13 @@
           <div class="weekly-meals mtxxlg">
             <div class="row">
 
-              <div class="col-sm-4" *ngFor="let day of Data.days">
+              <div class="col-sm-4" *ngFor="let cat of Data.categories">
                 <div class="meal-img cover"
-                  [ngStyle]="{'background':'url(' +myURL+ day.pivot.path + ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                  [ngStyle]="{'background':'url(' +cat.ar_name+')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
                 </div>
                 <div class="meal-data mbmd">
                   <h4 class="text-semibold mtlg"><a
-                      (click)="openDishDayModal(day)">{{languageService.getLanguageOrDefault()=='ar' ? day.ar_name :day.en_name}}</a>
+                      (click)="openDishDayModal(cat)">{{languageService.getLanguageOrDefault()=='ar' ? cat.ar_name :cat.en_name}}</a>
                   </h4>
                   <!-- <p>Chicken margaritas with salad with fruit</p> -->
                 </div>
@@ -66,7 +68,7 @@
             <a href="#"><i class="fab fa-instagram"></i></a>
           </div>
 
-          <div class="menu mtxxlg">
+          <!-- <div class="menu mtxxlg">
             <div class="section-title mbxxlg">
               <h2 class="text-capitalize text-center no-margin">Menu</h2>
             </div>
@@ -112,12 +114,12 @@
                       </span>
                     </div>
                   </div>
-                  <!-- <a (click)="openMealModal(row)" class="more-details">More details long details</a> -->
+                  
                 </div>
               </div>
 
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-sm-3">
           <div class="faq-card mblg">

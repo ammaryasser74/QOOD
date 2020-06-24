@@ -14,6 +14,7 @@ import { DayDishModalComponent } from './day-dish-modal/day-dish-modal.component
 import { WarningComponent } from 'src/app/sharedModules/warning/warning.component';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { environment } from 'src/environments/environment';
+import { MenuService } from 'src/app/services/user/menu.service';
 @Component({
   selector: 'app-deal',
   templateUrl: './deal.component.html',
@@ -43,7 +44,8 @@ export class DealComponent implements OnInit {
     private modelService: BsModalService,
     private formBuilder: FormBuilder,
     public settingService: SettingService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    public menuService:MenuService
   ) {}
   ngOnInit() {
     this.myURL = environment.api_imges;
@@ -53,7 +55,7 @@ export class DealComponent implements OnInit {
       this.userID = this.userService.currentUser.id;
     }
     this.initForm();
-    this.weekelyDealsService
+    this.menuService
       .GetByID(+this.activeRoute.snapshot.paramMap.get('id'), this.userID)
       .subscribe(res => {
         this.Data = res.Data;
@@ -199,7 +201,7 @@ export class DealComponent implements OnInit {
     this.modalService.show(DayDishModalComponent, {
       class: 'min-modal',
       initialState: {
-        myData: data.pivot,
+        myData: data.dishes,
       },
     });
   }

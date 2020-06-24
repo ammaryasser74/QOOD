@@ -17,6 +17,7 @@ import { WarningComponent } from 'src/app/sharedModules/warning/warning.componen
 import { BookMarkService } from 'src/app/services/user/bookmark.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { environment } from 'src/environments/environment';
+import { MenuService } from 'src/app/services/user/menu.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -59,6 +60,7 @@ export class SearchComponent implements OnInit {
                public cartService: CartService,
                public kitchenService: KitchenService,
                public bookMarkService: BookMarkService,
+               private menuService:MenuService,
                public localStorageService: LocalStorageService
     ) { }
   ngOnInit() {
@@ -88,8 +90,8 @@ export class SearchComponent implements OnInit {
   }
   getFilterData() {
     this.loading = true;
-    this.mealsService.Filter(this.filter).subscribe(res => {
-      res.Data.map(i => i.img1 = environment.api_imges + i.img1);
+    this.menuService.Filter(this.filter).subscribe(res => {
+      res.Data.map(i => i.img = environment.api_imges + i.img);
       this.Data = res.Data;
       this.loading = false;  console.log(this.Data,"DATA");});
    
@@ -97,9 +99,9 @@ export class SearchComponent implements OnInit {
   }
   arrangeDataASC() {
     if (this.filter.filterType == 1) {
-      this.Data.sort((a, b) => (a.price > b.price) ? 1 : -1);
+      this.Data.sort((a, b) => (a.price_of_person > b.price_of_person) ? 1 : -1);
     } else {
-      this.Data.sort((a, b) => (a.price < b.price) ? 1 : -1);
+      this.Data.sort((a, b) => (a.price_of_person < b.price_of_person) ? 1 : -1);
     }
   }
   cusinesSelect(e, id) {
@@ -199,19 +201,19 @@ export class SearchComponent implements OnInit {
       this.toastr.error(res.Message);
     }});
   }}
-  addToFavourite(mealID) {
+  addToFavourite(MenuID) {
     if (this.filter.UserID == null) {
       this.toastr.error('please login before');
      } else {
-    this.myOrderParam = {MealID: mealID, UserID: this.userService.currentUser.id };
-    this.mealsService.AddMealtoMyFavourite(this.myOrderParam).subscribe(
+    this.myOrderParam = {MenuID: MenuID, UserID: this.userService.currentUser.id };
+    this.menuService.AddMenutoMyFavourite(this.myOrderParam).subscribe(
        res => {
         if (res.Success) {
-          if (res.Data.filter(i => i.id == mealID).length > 0) {
-            const myarr = res.Data.filter(i => i.id == mealID);
-            this.Data.filter(i => i.id == mealID).map(i => i.customers = myarr[0].customers);
+          if (res.Data.filter(i => i.id == MenuID).length > 0) {
+            const myarr = res.Data.filter(i => i.id == MenuID);
+            this.Data.filter(i => i.id == MenuID).map(i => i.customers = myarr[0].customers);
           } else {
-            this.Data.filter(i => i.id == mealID).map(i => i.customers = []);
+            this.Data.filter(i => i.id == MenuID).map(i => i.customers = []);
           }
           this.toastr.success(res.Message); } else {
           this.toastr.error(res.Message);

@@ -71,7 +71,7 @@
                                 </div>
                             </li>
 
-                            <li>
+                            <!-- <li>
                                 <div class="panel-group ">
                                     <div class="">
                                         <div class="panel-heading no-padding">
@@ -96,39 +96,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="panel-group ">
-                                    <div class="">
-                                        <div class="panel-heading no-padding">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#Kitcken" aria-expanded="false" class="collapsed">
-                                                         {{'search.Kitcken'|translate}}
-                                                    <i class="fas fa-angle-down pull-right"></i>
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div id="Kitcken" class="panel-collapse collapse" aria-expanded="false">
-                                                <ul style="height:500px;overflow:auto;">
-                                                    <li class="checkbox-custom">
-                                                        <input type="radio" id="kitchen" name="kitchen" (change)="getFilterData()" value="0" [(ngModel)]="filter.KitchenID" class="form-radio">
-                                                        <label>  {{'search.All-kitchen'|translate}}</label>
-                                                    </li>
-
-                                                    <ng-container *ngFor="let kitchen of kitchens">
-                                                        <li class="checkbox-custom">
-                                                            <input type="radio" name="kitchen" id="kitchen" (change)="getFilterData()" value="{{kitchen.id}}" [(ngModel)]="filter.KitchenID" class="form-radio">
-                                                            <label>{{kitchen.kitchen_name}}</label>
-                                                        </li>
-                                                    </ng-container>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            </li> -->
+                         
                             <li>
                                 <div class="panel-group ">
                                     <div class="">
@@ -300,31 +269,19 @@
                                                 </h3>
 
                                                 <div class="price">
-                                                    <span *ngIf='row.ready_now==1'> Ready Now</span>
-                                                    <span *ngIf='row.days.length==0'> {{row.price}}</span>
-                                                    <del *ngIf='row.days.length>0' class="del-red">  {{row.price}}</del>
-                                                    <span *ngIf='row.days.length>0'>{{row.price - row.days[0].pivot.dis_count_value}}</span> {{'share.SAR'|translate}}
+                                                    <span> {{row.price_of_person}}/ الفرد</span>
                                                 </div>
+
                                                 <div class="meal-data mtmd mbmd">
-                                                    <span class="mrlg">
-                        <img class="mrsm" src="assets/img/icons/time.svg"  >
-                        {{'share.In'|translate}}  {{row.preparation_time_value}} {{'share.'+row.preparation_time_type+''|translate}} 
-                    </span>
                                                     <span>
-                        <img class="mrsm" src="assets/img/icons/person.svg"  >
-                        {{row.no_persons}} {{'share.person'|translate}}
-                    </span>
-                                                </div>
-                                                <div class="meal-data mtmd mbmd">
-                                                    <span class="mrlg"><i class="fa fa-balance-scale scale-quantity" aria-hidden="true"></i>  {{row.quantity}}
-                                                        {{languageService.getLanguageOrDefault()=='ar' ? row.unit.ar_name :row.unit.en_name}}
-                                                    </span>
-                                                  
+                                                    <img class="mrsm" src="assets/img/icons/person.svg"  >
+                                                 {{'share.person'|translate}} {{row.min_no_persons}}  الي  {{row.max_no_persons}}  
+                                                </span>
                                                 </div>
                                             </div>
-                                            <div>
+                                            <!-- <div>
                                                 <a (click)="openMealModal(row)" class="more-details width"> {{'share.More-details'|translate}}</a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>

@@ -62,6 +62,7 @@ import { ResetMyPasswordComponent } from './reset-my-password/reset-mypassword.c
 import { AuthGuard } from 'src/app/services/user/auth.guard';
 import { GroceryComponent } from './grocery/grocery.component';
 import { GroceryService } from 'src/app/services/user/grocery.service';
+import { MenuService } from 'src/app/services/user/menu.service';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/user/', '.json');
 }
@@ -142,6 +143,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaymentMethodService,
     WeekelyDealsService,
     GroceryService,
+    MenuService,
     CartService,
     {
       provide: AuthServiceConfig,
