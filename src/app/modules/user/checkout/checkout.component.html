@@ -26,7 +26,7 @@
               </div>
             </div>
 
-            <div class="faq-card checkout-card mblg" *ngIf="getFromLocalStorage('mycart').weeklydeals!=null">
+            <!-- <div class="faq-card checkout-card mblg" *ngIf="getFromLocalStorage('mycart').weeklydeals!=null">
               <div class="feature text-center">
                 <ng-container *ngFor="let row of ShowDays">
                   <div class="checkbox-custom black d-inline mrlg">
@@ -36,7 +36,7 @@
                   </div>
                 </ng-container>
               </div>
-            </div>
+            </div> -->
 
 
             <div class="faq-card checkout-card mblg">
@@ -44,8 +44,8 @@
                 <!-- <div class="feature-img">
                                         <img src="assets/img/icons/deliver.svg" alt="">
                                     </div> -->
-                <h3 class="text-semibold" *ngIf="!isWeekelyDeal"> {{'checkout.address-date'|translate}}</h3>
-                <h3 class="text-semibold" *ngIf="isWeekelyDeal"> {{'checkout.start-date'|translate}}</h3>
+                <h3 class="text-semibold" > {{'checkout.address-date'|translate}}</h3>
+                <!-- <h3 class="text-semibold"> {{'checkout.start-date'|translate}}</h3> -->
 
                 <!-- <kendo-timepicker [(value)]="value"></kendo-timepicker>
  -->

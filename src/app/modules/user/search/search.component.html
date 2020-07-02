@@ -97,8 +97,8 @@
                                     </div>
                                 </div>
                             </li> -->
-                         
-                            <!-- <li>
+<!--                          
+                            <li>
                                 <div class="panel-group ">
                                     <div class="">
                                         <div class="panel-heading no-padding">
@@ -128,6 +128,38 @@
                                     </div>
                                 </div>
                             </li> -->
+                            <li>
+                                <div class="panel-group ">
+                                    <div class="">
+                                        <div class="panel-heading no-padding">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#Kitcken" aria-expanded="false" class="collapsed">
+                                                         {{'search.Kitcken'|translate}}
+                                                    <i class="fas fa-angle-down pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="Kitcken" class="panel-collapse collapse" aria-expanded="false">
+                                                <ul style="height:500px;overflow:auto;">
+                                                    <li class="checkbox-custom">
+                                                        <input type="radio" id="kitchen" name="kitchen" (change)="getFilterData()" value="0" [(ngModel)]="filter.KitchenID" class="form-radio">
+                                                        <label>  {{'search.All-kitchen'|translate}}</label>
+                                                    </li>
+
+                                                    <ng-container *ngFor="let kitchen of kitchens">
+                                                        <li class="checkbox-custom">
+                                                            <input type="radio" name="kitchen" id="kitchen" (change)="getFilterData()" value="{{kitchen.id}}" [(ngModel)]="filter.KitchenID" class="form-radio">
+                                                            <label>{{kitchen.kitchen_name}}</label>
+                                                        </li>
+                                                    </ng-container>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                             <li>
                                 <div class="panel-group">
                                     <div class="">
@@ -247,7 +279,7 @@
                                 <div class="col-md-4 col-sm-6">
                                     <div class="mbxlg">
                                         <div class="product-item">
-                                            <figure [ngStyle]="{'background':'url(' + row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                                            <figure [ngStyle]="{'background':'url(' + row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn dropdown-toggle" (click)=addToFavourite(row.id)>
                                                         <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
@@ -260,7 +292,7 @@
                                                 <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="false" (rate)="onRate($event,row.id)">
                                                 </star-rating>
                                                 <h3 class="no-margin mtmd mbmd">
-                                                    <a routerLink="/user/meal-details/{{row.id}}">
+                                                    <a routerLink="/user/deal/{{row.id}}">
                                                      {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
                                                     </a>
                                                 </h3>

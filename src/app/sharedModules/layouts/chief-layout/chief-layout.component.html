@@ -23,6 +23,7 @@
             {{userService.currentUser.kitchen_owner_name}}
         </h2>
     </div>
+
     <div class="user-status text-center">
         <span class="capitalize" *ngIf="userService.currentUser.isactive==1">{{'chief-menu.Active'|translate}}</span>
         <span class="capitalize" *ngIf="userService.currentUser.isactive==0">{{'chief-menu.Lock'|translate}}</span>
@@ -67,18 +68,20 @@
                         </span>
             <span>{{'chief-menu.Menus'|translate}}</span>
         </a>
-        <a *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/deals" [class.active]="tabactive=='deals'">
+
+        <!-- <a *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/deals" [class.active]="tabactive=='deals'">
             <span class="icon-c text-center d-inline mrxs">
                             <img src="assets/img/icons/calender.svg">
                         </span>
             <span>{{'chief-menu.Weekly-Deals'|translate}}</span>
-        </a>
-        <a *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/ingredient-calculator" [class.active]="tabactive=='ingredient-calculator'">
+        </a> -->
+
+        <!-- <a *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/ingredient-calculator" [class.active]="tabactive=='ingredient-calculator'">
             <span class="icon-c text-center d-inline mrxs">
                             <img src="assets/img/icons/calculator.svg">
                         </span>
             <span>{{'chief-menu.Ingredient-Calculator'|translate}}</span>
-        </a>
+        </a> -->
         <a routerLink="/chief/wallet" [class.active]="tabactive=='wallet'">
             <span class="icon-c text-center d-inline mrxs">
                             <img src="assets/img/icons/wallet.svg">

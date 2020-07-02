@@ -1,4 +1,5 @@
 <main>
+
   <div *ngIf="loading" class="m-loading">
     <div>
       <i class="fas fa-spinner fa-spin color-green"></i>
@@ -12,7 +13,7 @@
     </div>
   </div>
 
-  <section class="sec-pad npt" *ngIf="!loading && ExsistData">
+  <section class="sec-pad npt" >
     <div class="container">
       <div class="shop-head shopping-head">
         <div class="row">
@@ -30,92 +31,49 @@
           </div>
         </div>
       </div>
-      <ng-container *ngFor="let row of getFromLocalStorage('mycart').dishes">
-        <div class="single-item ptxxlg pbxxlg">
-          <div class="row">
-            <div class="col-lg-6 col-md-7 col-sm-6">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="item-shop cover"
-                    [ngStyle]="{'background':'url(' +myUrl+row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
-                  </div>
-                </div>
-                <div class="col-sm-6 text-center">
-                  <div class="shop-content vcenter justify-content">
-                    <h4 class="no-margin text-semibold">
-                      <a routerLink="/user/meal-details/{{row.id}}">
-                        {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
-                      </a>
-                    </h4>
-                  </div>
+     
+      <div class="single-item ptxxlg pbxxlg">
+        <div class="row">
+          <div class="col-lg-6 col-md-7 col-sm-6">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="item-shop cover"
+                style="background-image: url('assets/img/catering/1.jpg')">
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="shop-content vcenter justify-content">
-                <a (click)="Delete(row.id,'Dish')" class="d-block mrxxlg "><i class="fas fa-trash "></i></a>
-                <div class="qty">
-                  <div class="qty-content ">
-                    <a class="qty-btn qty-minus text-bold" (click)="updateQuantity(row,-1,'Dish')">-</a>
-                    <input type="number" readonly id="qty" value="{{row.pivot.quantity}}">
-                    <a class="qty-btn qty-plus text-bold " (click)="updateQuantity(row,1,'Dish')">+</a>
-                  </div>
+              <div class="col-sm-6 text-center">
+                <div class="shop-content vcenter justify-content">
+                  <h4 class="no-margin text-semibold">
+                    <a >
+                       Menu 1 
+                    </a>
+                  </h4>
                 </div>
-              </div>
-            </div>
-            <div class=" col-lg-2 col-sm-2 col-xs-12  ">
-              <div class="shop-content end vcenter ">
-                <h3 class="price text-right no-margin ">
-                  {{row.pivot.price * row.pivot.quantity }} {{'share.SAR'|translate}}
-                </h3>
               </div>
             </div>
           </div>
-        </div>
-      </ng-container>
-      <ng-container *ngFor="let row of getFromLocalStorage('mycart').weeklydeals">
-        <div class="single-item ptxxlg pbxxlg">
-          <div class="row">
-            <div class="col-lg-6 col-md-7 col-sm-6">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="item-shop cover"
-                    [ngStyle]="{'background':'url('+myUrl+ row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
-                  </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="shop-content vcenter justify-content">
+              <a  class="d-block mrxxlg "><i class="fas fa-trash "></i></a>
+              <div class="qty">
+                <div class="qty-content ">
+                  <a class="qty-btn qty-minus text-bold" >-</a>
+                  <input type="number" readonly id="qty" value="300">
+                  <a class="qty-btn qty-plus text-bold " >+</a>
                 </div>
-                <div class="col-sm-6 text-center">
-                  <div class="shop-content vcenter justify-content">
-                    <h4 class="no-margin text-semibold">
-                      <a routerLink="/user/meal-details/{{row.id}}">
-                        {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
-                      </a>
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12 ">
-              <div class="shop-content vcenter  justify-content ">
-                <a (click)="Delete(row.id,'WeeklyDeal')" class="d-block mrxxlg "><i class="fas fa-trash "></i></a>
-                <div class="qty">
-                  <div class="qty-content ">
-                    <a class="qty-btn qty-minus text-bold" (click)="updateQuantity(row,-1,'WeeklyDeal')">-</a>
-                    <input type="number" readonly id="qty" value="{{row.pivot.quantity}}">
-                    <a class="qty-btn qty-plus text-bold " (click)="updateQuantity(row,1,'WeeklyDeal')">+</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-sm-2 col-xs-12  ">
-              <div class="shop-content end vcenter ">
-                <h3 class="price text-right no-margin ">
-                  {{row.pivot.price * row.pivot.quantity }} {{'share.SAR'|translate}}
-                </h3>
               </div>
             </div>
           </div>
+          <div class=" col-lg-2 col-sm-2 col-xs-12  ">
+            <div class="shop-content end vcenter ">
+              <h3 class="price text-right no-margin ">
+               300 {{'share.SAR'|translate}}
+              </h3>
+            </div>
+          </div>
         </div>
-      </ng-container>
+      </div>
+  
       <div class="single-item ptmd pbmd ">
         <div class="row ">
           <div class="col-md-8"> </div>
@@ -130,9 +88,9 @@
           <div class="col-md-2 col-sm-5 col-xs-6  ">
             <div class="shop-content end vcenter ">
               <div>
-                <h3 class="price total text-right no-margin text-bold mblg ">{{getFromLocalStorage('mycarttotal')}}
+                <h3 class="price total text-right no-margin text-bold mblg ">300
                   {{'share.SAR'|translate}}</h3>
-                <span class="d-block ">{{getFromLocalStorage('delivery_fee')}} {{'share.SAR'|translate}}</span>
+                <span class="d-block ">20 {{'share.SAR'|translate}}</span>
 
               </div>
             </div>
@@ -140,7 +98,6 @@
         </div>
       </div>
       <div class="pull-right mtxxlg shopping-btn ">
-
         <a routerLink="/user/search/0/0/0" class="btn btn-green capitalize d-inline ">
           {{'shopping.Continue-shopping'|translate}}</a>
         <a class="btn btn-green-outline mrlg capitalize d-inline"
@@ -149,9 +106,9 @@
     </div>
   </section>
 
-  <div class="sec-pad npt mtlg">
+  <!-- <div class="sec-pad npt mtlg">
     <div class="container" *ngIf="!loading && !ExsistData">
       <p class="text-danger no-margin text-semibold noresult">{{'shopping.cart-empty'|translate}}</p>
     </div>
-  </div>
+  </div> -->
 </main>

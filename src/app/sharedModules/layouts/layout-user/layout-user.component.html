@@ -100,14 +100,32 @@
               <li class="dropdown cart-dropdown max-height" *ngIf="!isChief">
 
                 <a href="checkout.html" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                  aria-haspopup="true" aria-expanded="false"
-                  [ngClass]="{'has-items' :getFromLocalStorage('mycarttotal')!=0 && getFromLocalStorage('mycarttotal')!=null}">
+                  aria-haspopup="true" aria-expanded="false" class="has-items"
+                >
                   <img src="assets/img/icons/cart.svg">
                 </a>
-
+                <!-- [ngClass]="{'has-items' :getFromLocalStorage('mycarttotal')!=0 && getFromLocalStorage('mycarttotal')!=null}" -->
                 <ul class="dropdown-menu cart m-t-25">
+                  <li class="cart-item single-item" >
+                    <a>
+                      <div class="item-shop cart-img cover" style="background-image: url('assets/img/catering/1.jpg')"
+                      >
+                      </div>
+                    </a>
+                    <div class="cart-content">
+                      <h4 class="no-margin">
+                        <a>
+                         Menu 1
+                        </a>
+                      </h4>
+                      <span class="d-block">{{'share.Qty' | translate}}:100</span>
+                      <p class="price no-margin mtxs text-bold"><span>{{'share.price' | translate}}:
+                        </span>1000 {{'share.SAR' | translate}}</p>
+                    </div>
+                  </li>
                   <div *ngIf="getFromLocalStorage('mycart')!=null">
                     <div *ngIf="getFromLocalStorage('mycart').dishes!=null">
+                     
                       <li class="cart-item single-item" *ngFor="let row of getFromLocalStorage('mycart').dishes">
                         <a>
                           <div class="item-shop cart-img cover"
@@ -122,7 +140,7 @@
                           </h4>
                           <span class="d-block">{{'share.Qty' | translate}}:{{row.pivot.quantity}}</span>
                           <p class="price no-margin mtxs text-bold"><span>{{'share.price' | translate}}:
-                            </span>{{row.pivot.price * row.pivot.quantity }} {{'share.SAR' | translate}}</p>
+                            </span>100{{'share.SAR' | translate}}</p>
                         </div>
                       </li>
                     </div>
@@ -153,7 +171,7 @@
                     </div>
                     <div class="shop-content d-inline pull-right">
                       <span
-                        class="price total text-right no-margin text-bold text-upper ">{{getFromLocalStorage('mycarttotal')}}
+                        class="price total text-right no-margin text-bold text-upper ">200
                         {{'share.SAR' | translate}}</span>
                     </div>
                   </li>

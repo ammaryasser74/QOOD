@@ -103,7 +103,7 @@
         "Dashboard": "لوحة التحكم",
         "MyDishes": "اطباقي",
         "Orders": "الطلبات",
-        "Menus": "قوائم الطعام",
+        "Menus": "قوائم المناسبات",
         "Weekly-Deals": "الإشتراكات الاسبوعية ",
         "Ingredient-Calculator": "حاسبة الطعام",
         "My-Wallet": "محفظتي",
@@ -227,7 +227,7 @@
         "quantity": "الكمية",
         "price": "السعر",
         "Accept": "مقبولة",
-        "Deal": "اشتراك",
+        "Deal": "احجز المناسبة",
         "order": "طلب",
         "Today-Orders": "طلبات اليوم"
     }

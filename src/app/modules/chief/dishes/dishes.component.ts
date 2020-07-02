@@ -29,12 +29,13 @@ export class DishesComponent implements OnInit {
               public languageService: LanguageService,
               private toastr: ToastrService,
               private modelService: BsModalService, ) { }
-  ngOnInit() {
-  this.myUrl = environment.api_imges;
-  this.userService.GetByID(this.userService.currentUser.id).subscribe(res => {this.appprove = res.Data.is_approved; });
-  this.getDishes();
 
+  ngOnInit(){
+    this.myUrl = environment.api_imges;
+    this.userService.GetByID(this.userService.currentUser.id).subscribe(res => {this.appprove = res.Data.is_approved; });
+    this.getDishes();
   }
+
   getDishes() {
     this.loading = true;
     this.kitchenService.GetListpaging(this.filter).subscribe(
@@ -59,6 +60,7 @@ export class DishesComponent implements OnInit {
       }
     };
   }
+  
   addDish(row) {
     this.addEditaddressModel = this.modalService.show(AddDishComponent, { initialState:
     {Data: row, }, class: 'modal-sm' });
@@ -66,6 +68,7 @@ export class DishesComponent implements OnInit {
     this.getDishes();
     };
   }
+  
   pageChanged(event: any): void {
     this.filter.current_page = event.page;
     this.getDishes();

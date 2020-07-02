@@ -56,14 +56,18 @@ export class AddDishComponent implements OnInit {
     private http: HttpClient,
     private localStorageService: LocalStorageService
   ) {}
+
   ngOnInit() {
+
     this.initForm();
     if (this.Data != null) {
       this.isEdit = true;
+      this.Data.category_id=this.Data.category.id
       this.form.patchValue(this.Data);
-      this.Data.cusines.forEach(element => {
-        this.selected.push(element.id);
-      });
+
+      // this.Data.cusines.forEach(element => {
+      //   this.selected.push(element.id);
+      // });
       // this.Data.days.forEach(element => {
       //   this.Days.push(element.id);
       // });
@@ -78,7 +82,7 @@ export class AddDishComponent implements OnInit {
     }
 
     // this.form.get('day_ids').setValue(this.Days)
-    this.form.get('cusines_ids').setValue(this.selected);
+    // this.form.get('cusines_ids').setValue(this.selected);
     this.categoryService.GetList().subscribe(res => {
       this.categories = res.Data;
     });
@@ -113,14 +117,13 @@ export class AddDishComponent implements OnInit {
         null,
         [Validators.required],
       ],
-      preparation_time_type: ['min', Validators.required],
-      preparation_time_value: [null, Validators.required],
+  
       chief_id: this.userService.currentUser.chief_id,
       quantity: [null, [Validators.required, Validators.min(1)]],
-      price: [null, [Validators.required, Validators.min(0.1)]],
-      no_persons: [null, [Validators.required, Validators.min(1)]],
+      price: [10],
+    
       category_id: [null, Validators.required],
-      cusines_ids: [null, Validators.required],
+      // cusines_ids: [null, Validators.required],
       unit_id: [null, Validators.required],
       img1: [null],
       img2: [null],

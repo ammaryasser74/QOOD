@@ -17,6 +17,7 @@
                             <p>
                                 <span>{{'home.location1'|translate}}</span>,{{'home.location2'|translate}}
                             </p>
+                         
                             <!-- <div class="checkbox-custom check-custome m-b-10">
                                 <ng-container *ngFor="let row of cities">
                                     <input type="radio" value="{{row.id}}" [checked]="row.id==filter.city_id" [(ngModel)]="filter.city_id" id="jeddah" class="form-radio check-custome-form">
@@ -40,12 +41,14 @@
                                 </a>
                             </div> -->
                         </div>
+                        <a routerLink="/user/search/0/0/0" style="width: 30%;"
+                        class="btn btn-green text-upper">{{'home.order-now'|translate}}</a>
                     </div>
-
+                
                 </div>
             </div>
         </section>
-        <section class="sec-pad hero-img cover" style="background-image: url('assets/img/cover/homepage-1.jpg')">
+        <!-- <section class="sec-pad hero-img cover" style="background-image: url('assets/img/cover/homepage-1.jpg')">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-12 rtl-margin">
@@ -62,7 +65,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <section class="sec-pad ball">
             <div class="container">
                 <div class="features">

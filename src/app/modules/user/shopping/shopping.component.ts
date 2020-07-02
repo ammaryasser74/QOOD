@@ -39,7 +39,7 @@ export class ShoppingComponent implements OnInit {
 
   ngOnInit() {
     this.myUrl = environment.api_imges;
-    this.getCard();
+    // this.getCard();
   }
 
   getFromLocalStorage(key: string) {
@@ -59,13 +59,13 @@ export class ShoppingComponent implements OnInit {
     }
   }
   checkOut() {
-    if (this.userService.currentUser == null) {
-      this.modalService.show(LoginComponent, {
-        class: 'modal-lg-width',
-      });
-    } else {
+    // if (this.userService.currentUser == null) {
+    //   this.modalService.show(LoginComponent, {
+    //     class: 'modal-lg-width',
+    //   });
+    // } else {
       this.router.navigate(['/user/checkout']);
-    }
+    // }
   }
 
   updateQuantity(row, quantity, Type) {
