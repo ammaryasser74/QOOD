@@ -22,6 +22,7 @@ import { WeekelyDealsComponent } from '../../chief/weekely-deals/weekely-deals.c
 import { WeekelyDealsService } from 'src/app/services/user/weekely-deals.service';
 import { VerficationCodeComponent } from 'src/app/sharedModules/layouts/verfication-code/verfication-code.component';
 import { PathLocationStrategy } from '@angular/common';
+import { MenuService } from 'src/app/services/user/menu.service';
 
 @Component({
   selector: 'app-account',
@@ -61,6 +62,7 @@ export class AccountComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     public cartService: CartService,
     public orderService: OrderService,
+    private menuService:MenuService,
     public bookMarkService: BookMarkService
   ) {}
 
@@ -74,11 +76,13 @@ export class AccountComponent implements OnInit {
       .subscribe(res => {
         this.recentOrder = res.Data;
       });
-    this.MealsService.MyFavouriteMeal(
+    this.menuService.MyFavouriteMenu(
       this.userService.currentUser.id
     ).subscribe(res => {
-      res.Data.map(i => (i.img1 = environment.api_imges + i.img1));
+      res.Data.map(i => (i.img = environment.api_imges + i.img));
       this.myFavourite = res.Data;
+      console.log(res.Data);
+      
       this.myavatar = this.userService.currentUser.avatar;
       this.form.patchValue(this.userService.currentUser);
 
@@ -134,7 +138,7 @@ export class AccountComponent implements OnInit {
       },
     });
   }
-  addToFavourite(mealID) {
+  addToFavourite(MenuID) {
     this.warningModel = this.modelService.show(WarningComponent, {
       class: 'modal-sm',
     });
@@ -142,14 +146,11 @@ export class AccountComponent implements OnInit {
       'Are you sure you want to delete from Favourite ?';
     this.warningModel.content.onClose = cancel => {
       if (cancel) {
-        this.myOrderParam = {
-          MealID: mealID,
-          UserID: this.userService.currentUser.id,
-        };
-        this.MealsService.AddMealtoMyFavourite(this.myOrderParam).subscribe(
+        this.myOrderParam = {MenuID: MenuID, UserID: this.userService.currentUser.id };
+        this.menuService.AddMenutoMyFavourite(this.myOrderParam).subscribe(
           res => {
             if (res.Success) {
-              res.Data.map(i => (i.img1 = environment.api_imges + i.img1));
+              res.Data.map(i => (i.img= environment.api_imges + i.img));
               this.myFavourite = res.Data;
               this.toastr.success(res.Message);
               this.warningModel.hide();

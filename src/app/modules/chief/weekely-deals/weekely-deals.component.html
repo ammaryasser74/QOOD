@@ -9,7 +9,7 @@
             </div>
             <div *ngIf="!loading">
                 <div class="d-content-c plmd">
-                    <button type="button" class="btn btn-green btn-bigger width100 mbxxlg" [disabled]="appprove!='approved'" (click)="addWeekely()">{{'deal.add'|translate}} </button>
+                    <button type="button" class="btn btn-green btn-bigger width100 mbxxlg" [disabled]="appprove!='approved'" (click)="addWeekely()">{{'menu.add-menu'|translate}} </button>
                     <div class="weekly">
                         <div class="menu-items order-items">
                             <ng-container *ngFor="let row of Data">
@@ -21,13 +21,10 @@
                                             <h4 class="no-margin mtmd mbxs"> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</h4>
                                         </div>
                                         <div class="meal-data bt bb mtmd mbmd">
-                                            <span class="br d-inline">
-                <img class="mrsm" src="assets/img/icons/time.svg"  >
-                {{row.days.length}} {{'share.day'|translate}}
-            </span>
+                 
                                             <span class="d-inline">
                 <img class="mrsm" src="assets/img/icons/person.svg"  >
-               {{row.no_persons}} {{'share.person'|translate}}
+               {{row.min_no_persons}} :{{row.max_no_persons}} {{'share.person'|translate}}
             </span>
                                         </div>
                                         <div class="description bb plxxlg prxxlg pblg">

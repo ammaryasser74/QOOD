@@ -87,9 +87,7 @@ export class AddDishComponent implements OnInit {
       this.categories = res.Data;
     });
     this.unitService.GetList().subscribe(res=>{this.units=res});
-    this.cusinesService.GetList().subscribe(res => {
-      this.cusines = res.Data;
-    });
+  
     this.kitchenService.Days().subscribe(res => {
       this.Days = res.Data;
     });

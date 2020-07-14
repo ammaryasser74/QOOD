@@ -62,19 +62,19 @@
         </a>
 
 
-        <a  *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/menus" [class.active]="tabactive=='menus'">
+        <!-- <a  *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/menus" [class.active]="tabactive=='menus'">
             <span class="icon-c text-center d-inline mrxs">
                             <img src="assets/img/icons/fork.svg">
                         </span>
             <span>{{'chief-menu.Menus'|translate}}</span>
-        </a>
+        </a> -->
 
-        <!-- <a *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/deals" [class.active]="tabactive=='deals'">
+        <a *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/deals" [class.active]="tabactive=='deals'">
             <span class="icon-c text-center d-inline mrxs">
                             <img src="assets/img/icons/calender.svg">
                         </span>
-            <span>{{'chief-menu.Weekly-Deals'|translate}}</span>
-        </a> -->
+            <span>{{'chief-menu.Menus'|translate}}</span>
+        </a>
 
         <!-- <a *ngIf="userService.currentUser.type=='chief'" routerLink="/chief/ingredient-calculator" [class.active]="tabactive=='ingredient-calculator'">
             <span class="icon-c text-center d-inline mrxs">

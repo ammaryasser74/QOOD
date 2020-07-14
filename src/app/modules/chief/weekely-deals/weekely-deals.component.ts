@@ -9,12 +9,14 @@ import { WarningComponent } from 'src/app/sharedModules/warning/warning.componen
 import { AddWeekelyDealsComponent } from './add-weekely-deals/add-weekely-deals.component';
 import { WeekelyDealsService } from 'src/app/services/chief/weekely-deals';
 import { environment } from 'src/environments/environment';
+import { MenuService,MealFilter } from 'src/app/services/user/menu.service';
 @Component({
   selector: 'app-weekely-deals',
   templateUrl: './weekely-deals.component.html',
   styleUrls: ['./weekely-deals.component.css']
 })
 export class WeekelyDealsComponent implements OnInit {
+  filter: MealFilter = {min_price: 1,KitchenID:this.userService.currentUser.chief_id, max_price: 2000, UserID: null, city_id: 0, category_id: 0, filterType: 0, cusines_id: []};
   dishes: any = [];
   myUrl: any;
   Data: any = [];
@@ -28,10 +30,13 @@ export class WeekelyDealsComponent implements OnInit {
               public modalService: BsModalService,
               public languageService: LanguageService,
               private toastr: ToastrService,
+              private menuService: MenuService,
               private weekelyDealsService: WeekelyDealsService,
               private modelService: BsModalService, ) { }
 
   ngOnInit() {
+    console.log(this.userService.currentUser);
+    
     this.myUrl = environment.api_imges;
     this.loading = true;
     this.userService.GetByID(this.userService.currentUser.id).subscribe(res => {this.appprove = res.Data.is_approved; });
@@ -39,7 +44,7 @@ export class WeekelyDealsComponent implements OnInit {
 
   }
   GetWeekelyDeals() {
-    this.weekelyDealsService.GetList(this.userService.currentUser.chief_id).subscribe(
+    this.menuService.Filter(this.filter).subscribe(
       res => {
        this.loading = false;
        this.Data = res.Data;
@@ -47,10 +52,10 @@ export class WeekelyDealsComponent implements OnInit {
   }
 Delete(ID) {
     this.warningModel = this.modelService.show(WarningComponent, { class: 'modal-sm' });
-    this.warningModel.content.boxObj.msg = 'Are you sure you want to delete this weekely deals ?';
+    this.warningModel.content.boxObj.msg = 'Are you sure you want to delete ?';
     this.warningModel.content.onClose = (cancel) => {
       if (cancel) {
-        this.weekelyDealsService.Delete(ID).subscribe(res => {
+        this.menuService.DeleteMenu(ID).subscribe(res => {
             if (res.Success) {
               this.Data = res.Data;
               this.toastr.success(res.Message);

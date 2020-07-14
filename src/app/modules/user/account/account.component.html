@@ -130,7 +130,7 @@
                                     <div class="col-md-3 col-sm-6">
                                         <div class="mbxlg">
                                             <div class="product-item">
-                                                <figure class="cover" [ngStyle]="{'background':'url(' + row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                                                <figure class="cover" [ngStyle]="{'background':'url(' + row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
                                                     <div class="btn-group">
                                                         <button type="button" class="btn dropdown-toggle" (click)=addToFavourite(row.id)>
                                                             <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
@@ -138,7 +138,7 @@
                                                         </button>
                                                     </div>
                                                 </figure>
-                                                <a routerLink="/user/search/0/0/{{row.chief_id}}" class="btn btn-green text-upper">{{'share.order'|translate}}</a>
+                                                <a routerLink="/user/search/0/0/0" class="btn btn-green text-upper">{{'share.order'|translate}}</a>
                                                 <div class="product-info">
                                                     <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="false" (rate)="onRate($event,row.id)">
                                                     </star-rating>
@@ -148,23 +148,20 @@
                                                         </a>
                                                     </h3>
                                                     <div class="price">
-                                                        <span *ngIf='row.ready_now==1'> Ready Now</span>
-                                                        <span *ngIf='row.days.length==0'> {{row.price}}</span>
-                                                        <del *ngIf='row.days.length>0' class="del-red">  {{row.price}}</del>
-                                                        <span *ngIf='row.days.length>0'>{{row.price - row.days[0].pivot.dis_count_value}}</span> {{'share.SAR'|translate}}
+                                                       
+                                                        <span > {{row.price_of_person}}</span>
+                                                       
+                                                         {{'share.SAR'|translate}}
                                                     </div>
                                                     <div class="meal-data mtmd mbmd">
-                                                        <span class="mrlg">
-                        <img class="mrsm" src="assets/img/icons/time.svg" >
-                        {{'share.In'|translate}} {{row.preparation_time_value}}  {{'share.'+row.preparation_time_type+''|translate}} 
-                    </span>
+                         
                                                         <span>
                         <img class="mrsm" src="assets/img/icons/person.svg">
-                       {{row.no_persons}} {{'share.person'|translate}}
+                       {{row.max_no_persons}}:{{row.min_no_persons}}  {{'share.person'|translate}}
                     </span>
                                                     </div>
                                                 </div>
-                                                <a class="more-details" (click)="openMealModal(row)">{{'share.More-details'|translate}}</a>
+                                                
                                             </div>
                                         </div>
                                     </div>
