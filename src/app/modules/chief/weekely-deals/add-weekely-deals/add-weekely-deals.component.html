@@ -23,7 +23,7 @@
                                     <img src='assets/img/icons/photo.svg' class="m-t-25" for="my-file-1" style="height: 50px;"  *ngIf="img==null">
                                     <img [src]='img' for="my-file" for="my-file" width="100%" height="125px"
                                      *ngIf="img!=null">
-                                        <input class="input-file" id="my-file" type="file" style="display :none" accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event,8)" class="select-profile-picture">
+                                        <input class="input-file" id="my-file" type="file" style="display :none" accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event)" class="select-profile-picture">
                                     </div>
                                 </a>
                     </label>

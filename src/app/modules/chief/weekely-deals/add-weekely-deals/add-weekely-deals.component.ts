@@ -130,26 +130,6 @@ export class AddWeekelyDealsComponent implements OnInit {
       }
     }
 
-
-
-
-
-
-    // if (this.Dish_Category.length == 0) {
-    //   this.Dish_Category.push(this.myparam);
-    // } else if (this.Dish_Category.find(i => i.dish_id == DishID && i.day_id == this.myOpenDay)) {
-    //   for (let index = 0; index < this.Dish_Category.length; index++) {
-    //     if (this.Dish_Category[index].dish_id == DishID && this.Dish_Category[index].day_id == this.myOpenDay) {
-    //       this.Dish_Category.splice(index, 1);
-    //     }
-    //   }
-    // } else {
-
-    console.log(this.form.value.dishes_ids, this.Dish_Category, "ffff");
-
-    // }
-
-
   }
   back() {
     this.open = false;
@@ -178,7 +158,20 @@ export class AddWeekelyDealsComponent implements OnInit {
       }
     }
   }
-  uploadmyImages(Data, type) {
+  onSelectFile(event) {
+    
+         if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]); // read file as data url
+           this.fileData = event.target.files[0] as File;
+           reader.onload = (event: any) => {
+            this.img = (event.target.result);
+             this.uploadmyImage(this.fileData);
+            };
+          }
+       
+      }
+  uploadmyImage(Data) {
     const formData = new FormData();
     formData.append('img', Data);
     this.http.request(new HttpRequest('POST', `${environment.api_url}/UploadImage`,
