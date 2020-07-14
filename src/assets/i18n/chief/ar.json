@@ -234,8 +234,8 @@
     ,"deal":{
         "add":"اضافة اشتراك جديد",
         "update":"تعديل اشتراك ",
-        "weekely-Arabic-Name":"اسم الاشتراك بالعربية  ",
-        "weekelys-English-Name":"اسم الاشتراك بالانجليزية  ",
+        "weekely-Arabic-Name":"اسم القائمة بالعربية  ",
+        "weekelys-English-Name":"اسم القائمة بالانجليزية  ",
         "Description-arabic":"الوصف بالعربية",
         "Description-Elglish":"الوصف بالانجليزية",
         "price": "السعر",

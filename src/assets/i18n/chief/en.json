@@ -231,8 +231,8 @@
     ,"deal":{
         "add":"Add Weekly Deal",
         "update":"update Weekly Deal",
-        "weekely-Arabic-Name":"Weekly Arabic Name",
-        "weekelys-English-Name":"Weekly English Name",
+        "weekely-Arabic-Name":"Menu Arabic Name",
+        "weekelys-English-Name":"Menu English Name",
         "Description-arabic":"Description Arabic",
         "Description-Elglish":"Description English",
         "price": "Price",

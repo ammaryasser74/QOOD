@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { KitchenService ,Filter} from 'src/app/services/chief/kitchen.service';
+import { KitchenService, Filter } from 'src/app/services/chief/kitchen.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { WeekelyDealsService } from 'src/app/services/chief/weekely-deals';
@@ -17,7 +17,7 @@ import { MenuService } from 'src/app/services/user/menu.service';
   styleUrls: ['./add-weekely-deals.component.css']
 })
 export class AddWeekelyDealsComponent implements OnInit {
-  filter: Filter = {  ChiefID: this.userService.currentUser.chief_id, SearchField:'',per_page:10,current_page: 1};
+  filter: Filter = { ChiefID: this.userService.currentUser.chief_id, SearchField: '', per_page: 10, current_page: 1 };
   loading = false;
   myUrl: any;
   addEditaddressModel: BsModalRef;
@@ -29,15 +29,10 @@ export class AddWeekelyDealsComponent implements OnInit {
   onClose: any;
   cusines: any;
   img: any;
-  img2: any;
-  img3: any;
-  img4: any;
-  img5: any;
-  img6: any;
-  img7: any;
+  selected = [];
   Days: any = [];
   fileData = null;
-  categories : any;
+  categories: any;
   fileData2 = null;
   fileData3 = null;
   fileData4 = null;
@@ -46,7 +41,7 @@ export class AddWeekelyDealsComponent implements OnInit {
   fileData7 = null;
   Dish_Category: any = [];
   myOpenDay: number;
-DishByCategory:any = [];
+  DishByCategory: any = [];
   open = false;
   constructor(public myModel: BsModalRef,
     public kitchenService: KitchenService,
@@ -61,55 +56,50 @@ DishByCategory:any = [];
     public userService: UserService) { }
 
   ngOnInit() {
-    this.myUrl = environment.api_imges;
-    this.open = false;
-    this.getDishes();
     this.cusinesService.GetList().subscribe(res => {
       this.cusines = res.Data;
     });
-    this.categoryService.GetList().subscribe(res => {
-      this.categories = res.Data;
-    });
+    this.myUrl = environment.api_imges;
+    this.getDishes();
+
     this.initForm();
-    this.kitchenService.Days().subscribe(res => {
-      this.Days = res.Data;
-    });
+
+  }
+  fillData() {
     if (this.Data != null) {
+      console.log(this.Data, "llll");
+      this.form.get('menu_id').setValue(this.Data.id)
       this.isEdit = true;
       this.form.patchValue(this.Data);
       this.img = this.myUrl + this.Data.img;
-      this.Data.dishes.forEach(element => {
-        this.myparam = { dish_id: element.id, day_id: element.pivot.day_id };
-        this.Dish_Category.push(this.myparam);
+      //cusines 
+      this.Data.cusines.forEach(element => {
+      this.selected.push(element.id);
       });
-      //   this.Data.days.forEach(element => {
-      //    if (element.id == 1) {this.img1 = this.myUrl + element.pivot.path; } else if (element.id == 2) {this.img2 = this.myUrl + element.pivot.path; } else if (element.id == 3) {this.img3 = this.myUrl + element.pivot.path; } else if (element.id == 4) {this.img4 = this.myUrl + element.pivot.path; } else if (element.id == 5) {this.img5 = this.myUrl + element.pivot.path; } else if (element.id == 6) {this.img6 = this.myUrl + element.pivot.path; } else {this.img7 = this.myUrl + element.pivot.path; }
-      //  });
+      this.allDish.map(i=>i.checked=false)
+      // Dish_Category
+      this.Data.dishes.forEach(element => {
+        this.Dish_Category.push(element.id)
+        this.allDish.find(i => i.id == element.id).checked=true;
+      });
+
+      this.form.get('cusines_ids').setValue(this.selected)
+ 
     }
   }
   getDishes() {
     this.loading = true;
     this.kitchenService.GetListpaging(this.filter).subscribe(
       res => {
+      
         this.loading = false;
-        this.allDish= res.Data;
-      }
-    );
-  }
-  onSelectFile(event, DayID) {
-    if (DayID == 8) {
-      if (event.target.files && event.target.files[0]) {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]); // read file as data url
-        this.fileData = event.target.files[0] as File;
-        reader.onload = (event: any) => {
-          this.img = (event.target.result);
-          this.uploadmyImages(this.fileData, 8);
-        };
-      }
-    }
+        
+        this.allDish = res.Data.data;
+        this.fillData()
+      })
 
   }
+
   initForm() {
     this.form = this.formBuilder.group({
       ar_description: [null, [Validators.required, Validators.pattern('^[\u0621-\u064A0-9 ]+$')]],
@@ -122,47 +112,43 @@ DishByCategory:any = [];
       dishes_ids: [null],
       cusines_ids: [null],
       chief_id: this.userService.currentUser.chief_id,
-      id: [0, Validators.required],
+      menu_id: [0, Validators.required],
       img: [null],
     });
   }
   addDishToDay(DishID) {
-  if(this.Dish_Category.length == 0){
-    this.Dish_Category.push(DishID);
-  }
-  else{
-      let index=this.Dish_Category.findIndex(i => i== DishID)
-      console.log(index,"index");
-      
-          if(index!=-1){
-            console.log(index,"KKKK");
-            
-            this.Dish_Category.splice(index, 1);
-          }
-          else{
-            this.Dish_Category.push(DishID);
-          }
-  }
-     
-     
-  
-  
+    if (this.Dish_Category.length == 0) {
+      this.Dish_Category.push(DishID);
+    }
+    else {
+      let index = this.Dish_Category.findIndex(i => i == DishID)
+      if (index != -1) {
+        this.Dish_Category.splice(index, 1);
+      }
+      else {
+        this.Dish_Category.push(DishID);
+      }
+    }
 
 
-      // if (this.Dish_Category.length == 0) {
-      //   this.Dish_Category.push(this.myparam);
-      // } else if (this.Dish_Category.find(i => i.dish_id == DishID && i.day_id == this.myOpenDay)) {
-      //   for (let index = 0; index < this.Dish_Category.length; index++) {
-      //     if (this.Dish_Category[index].dish_id == DishID && this.Dish_Category[index].day_id == this.myOpenDay) {
-      //       this.Dish_Category.splice(index, 1);
-      //     }
-      //   }
-      // } else {
-        
-        console.log(this.form.value.dishes_ids ,this.Dish_Category,"ffff");
-      
-      // }
-  
+
+
+
+
+    // if (this.Dish_Category.length == 0) {
+    //   this.Dish_Category.push(this.myparam);
+    // } else if (this.Dish_Category.find(i => i.dish_id == DishID && i.day_id == this.myOpenDay)) {
+    //   for (let index = 0; index < this.Dish_Category.length; index++) {
+    //     if (this.Dish_Category[index].dish_id == DishID && this.Dish_Category[index].day_id == this.myOpenDay) {
+    //       this.Dish_Category.splice(index, 1);
+    //     }
+    //   }
+    // } else {
+
+    console.log(this.form.value.dishes_ids, this.Dish_Category, "ffff");
+
+    // }
+
 
   }
   back() {
@@ -170,20 +156,20 @@ DishByCategory:any = [];
     this.myOpenDay = 0;
   }
   openMeal(catID) {
-    console.log(this.allDish,"ASD");
+    console.log(this.allDish, "ASD");
     this.open = true;
-    
-    if (catID > 0 ) {
 
-      if (this.Dish_Category.filter(i => i.category_id == catID).length == 0) {  
-        this.DishByCategory=this.allDish.data
+    if (catID > 0) {
+
+      if (this.Dish_Category.filter(i => i.category_id == catID).length == 0) {
+        this.DishByCategory = this.allDish.data
         this.DishByCategory.filter(i => i.category_id === catID);
-console.log("lllllllllllllllllllllll");
+        console.log("lllllllllllllllllllllll");
 
         // this.allDish.data.map(i => i.checked = false);
       } else {
         console.log("llllllllllll");
-        
+
         this.allDish.map(i => i.checked = false);
         const myDishEsit = this.Dish_Category.filter(i => i.category_id == catID);
         myDishEsit.forEach(element => {
@@ -217,8 +203,8 @@ console.log("lllllllllllllllllllllll");
     } else if (this.form.valid) {
       this.form.value.dishes_ids = this.Dish_Category;
       if (this.form.value.id == 0) {
-        console.log(this.form.value.dishes_ids ,this.Dish_Category,"ffff");
-        
+        console.log(this.form.value.dishes_ids, this.Dish_Category, "ffff");
+
         this.loading = true;
         this.menuService.Post(this.form.value).subscribe(
           res => {

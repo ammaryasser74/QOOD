@@ -8,8 +8,8 @@
         <div class="modal-body m-b-20">
             <div class="content-head text-center mbxlg m-t-15">
                 <img src="assets/img/icons/plate-1.svg" alt="">
-                <h3 class="no-margin mtmd mbsm text-semibold capitalize" *ngIf="!isEdit">{{'menu.add-menu'|translate}}</h3>
-                <h3 class="no-margin mtmd mbsm text-semibold capitalize" *ngIf="isEdit">{{'deal.update'|translate}}</h3>
+                <h3 class="no-margin mtmd mbsm text-semibold" *ngIf="isEdit">{{'menu.update-menu'|translate}}</h3>
+                <h3 class="no-margin mtmd mbsm text-semibold" *ngIf="!isEdit">{{'menu.add-menu'|translate}}</h3>
             </div>
             <div *ngIf="loading" class="m-loading">
                 <i class="fas fa-spinner fa-spin color-green"></i>
@@ -113,7 +113,7 @@
                 <!-- /////////////////////my Dishes//////////////////// -->
                 <!-- <div *ngIf="open"> -->
                     <div class="row menu-items">
-                        <div class="me-c " *ngFor="let row of allDish.data">
+                        <div class="me-c " *ngFor="let row of allDish">
                             <div class="product-item menu-item ">
                                 <figure class="cover" [ngStyle]="{'background':'url('+ myUrl+ row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center' }">
                                     <div class="btn-group ">

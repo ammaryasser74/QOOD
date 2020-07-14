@@ -49,7 +49,7 @@ export class MenuService {
         return this.webApi.post(`/Kitchen${this.controller}/Post`, myParam);
     }
     Update(myParam) {
-        return this.webApi.post(`${this.controller}/Update`, myParam);
+        return this.webApi.post(`/Kitchen${this.controller}/Update`, myParam);
     }
     DeleteMenu(MemuID) {
         return this.webApi.get(`/Kitchen${this.controller}/Delete/` + MemuID);

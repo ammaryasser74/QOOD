@@ -58,7 +58,9 @@ export class AddDishComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
+    this.categoryService.GetList().subscribe(res => {
+      this.categories = res.Data;
+    });
     this.initForm();
     if (this.Data != null) {
       this.isEdit = true;
@@ -83,9 +85,7 @@ export class AddDishComponent implements OnInit {
 
     // this.form.get('day_ids').setValue(this.Days)
     // this.form.get('cusines_ids').setValue(this.selected);
-    this.categoryService.GetList().subscribe(res => {
-      this.categories = res.Data;
-    });
+   
     this.unitService.GetList().subscribe(res=>{this.units=res});
   
     this.kitchenService.Days().subscribe(res => {
