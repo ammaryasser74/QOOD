@@ -100,36 +100,18 @@
               <li class="dropdown cart-dropdown max-height" *ngIf="!isChief">
 
                 <a href="checkout.html" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                  aria-haspopup="true" aria-expanded="false" class="has-items"
-                >
+                  aria-haspopup="true" aria-expanded="false"
+                  [ngClass]="{'has-items' :getFromLocalStorage('mycarttotal')!=0 && getFromLocalStorage('mycarttotal')!=null}">
                   <img src="assets/img/icons/cart.svg">
                 </a>
-                <!-- [ngClass]="{'has-items' :getFromLocalStorage('mycarttotal')!=0 && getFromLocalStorage('mycarttotal')!=null}" -->
+
                 <ul class="dropdown-menu cart m-t-25">
-                  <li class="cart-item single-item" >
-                    <a>
-                      <div class="item-shop cart-img cover" style="background-image: url('assets/img/catering/1.jpg')"
-                      >
-                      </div>
-                    </a>
-                    <div class="cart-content">
-                      <h4 class="no-margin">
-                        <a>
-                         Menu 1
-                        </a>
-                      </h4>
-                      <span class="d-block">{{'share.Qty' | translate}}:100</span>
-                      <p class="price no-margin mtxs text-bold"><span>{{'share.price' | translate}}:
-                        </span>1000 {{'share.SAR' | translate}}</p>
-                    </div>
-                  </li>
                   <div *ngIf="getFromLocalStorage('mycart')!=null">
-                    <div *ngIf="getFromLocalStorage('mycart').dishes!=null">
-                     
-                      <li class="cart-item single-item" *ngFor="let row of getFromLocalStorage('mycart').dishes">
+                    <div *ngIf="getFromLocalStorage('mycart')!=null">
+                      <li class="cart-item single-item" *ngFor="let row of getFromLocalStorage('mycart')">
                         <a>
                           <div class="item-shop cart-img cover"
-                            [ngStyle]="{'background':'url('+ myUrl+row.img1+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                            [ngStyle]="{'background':'url('+ myUrl+row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
                           </div>
                         </a>
                         <div class="cart-content">
@@ -140,29 +122,11 @@
                           </h4>
                           <span class="d-block">{{'share.Qty' | translate}}:{{row.pivot.quantity}}</span>
                           <p class="price no-margin mtxs text-bold"><span>{{'share.price' | translate}}:
-                            </span>100{{'share.SAR' | translate}}</p>
-                        </div>
-                      </li>
-                    </div>
-                    <div *ngIf="getFromLocalStorage('mycart').weeklydeals!=null">
-                      <li class="cart-item single-item" *ngFor="let row of getFromLocalStorage('mycart').weeklydeals">
-                        <a>
-                          <div class="item-shop cart-img cover"
-                            [ngStyle]="{'background':'url(' + myUrl+row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
-                          </div>
-                        </a>
-                        <div class="cart-content">
-                          <h4 class="no-margin">
-                            <a>
-                              {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
-                            </a>
-                          </h4>
-                          <span class="d-block">Qty:{{row.pivot.quantity}}</span>
-                          <p class="price no-margin mtxs text-bold"><span>{{'share.price' | translate}}:
                             </span>{{row.pivot.price * row.pivot.quantity }} {{'share.SAR' | translate}}</p>
                         </div>
                       </li>
                     </div>
+                  
                   </div>
 
                   <li class="cart-item cart-total">
@@ -171,7 +135,7 @@
                     </div>
                     <div class="shop-content d-inline pull-right">
                       <span
-                        class="price total text-right no-margin text-bold text-upper ">200
+                        class="price total text-right no-margin text-bold text-upper ">{{getFromLocalStorage('mycarttotal')}}
                         {{'share.SAR' | translate}}</span>
                     </div>
                   </li>
@@ -229,8 +193,7 @@
               </li>
               <li [class.active]="nav==2"><a (click)="nav=2"
                   routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
-              <!-- <li [class.active]="nav==3"><a (click)="nav=3"
-                  routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}}</a></li> -->
+           
            
                   
               <li [class.active]="nav==4"><a (click)="nav=4"
@@ -274,8 +237,7 @@
             <ul>
               <li><a (click)="closeMenu()" routerLink="/user/home">{{'share.home' | translate}}</a></li>
               <li><a (click)="closeMenu()" routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
-              <!-- <li><a (click)="closeMenu()" routerLink="/user/weekely-deals">{{'share.weekly-deals' | translate}} </a>
-              </li> -->
+            
               <li><a (click)="closeMenu()" routerLink="/user/contact-us">{{'share.contact-us' | translate}}</a></li>
               <li><a (click)="closeMenu()" routerLink="/user/help">{{'share.help' | translate}}</a></li>
               <li><a  (click)="closeMenu()" href="http://grocery.qoot.online/" target="_blank">{{'share.grocery' | translate}} </a>
@@ -283,29 +245,8 @@
             </ul>
           </div>
         </div>
-        <!-- <div class="col-sm-2 col-xs-6">
-          <div class="quick-links">
-            <h3 class="mblg">{{'share.Cusines'|translate}}</h3>
-            <ul *ngIf="!loadingdata">
-              <ng-container *ngFor="let row of cusines ; let i=index">
-                <li *ngIf="i<6"><a> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</a></li>
-              </ng-container>
-
-            </ul>
-          </div>
-        </div> -->
-        <!-- <div class="col-sm-3 col-xs-6">
-          <div class="quick-links mob-off">
-            <h3 class="mblg">{{'share.Brands'|translate}}</h3>
-            <ul>
-              <ng-container *ngFor="let row of brands">
-                <li><a href="{{row.url}}" target="_blank"> {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</a></li>
-              </ng-container>
-
-
-            </ul>
-          </div>
-        </div> -->
+      
+      
         <div class="col-sm-4 col-xs-12">
           <div class="quick-links">
             <h3 class="mblg"> {{'share.Subscribe'|translate}}</h3>

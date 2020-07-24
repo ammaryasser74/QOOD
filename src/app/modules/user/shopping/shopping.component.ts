@@ -39,7 +39,7 @@ export class ShoppingComponent implements OnInit {
 
   ngOnInit() {
     this.myUrl = environment.api_imges;
-    // this.getCard();
+     this.getCard();
   }
 
   getFromLocalStorage(key: string) {
@@ -47,7 +47,7 @@ export class ShoppingComponent implements OnInit {
   }
   getCard() {
     this.myCard = this.localStorageService.get('mycart') as any;
-    if (this.myCard.dishes == null && this.myCard.weeklydeals == null) {
+    if (this.myCard == null ) {
       this.myCard = [];
       this.ExsistData = false;
     }
@@ -57,6 +57,8 @@ export class ShoppingComponent implements OnInit {
     } else {
       this.ExsistData = true;
     }
+    console.log(this.myCard,"lll");
+    
   }
   checkOut() {
     // if (this.userService.currentUser == null) {
@@ -68,38 +70,23 @@ export class ShoppingComponent implements OnInit {
     // }
   }
 
-  updateQuantity(row, quantity, Type) {
+ 
+  updateQuantity(row, quantity) {
     this.loadingtwo = true;
     if (this.userService.currentUser == null) {
-      if (Type == 'WeeklyDeal') {
         this.myCardParam = {
           ar_name: row.ar_name,
           en_name: row.ar_name,
           ar_description: row.ar_description,
-          Type,
+        
           en_description: row.en_description,
           price: row.price,
           pivot: { quantity, price: row.pivot.price },
           chief: { delivery_fee: row.chief.delivery_fee },
           id: row.id,
           chief_id: row.chief_id,
-          img: [row.img],
+          img: row.img,
         };
-      } else {
-        this.myCardParam = {
-          ar_name: row.ar_name,
-          en_name: row.ar_name,
-          ar_description: row.ar_description,
-          Type,
-          en_description: row.en_description,
-          price: row.price,
-          pivot: { quantity, price: row.pivot.price },
-          chief: { delivery_fee: row.chief.delivery_fee },
-          id: row.id,
-          chief_id: row.chief_id,
-          img1: row.img1,
-        };
-      }
       const n = this.cartService.updateCardStorage(this.myCardParam);
       if (n === true) {
         this.loadingtwo = false;
@@ -109,7 +96,7 @@ export class ShoppingComponent implements OnInit {
         EntityID: row.id,
         UserID: this.userService.currentUser.id,
         quantity,
-        Type,
+       
       };
       this.cartService.updateQuantity(this.myOrderParam).subscribe(res => {
         if (res.Success) {
@@ -120,7 +107,8 @@ export class ShoppingComponent implements OnInit {
       });
     }
   }
-  Delete(mealID, Type) {
+
+  Delete(menuID) {
     this.warningModel = this.modelService.show(WarningComponent, {
       class: 'modal-sm',
     });
@@ -129,15 +117,15 @@ export class ShoppingComponent implements OnInit {
     this.warningModel.content.onClose = cancel => {
       if (cancel) {
         if (this.userService.currentUser == null) {
-          this.cartService.deleteFromCardStorage(mealID, Type);
+          this.cartService.deleteFromCardStorage(menuID);
           this.warningModel.hide();
           this.loading = false;
           this.getCard();
         } else {
           this.myOrderParam = {
-            EntityID: mealID,
+            EntityID: menuID,
             UserID: this.userService.currentUser.id,
-            Type,
+            
           };
           this.cartService
             .RemovefromMyCart(this.myOrderParam)

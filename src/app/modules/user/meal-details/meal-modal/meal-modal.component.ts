@@ -58,7 +58,7 @@ export class MealModalComponent implements OnInit {
       this.toastr.error('chief cannot ordered');
      } else {
     this.myOrderParam = {MealID: mealID, UserID: this.userID, quantity: 1 };
-    this.cartService.AddDishtoMyCart(this.myOrderParam).subscribe(res => {
+    this.cartService.AddMenutoMyCart(this.myOrderParam).subscribe(res => {
        if (res.Success) {this.toastr.success(res.Message); this.myModel.hide(); } else {this.toastr.error(res.Message); }
      }
    );

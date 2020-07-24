@@ -123,7 +123,7 @@ export class SignupComponent implements OnInit {
           UserID: this.userService.currentUser.id,
           quantity: element.pivot.quantity,
         };
-        this.cartService.AddDishtoMyCart(this.myOrderParam).subscribe(res => {
+        this.cartService.AddMenutoMyCart(this.myOrderParam).subscribe(res => {
           this.cartService.updateCard();
         });
       });

@@ -27,6 +27,8 @@ export class InvoiceReciptComponent implements OnInit {
   //   this.loading=true;
    this.oderservice.OrderDetails(+this.activeRoute.snapshot.paramMap.get('id'), this.userService.currentUser.id)
     .subscribe(res => {this.order = res.Data; this.loading = false;
+      console.log(this.order,"asd");
+      
    });
    this.Date = moment().format('YYYY-MM-DD hh:mm:ss A');
   }

@@ -317,7 +317,8 @@
         "Delivery-Fees": "Delivery Fees",
         "cart-empty": "your cart is empty",
         "Check-Out": "Check Out",
-        "Continue-shopping": "Continue shopping"
+        "Continue-shopping": "Continue shopping",
+        "noofperson":"No of Person"
     },
     "meal-details": {
         "Menu": "Menu",

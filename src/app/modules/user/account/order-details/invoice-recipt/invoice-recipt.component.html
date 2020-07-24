@@ -42,36 +42,22 @@
             </thead>
             <tbody>
 
-                <tr class="border-bottom " *ngFor="let item of order.dishes">
+                <tr class="border-bottom " *ngFor="let item of order.menu">
                     <td class="text-center">
-                        {{item.pivot.quantity * item.price}}
+                        {{item.pivot.quantity * item.pivot.price}}
 
                     </td>
                     <td class="text-center">
                         {{item.pivot.quantity}}
                     </td>
                     <td class="text-center">
-                        {{item.price}}
+                        {{item.pivot.price}}
                     </td>
                     <td class="text-center">
-                        {{languageService.getLanguageOrDefault()=='ar' ? item.ar_name : item.en_name}}
+                        {{ item.ar_name}}
                     </td>
                 </tr>
-                <tr class="border-bottom " *ngFor="let item of order.allweeklydeals">
-                    <td class="text-center">
-                        {{item.pivot.quantity * item.price}}
-
-                    </td>
-                    <td class="text-center">
-                        {{item.pivot.quantity}}
-                    </td>
-                    <td class="text-center">
-                        {{item.price}}
-                    </td>
-                    <td class="text-center">
-                        {{languageService.getLanguageOrDefault()=='ar' ? item.ar_name : item.en_name}}
-                    </td>
-                </tr>
+              
             </tbody>
         </table>
     </div>
@@ -86,10 +72,10 @@
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 margin-top-10 text-right">
 
-        <p> خدمة التوصيل : <span>  60 </span></p>
+        <p> خدمة التوصيل : <span>  {{order.delivery_fee}} </span></p>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 margin-top-10 text-right">
 
-        <p> الصافي: <span>   {{order.NetTotal + 60 }} </span></p>
+        <p> الصافي: <span>   {{order.NetTotal+order.delivery_fee }} </span></p>
 
     </div>

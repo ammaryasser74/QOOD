@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
     if (this.localStorageService.get('mycart') != null) {
           this.myDataforcard.dishes.forEach(element => {
           this.myOrderParam = {MealID: element.id, UserID: this.userService.currentUser.id, quantity: element.pivot.quantity};
-          this.cartService.AddDishtoMyCart(this.myOrderParam).subscribe(res => {
+          this.cartService.AddMenutoMyCart(this.myOrderParam).subscribe(res => {
             this.cartService.updateCard();
           });
           });

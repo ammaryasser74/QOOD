@@ -60,7 +60,7 @@ import { InvoiceReciptComponent } from './account/order-details/invoice-recipt/i
 import { BsLocaleService, PaginationModule } from 'ngx-bootstrap';
 import { ResetMyPasswordComponent } from './reset-my-password/reset-mypassword.component';
 import { AuthGuard } from 'src/app/services/user/auth.guard';
-import { GroceryComponent } from './grocery/grocery.component';
+
 import { GroceryService } from 'src/app/services/user/grocery.service';
 import { MenuService } from 'src/app/services/user/menu.service';
 export function HttpLoaderFactory(http: HttpClient) {
@@ -122,7 +122,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DayDishModalComponent,
     InvoiceReciptComponent,
     ResetMyPasswordComponent,
-    GroceryComponent,
+
   ],
 
   providers: [

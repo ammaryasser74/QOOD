@@ -136,59 +136,59 @@ export class SearchComponent implements OnInit {
   }
 
   orderNow(row) {
-    this.toastr.success("تم الاشتراك بنجاح");
-    // if (this.filter.UserID == null) {
-    //  this.myCardParam = {ar_name: row.ar_name, en_name: row.ar_name, ar_description: row.ar_description, Type: 'Dish', en_description: row.en_description, price: row.price,
-    //   pivot: {quantity: 1, price: row.price}, chief: {delivery_fee: row.chief.delivery_fee},
-    //   id: row.id, chief_id: row.chief_id, img1: row.img1.replace('https://backend-qoot.qoot.online', '')};
-    //  const n = this.cartService.updateCardStorage(this.myCardParam);
-    //  if (n === true) {
-    //     this.toastr.success('add Sucessfully to your card');
-    //   } else {
-    //     this.warningModel = this.modelService.show(WarningComponent, { class: 'modal-sm' });
-    //     this.warningModel.content.boxObj.msg = 'cannot add to your cart must be from one kitchen do you want delete all cart';
-    //     this.warningModel.content.onClose = (cancel) => {
-    //       if (cancel) {
-    //         this.localStorageService.set('mycart', null);
-    //         this.cartService.mynewData = {weeklydeals: [], dishes: []};
-    //         this.localStorageService.set('mycarttotal', null);
-    //         this.toastr.success('تم الحذف بنجاح');
-    //         this.warningModel.hide();
-    //          }
-    //       };
-    //   }
-    // } else if (this.userService.currentUser.type == 'chief') {
-    //       this.toastr.error('chief cannot ordered');
-    //  } else {
-    //   this.myOrderParam = {MealID: row.id, UserID: this.userService.currentUser.id, quantity: 1 };
-    //   this.cartService.AddDishtoMyCart(this.myOrderParam).subscribe(res => {
-    //       if (res.Success) {
-    //         this.toastr.success(res.Message);
-    //         this.cartService.updateCard();
-    //       } else {
-    //         this.warningModel = this.modelService.show(WarningComponent, { class: 'modal-sm' });
-    //         this.warningModel.content.boxObj.msg = res.Message;
-    //         this.warningModel.content.onClose = (cancel) => {
-    //           if (cancel) {
-    //              this.cartService.DeleteMyCart(this.userService.currentUser.id).subscribe(
-    //                res => {
-    //                 if (res.Success) {
-    //                   this.cartService.updateCard();
-    //                   this.toastr.success(res.Message);
-    //                   this.warningModel.hide();
-    //                   this.cartService.AddDishtoMyCart(this.myOrderParam).subscribe(
-    //                     resData => {
-    //                       this.toastr.success(resData.Message);
-    //                       this.cartService.updateCard();
-    //                       this.loading = false;
-    //                     });
-    //                 } else {
-    //                   this.toastr.error(res.Message);
-    //                 }}); }
-    //               };
-    //       }
-    //     });
-    //  }
+   
+    if (this.filter.UserID == null) {
+     this.myCardParam = {ar_name: row.ar_name, en_name: row.ar_name, ar_description: row.ar_description, en_description: row.en_description, price: row.price,
+      pivot: {quantity: 1, price: row.price}, chief: {delivery_fee: row.chief.delivery_fee},
+      id: row.id, chief_id: row.chief.id, img: row.img.replace('https://backend-qoot.qoot.online', '')};
+     const n = this.cartService.updateCardStorage(this.myCardParam);
+     if (n === true) {
+        this.toastr.success('add Sucessfully to your card');
+      } else {
+        this.warningModel = this.modelService.show(WarningComponent, { class: 'modal-sm' });
+        this.warningModel.content.boxObj.msg = 'cannot add to your cart must be from one kitchen do you want delete all cart';
+        this.warningModel.content.onClose = (cancel) => {
+          if (cancel) {
+            this.localStorageService.set('mycart', null);
+            this.cartService.mynewData =[];
+            this.localStorageService.set('mycarttotal', null);
+            this.toastr.success('تم الحذف بنجاح');
+            this.warningModel.hide();
+             }
+          };
+      }
+    } else if (this.userService.currentUser.type == 'chief') {
+          this.toastr.error('chief cannot ordered');
+     } else {
+      this.myOrderParam = {MenuID: row.id, UserID: this.userService.currentUser.id, quantity: 1 };
+      this.cartService.AddMenutoMyCart(this.myOrderParam).subscribe(res => {
+          if (res.Success) {
+            this.toastr.success(res.Message);
+            this.cartService.updateCard();
+          } else {
+            this.warningModel = this.modelService.show(WarningComponent, { class: 'modal-sm' });
+            this.warningModel.content.boxObj.msg = res.Message;
+            this.warningModel.content.onClose = (cancel) => {
+              if (cancel) {
+                 this.cartService.RemovefromMyCart({UserID:this.userService.currentUser.id,EntityID:row.id}).subscribe(
+                   res => {
+                    if (res.Success) {
+                      this.cartService.updateCard();
+                      this.toastr.success(res.Message);
+                      this.warningModel.hide();
+                      this.cartService.AddMenutoMyCart(this.myOrderParam).subscribe(
+                        resData => {
+                          this.toastr.success(resData.Message);
+                          this.cartService.updateCard();
+                          this.loading = false;
+                        });
+                    } else {
+                      this.toastr.error(res.Message);
+                    }}); }
+                  };
+          }
+        });
+     }
 
  }
  addBookMark() {
