@@ -114,6 +114,7 @@ export class AddWeekelyDealsComponent implements OnInit {
       chief_id: this.userService.currentUser.chief_id,
       menu_id: [0, Validators.required],
       img: [null],
+      
     });
   }
   addDishToDay(DishID) {
@@ -191,11 +192,13 @@ export class AddWeekelyDealsComponent implements OnInit {
 
   }
   save() {
+    console.log(this.form.value,"LLL");
+    
     if (this.Dish_Category.length == 0) {
       this.toastr.error('you must at least one day');
     } else if (this.form.valid) {
       this.form.value.dishes_ids = this.Dish_Category;
-      if (this.form.value.id == 0) {
+      if (this.form.value.menu_id == 0) {
         console.log(this.form.value.dishes_ids, this.Dish_Category, "ffff");
 
         this.loading = true;

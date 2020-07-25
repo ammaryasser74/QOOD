@@ -117,7 +117,7 @@ export class AddDishComponent implements OnInit {
       ],
   
       chief_id: this.userService.currentUser.chief_id,
-      quantity: [null, [Validators.required, Validators.min(1)]],
+      quantity: [null, [Validators.required, Validators.min(0.1)]],
       price: [10],
     
       category_id: [null, Validators.required],

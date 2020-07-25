@@ -31,7 +31,7 @@ export class ChiefLayoutComponent implements OnInit {
   ngOnInit() {
     this.GetListNotifiction()  
     this.refresher = interval(10000).subscribe(() => this.GetListNotifiction());
-    this.userService.checkmyToken();
+    // this.userService. ();
     this.tabactive = this.activeRoute.routeConfig.path;
   }
   GetListNotifiction(){

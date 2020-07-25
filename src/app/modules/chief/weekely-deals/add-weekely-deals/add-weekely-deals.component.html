@@ -63,34 +63,36 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="col-sm-6">
-                                <ng-select placeholder="{{'add-dish.Select-Cusines'|translate}}" [multiple]="true" formControlName="cusines_ids">
-                                    <ng-option *ngFor="let row of cusines" [value]="row.id" [disabled]="row.disabled">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</ng-option>
-                                </ng-select>
-                                <span class="text-danger" *ngIf="form.get('cusines_ids').invalid && form.get('cusines_ids').dirty">{{'share.required' |translate}}</span>
-                            </div> 
+                        
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input type="number" formControlName="price_of_person" placeholder="{{'deal.price'|translate}}" [ngClass]="{'has-error':form.get('price_of_person').invalid && form.get('price_of_person').dirty}">
                                     <span class="text-danger" *ngIf="form.get('price_of_person').invalid && form.get('price_of_person').dirty">{{'share.required' |translate}}</span>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
-                                    <input type="number" formControlName="min_no_persons" placeholder="{{'share.persons'|translate}}" [ngClass]="{'has-error':form.get('min_no_persons').invalid && form.get('min_no_persons').dirty}">
+                                    <input type="number" formControlName="min_no_persons" placeholder="{{'share.minpersons'|translate}}" [ngClass]="{'has-error':form.get('min_no_persons').invalid && form.get('min_no_persons').dirty}">
                                     <span class="text-danger" *ngIf="form.get('min_no_persons').invalid && form.get('min_no_persons').dirty">{{'share.required' |translate}}</span>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
-                                    <input type="number" formControlName="max_no_persons" placeholder="{{'share.persons'|translate}}" [ngClass]="{'has-error':form.get('max_no_persons').invalid && form.get('max_no_persons').dirty}">
+                                    <input type="number" formControlName="max_no_persons" placeholder="{{'share.maxpersons'|translate}}" [ngClass]="{'has-error':form.get('max_no_persons').invalid && form.get('max_no_persons').dirty}">
                                     <span class="text-danger" *ngIf="form.get('max_no_persons').invalid && form.get('max_no_persons').dirty">{{'share.required' |translate}}</span>
                                 </div>
                             </div>
                            
                         </div>
 
-                     
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                <ng-select placeholder="{{'add-dish.Select-Cusines'|translate}}" [multiple]="true" formControlName="cusines_ids">
+                                    <ng-option *ngFor="let row of cusines" [value]="row.id" [disabled]="row.disabled">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</ng-option>
+                                </ng-select>
+                                <span class="text-danger" *ngIf="form.get('cusines_ids').invalid && form.get('cusines_ids').dirty">{{'share.required' |translate}}</span>
+                            </div> 
+                        </div>
                         <!-- <div class="days">
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 " *ngFor="let row of categories">

@@ -48,7 +48,9 @@
         "kg":	"kg",
         "gram":	"Gram",
         "liter":	"Liter",
-        "ml"	:"M/L"
+        "ml"	:"M/L",
+        "minpersons":"Min Persons",
+        "maxpersons":"Max Persons"
     },
     "wallet":{
         "Transcation-History":"Transaction History" ,
