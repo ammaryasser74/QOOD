@@ -86,7 +86,7 @@ export class SearchComponent implements OnInit {
           this.DataKitchen = res.Data;
         });
     }
-    this.getFilterData();
+   this.getFilterData();
   }
   getFilterData() {
     this.loading = true;
@@ -136,11 +136,14 @@ export class SearchComponent implements OnInit {
   }
 
   orderNow(row) {
-   
+    console.log(row.img,"llll","DODOD");
+    row.img.replace(row.img,'https://backend-qoot.qoot.online/', '')
+    console.log(row.img,"llll","DODOD");
+    
     if (this.filter.UserID == null) {
-     this.myCardParam = {ar_name: row.ar_name, en_name: row.ar_name, ar_description: row.ar_description, en_description: row.en_description, price: row.price,
-      pivot: {quantity: 1, price: row.price}, chief: {delivery_fee: row.chief.delivery_fee},
-      id: row.id, chief_id: row.chief.id, img: row.img.replace('https://backend-qoot.qoot.online', '')};
+     this.myCardParam = {ar_name: row.ar_name, en_name: row.ar_name, ar_description: row.ar_description, en_description: row.en_description, price: row.price_of_person,
+      pivot: {quantity:row.min_no_persons , price: row.price_of_person}, chief: {delivery_fee: row.chief.delivery_fee},
+      id: row.id, chief_id: row.chief.id, img: row.img.replace('https://catering.qoot.online/', '')};
      const n = this.cartService.updateCardStorage(this.myCardParam);
      if (n === true) {
         this.toastr.success('add Sucessfully to your card');
@@ -170,7 +173,7 @@ export class SearchComponent implements OnInit {
             this.warningModel.content.boxObj.msg = res.Message;
             this.warningModel.content.onClose = (cancel) => {
               if (cancel) {
-                 this.cartService.RemovefromMyCart({UserID:this.userService.currentUser.id,EntityID:row.id}).subscribe(
+                 this.cartService.DeleteMyCart(this.userService.currentUser.id).subscribe(
                    res => {
                     if (res.Success) {
                       this.cartService.updateCard();

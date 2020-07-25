@@ -61,6 +61,8 @@ export class UserService {
     }
   }
   checkmyToken() {
+    console.log(this.currentUser,"checkmyToken");
+    
     if (this.currentUser != null) {
       this.CheckToken(this.currentUser.id).subscribe(res => {
         if (res.Success) {

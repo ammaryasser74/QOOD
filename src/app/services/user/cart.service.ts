@@ -68,9 +68,6 @@ export class CartService {
         } else {
             this.mynewData = this.localStorageService.get('mycart');
         }
-
-        //  if (data.Type == 'Dish') {
-        
                   // case 1 no item before
                   if (this.mynewData.length == 0) {
                     this.mynewData.push(data);
@@ -79,12 +76,8 @@ export class CartService {
                     return true;
                   } else {
                     for (let index = 0; index < 1; index++) {
-                      ;
-                        
                         const element = this.mynewData[index];
-
-                        console.log(element,"fgffff",this.mynewData)
-                        if (data.chief.id == element.chief_id) {
+                        // if (data.chief.id == element.chief_id) {
                             // exsit item
                             for (let index = 0; index < this.mynewData.length; index++) {
                                 const element = this.mynewData[index];
@@ -94,8 +87,7 @@ export class CartService {
                                        // data.pivot.quantity=x;
                                         console.log(this.mynewData, 'llls');
                                         this.mynewData.filter(i => i.id == element.id).map(i => i.pivot.quantity = x);
-                                        //  this.mynewData.splice(index, 1);
-                                        //  this.mynewData.push(data);
+                                      
                                         this.localStorageService.set('mycart', this.mynewData);
                                         this.itemExsist = true;
                                         this.localStorageService.set('mycart', this.mynewData);
@@ -108,70 +100,18 @@ export class CartService {
                                 }
                             }
                             if (this.itemExsist === false) {
+                                return false
                                   // new item
-                                this.mynewData.push(data);
-                                this.localStorageService.set('mycart', this.mynewData);
-                                this.calculateTotal(this.mynewData);
+                                // this.mynewData.push(data);
+                                // this.localStorageService.set('mycart', this.mynewData);
+                                // this.calculateTotal(this.mynewData);
                                 return true;
                             }
-                        } else {
-                            return false;
-                        }
+                        // } else {
+                        //     return false;
+                        // }
                     }
                   }
-          
-        // } else {
-        //     if (this.mynewData.length == 0) {
-        //           // case 1 no item before
-        //           if (this.mynewData.weeklydeals.length == 0) {
-        //             this.mynewData.weeklydeals.push(data);
-        //             this.calculateTotal(this.mynewData);
-        //             this.localStorageService.set('mycart', this.mynewData);
-        //             return true;
-        //           } else {
-        //             for (let index = 0; index < 1; index++) {
-        //                 const element = this.mynewData.weeklydeals[index];
-        //                 if (data.chief_id == element.chief_id) {
-        //                     // exsit item
-        //                     for (let index = 0; index < this.mynewData.weeklydeals.length; index++) {
-        //                         const element = this.mynewData.weeklydeals[index];
-        //                         if (data.id == element.id) {
-        //                             const x = element.pivot.quantity + data.pivot.quantity;
-        //                             if (x > 0) {
-        //                                 data.pivot.quantity = x;
-        //                                 const index = this.mynewData.weeklydeals.findIndex(i => i.id == element.id);
-        //                                 this.mynewData.weeklydeals.splice(index, 1);
-        //                                 this.mynewData.weeklydeals.push(data);
-        //                                 this.localStorageService.set('mycart', this.mynewData.weeklydeals);
-        //                                 this.itemExsist = true;
-
-        //                                 this.localStorageService.set('mycart', this.mynewData);
-        //                                 this.calculateTotal(this.mynewData);
-        //                                 return true;
-        //                             } else {
-        //                                 return true;
-
-        //                                 this.itemExsist = true;
-        //                             }
-        //                         }
-        //                     }
-        //                     if (this.itemExsist === false) {
-        //                         console.log('da5al hena la2z');
-        //                           // new item
-        //                         this.mynewData.weeklydeals.push(data);
-        //                         this.localStorageService.set('mycart', this.mynewData);
-        //                         this.calculateTotal(this.mynewData);
-        //                         return true;
-        //                     }
-        //                 } else {
-        //                     return false;
-        //                 }
-        //             }
-        //           }
-        //     } else {
-        //       return false;
-        //     }
-        // }
     }
     calculateTotal(myData) {
     if (myData) {

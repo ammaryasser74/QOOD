@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
   slickInit(e) {
   }
   ngOnInit() {
-    this.userService.checkmyToken();
+    //  this.userService.checkmyToken();
     this.myUrl = environment.api_imges;
     this.subLayoutService.broadcast(true);
     if (this.userService.currentUser != null) {

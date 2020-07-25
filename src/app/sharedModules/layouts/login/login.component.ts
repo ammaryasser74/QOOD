@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
     this.modalService.show(ForgetPasswordComponent);
   }
   addtomyCard() {
+    debugger
     this.myDataforcard = this.localStorageService.get('mycart');
     if (this.localStorageService.get('mycart') == null ) {
       this.localStorageService.set('mycart', null);
@@ -90,18 +91,13 @@ export class LoginComponent implements OnInit {
       return false;
     }
     if (this.localStorageService.get('mycart') != null) {
-          this.myDataforcard.dishes.forEach(element => {
+          this.myDataforcard.forEach(element => {
           this.myOrderParam = {MealID: element.id, UserID: this.userService.currentUser.id, quantity: element.pivot.quantity};
           this.cartService.AddMenutoMyCart(this.myOrderParam).subscribe(res => {
             this.cartService.updateCard();
           });
           });
-          this.myDataforcard.weeklydeals.forEach(element => {
-            this.myOrderParam = {WeeklyDealID: element.id, UserID: this.userService.currentUser.id, quantity: element.pivot.quantity};
-            this.cartService.addWeeklyDealtoMyCart(this.myOrderParam).subscribe(res => {
-              this.cartService.updateCard();
-            });
-            });
+       
           return true;
         } else {
           return false;

@@ -63,7 +63,7 @@ export class LayoutUserComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.GetListNotifiction();
-    this.userService.checkmyToken();
+    // this.userService.checkmyToken();
     this.myUrl = environment.api_imges;
     this.aside = 1;
     this.isOpen = false;
