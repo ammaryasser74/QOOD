@@ -63,7 +63,16 @@ export class LayoutUserComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.GetListNotifiction();
-    // this.userService.checkmyToken();
+    console.log(  this.localStorageService.get('first'),";;;");
+    // this.localStorageService.set('first',true)
+     if(this.localStorageService.get('first')==null){
+      this.userService.checkmyToken();
+      this.localStorageService.set('first',true)
+      this.localStorageService.set('mycart', null);
+      this.localStorageService.set('mycarttotal', null);
+      this.localStorageService.set('accessToken',null);
+      this.localStorageService.set('currentUser', null);
+    }
     this.myUrl = environment.api_imges;
     this.aside = 1;
     this.isOpen = false;

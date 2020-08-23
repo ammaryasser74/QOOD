@@ -57,7 +57,7 @@
                 <div class="qty">
                   <div class="qty-content ">
                     <button class="qty-btn qty-minus text-bold border-1" [disabled]="row.pivot.quantity==row.min_no_persons" (click)="updateQuantity(row,-1)" >-</button>
-                    <input type="number"  id="qty" value="{{row.pivot.quantity}}" >
+                    <input type="number"  id="qty" value="{{row.pivot.quantity}}" (keyup.enter)="updateQuantityWithText(row,$event.target.value)" (change)="updateQuantityWithText(row,$event.target.value)"  >
                     <button class="qty-btn qty-plus text-bold border-1 " (click)="updateQuantity(row,1)" [class.disabled]="row.pivot.quantity==row.max_no_persons">+</button>
                   </div>
                 </div>

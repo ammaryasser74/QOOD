@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { SubLayoutService } from 'src/app/services/sub-layout.service';
 import { environment } from 'src/environments/environment';
 import { MenuService } from 'src/app/services/user/menu.service';
+import { LocalStorageService } from 'angular-2-local-storage';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -59,11 +60,14 @@ export class HomeComponent implements OnInit {
     private formBuilder: FormBuilder,
     public cartService: CartService,
     private userService: UserService,
+    private localStorageService:LocalStorageService,
     private router: Router,) { }
   slickInit(e) {
   }
   ngOnInit() {
-    //  this.userService.checkmyToken();
+
+
+     
     this.myUrl = environment.api_imges;
     this.subLayoutService.broadcast(true);
     if (this.userService.currentUser != null) {

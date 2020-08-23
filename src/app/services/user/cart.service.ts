@@ -28,6 +28,9 @@ export class CartService {
     updateQuantity(myParam) {
         return this.webApi.post(`${this.controller}/updateQuantity`, myParam);
     }
+    updateQuantityWithText(myParam) {
+        return this.webApi.post(`${this.controller}/updateQuantityWithText`, myParam);
+    }
     MyCart(UserID) {
         return this.webApi.get(`${this.controller}/MyCart/` + UserID);
     }

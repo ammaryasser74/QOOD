@@ -43,7 +43,7 @@
                                 <th class="text-center">price</th>
                             </thead>
                             <tbody>
-                                <tr class="text-center" *ngFor="let dish of Data.dishes">
+                                <tr class="text-center" *ngFor="let dish of Data.menus">
                                     <td>{{languageService.getLanguageOrDefault()=='ar' ? dish.ar_name :dish.en_name}}</td>
                                     <td>{{dish.pivot.quantity}}</td>
                                     <td>{{dish.pivot.price}}</td>

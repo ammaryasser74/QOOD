@@ -69,7 +69,42 @@ export class ShoppingComponent implements OnInit {
       this.router.navigate(['/user/checkout']);
     // }
   }
-
+  updateQuantityWithText(row, quantity){
+    debugger
+    this.loadingtwo = true;
+    if (this.userService.currentUser == null) {
+        this.myCardParam = {
+          ar_name: row.ar_name,
+          en_name: row.ar_name,
+          ar_description: row.ar_description,
+          en_description: row.en_description,
+          price: row.price,
+          pivot: { quantity, price: row.pivot.price },
+          chief: { delivery_fee: row.chief.delivery_fee },
+          id: row.id,
+          chief_id: row.chief_id,
+          img: row.img,
+        };
+      const n = this.cartService.updateCardStorage(this.myCardParam);
+      if (n === true) {
+        this.loadingtwo = false;
+      }
+    } else {
+      this.myOrderParam = {
+        EntityID: row.id,
+        UserID: this.userService.currentUser.id,
+        quantity,
+       
+      };
+      this.cartService.updateQuantityWithText(this.myOrderParam).subscribe(res => {
+        if (res.Success) {
+          this.loadingtwo = false;
+          this.cartService.calculateTotal(res.Data);
+          this.localStorageService.set('mycart', res.Data);
+        }
+      });
+    }
+  }
  
   updateQuantity(row, quantity) {
     this.loadingtwo = true;
