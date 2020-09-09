@@ -37,6 +37,8 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SubLayoutService } from '../services/sub-layout.service';
 import { WarningModule } from './warning/warning.module';
+import { PusherService } from '../services/user/pusher.service';
+
 @NgModule({
   imports: [
     LayoutsModule,
@@ -87,6 +89,7 @@ import { WarningModule } from './warning/warning.module';
     SlickCarouselModule,
     FormatedDatePipe,
     AgmCoreModule,
+    
   ],
   providers: [
     WebApiService,
@@ -94,6 +97,7 @@ import { WarningModule } from './warning/warning.module';
     LanguageService,
     SettingService,
     SubLayoutService,
+    PusherService
   ],
 })
 export class SharedModule {

@@ -1,4 +1,10 @@
 <div dir="{{mydir}}">
+  <a class="float" (click)="usersChat()">
+    <i class="fas fa-comments my-float"></i>
+  </a>
+ <!-- <div class="chat">
+ DODDO
+ </div> -->
   <header class="ball">
     <nav class="navbar ">
       <div class="top-header">
@@ -126,7 +132,7 @@
                         </div>
                       </li>
                     </div>
-                  
+
                   </div>
 
                   <li class="cart-item cart-total">
@@ -142,7 +148,8 @@
                   <li class="cart-btn">
                     <a routerLink="/user/checkout" class="btn btn-green text-upper"
                       *ngIf="getFromLocalStorage('currentUser')!=null && getFromLocalStorage('mycarttotal')!=0 && getFromLocalStorage('mycarttotal')!=null">{{'share.checkout'|translate}}</a>
-                    <a routerLink="/user/shopping" class="btn btn-green-outline text-upper">{{'share.view-cart' | translate}}</a>
+                    <a routerLink="/user/shopping"
+                      class="btn btn-green-outline text-upper">{{'share.view-cart' | translate}}</a>
                   </li>
                 </ul>
               </li>
@@ -152,24 +159,26 @@
               <button type="button" class="btn navbar-btn" (click)="signUp()"
                 *ngIf="getFromLocalStorage('currentUser')==null">{{'share.signup' | translate}}</button>
 
-                <li class="dropdown notification" *ngIf="getFromLocalStorage('currentUser')?.type=='chief'"  >
-                  <a  class="dropdown-toggle has-items" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      <img src="assets/img/icons/notification.svg" >
-                  </a>
-                  <ul class="dropdown-menu" *ngIf="listNotification">
-                      <li *ngFor="let row of listNotification">
-                          <a (click)="readNotigication(row.id)" class="notification-item">
-                              <div class="notification-img pull-left mrsm">
-                                  <img src="assets/img/icons/plate-1.svg">
-                              </div>
-                              <div class="notification-msg pull-left">
-                                  <span class="d-block text-semibold">New order</span>
-                                  <p class="no-margin text-semibold">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_text :row.en_text}}</p>
-                              </div>
-                          </a>
-                      </li>
-                     
-                  </ul>
+              <li class="dropdown notification" *ngIf="getFromLocalStorage('currentUser')?.type=='chief'">
+                <a class="dropdown-toggle has-items" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">
+                  <img src="assets/img/icons/notification.svg">
+                </a>
+                <ul class="dropdown-menu" *ngIf="listNotification">
+                  <li *ngFor="let row of listNotification">
+                    <a (click)="readNotigication(row.id)" class="notification-item">
+                      <div class="notification-img pull-left mrsm">
+                        <img src="assets/img/icons/plate-1.svg">
+                      </div>
+                      <div class="notification-msg pull-left">
+                        <span class="d-block text-semibold">New order</span>
+                        <p class="no-margin text-semibold">
+                          {{languageService.getLanguageOrDefault()=='ar' ? row.ar_text :row.en_text}}</p>
+                      </div>
+                    </a>
+                  </li>
+
+                </ul>
               </li>
               <li class="dropdown cart-dropdown user-dropdown" *ngIf="getFromLocalStorage('currentUser')!=null">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -182,10 +191,11 @@
                   <li><a routerLink="/user/account/3">{{'share.favourite' | translate}}</a></li>
                   <li><a (click)="logout()">{{'share.sign-out' | translate}}</a></li>
                 </ul>
-                <ul class="dropdown-menu user-menu" *ngIf="getFromLocalStorage('currentUser').type=='chief' || getFromLocalStorage('currentUser').type=='grocery'">
+                <ul class="dropdown-menu user-menu"
+                  *ngIf="getFromLocalStorage('currentUser').type=='chief' || getFromLocalStorage('currentUser').type=='grocery'">
                   <li><a routerLink="/chief/chef-account">{{'share.account' | translate}}</a></li>
                   <li><a (click)="logout()">{{'share.sign-out' | translate}}</a></li>
-                </ul> 
+                </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav main-nav" *ngIf="!isChief">
@@ -193,15 +203,15 @@
               </li>
               <li [class.active]="nav==2"><a (click)="nav=2"
                   routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
-           
-           
-                  
+
+
+
               <li [class.active]="nav==4"><a (click)="nav=4"
                   routerLink="/user/book-event">{{'share.book-event' | translate}}</a></li>
               <li [class.active]="nav==5"><a (click)="nav=5"
                   routerLink="/user/contact-us">{{'share.contact-us' | translate}}</a></li>
-                  <li class="grocery" ><a class="grocery" 
-                    href="http://grocery.qoot.online/" target="_blank">{{'share.grocery' | translate}}</a></li>
+              <li class="grocery"><a class="grocery" href="http://grocery.qoot.online/"
+                  target="_blank">{{'share.grocery' | translate}}</a></li>
             </ul>
           </div>
         </div>
@@ -237,16 +247,17 @@
             <ul>
               <li><a (click)="closeMenu()" routerLink="/user/home">{{'share.home' | translate}}</a></li>
               <li><a (click)="closeMenu()" routerLink="/user/about-us">{{'share.about' | translate}}</a></li>
-            
+
               <li><a (click)="closeMenu()" routerLink="/user/contact-us">{{'share.contact-us' | translate}}</a></li>
               <li><a (click)="closeMenu()" routerLink="/user/help">{{'share.help' | translate}}</a></li>
-              <li><a  (click)="closeMenu()" href="http://grocery.qoot.online/" target="_blank">{{'share.grocery' | translate}} </a>
+              <li><a (click)="closeMenu()" href="http://grocery.qoot.online/"
+                  target="_blank">{{'share.grocery' | translate}} </a>
               </li>
             </ul>
           </div>
         </div>
-      
-      
+
+
         <div class="col-sm-4 col-xs-12">
           <div class="quick-links">
             <h3 class="mblg"> {{'share.Subscribe'|translate}}</h3>

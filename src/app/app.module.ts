@@ -18,6 +18,12 @@ import { UserService } from './services/user/user.service';
 import { CartService } from './services/user/cart.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+// for auth    
+import {AngularFireAuthModule} from 'angularfire2/auth';
+// for database
+import {AngularFireDatabaseModule} from 'angularfire2/database';
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -53,7 +59,9 @@ export function provideConfig() {
     }),
     SocialLoginModule,
     DateInputsModule,
-
+    AngularFireModule.initializeApp(environment.firebase),
+    //AngularFireDatabaseModule,
+    AngularFirestoreModule,
     ServiceWorkerModule.register('sw.js', {
       enabled: environment.production,
     }),

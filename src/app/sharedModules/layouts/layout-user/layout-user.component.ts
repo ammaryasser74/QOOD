@@ -179,4 +179,12 @@ export class LayoutUserComponent implements OnInit {
       }
     }
   }
+  usersChat(){
+    if (this.userService.currentUser){
+
+    }
+    else{
+      this.login()
+    }
+  }
 }

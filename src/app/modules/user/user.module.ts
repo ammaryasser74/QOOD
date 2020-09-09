@@ -63,6 +63,10 @@ import { AuthGuard } from 'src/app/services/user/auth.guard';
 
 import { GroceryService } from 'src/app/services/user/grocery.service';
 import { MenuService } from 'src/app/services/user/menu.service';
+import { MessagesComponent } from './messages/messages.component';
+import { NewMessageComponent } from './new-message/new-message.component';
+import { MessageService } from 'src/app/services/user/message.service';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/user/', '.json');
 }
@@ -77,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RatingModule,
     NgSelectModule,
     Ng5SliderModule,
+  
     RouterModule.forChild(UserRouting),
     TranslateModule.forRoot({
       loader: {
@@ -122,7 +127,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DayDishModalComponent,
     InvoiceReciptComponent,
     ResetMyPasswordComponent,
-
+    MessagesComponent,
+    NewMessageComponent,
   ],
 
   providers: [
@@ -144,6 +150,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     WeekelyDealsService,
     GroceryService,
     MenuService,
+    MessageService,
     CartService,
     {
       provide: AuthServiceConfig,

@@ -20,6 +20,7 @@ import { WeekelyDealsComponent } from '../user/weekely-deals/weekely-deals.compo
 import { DealComponent } from './weekely-deals/deal/deal.component';
 import { InvoiceReciptComponent } from './account/order-details/invoice-recipt/invoice-recipt.component';
 import { ResetMyPasswordComponent } from './reset-my-password/reset-mypassword.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 export const UserRouting: Route[] = [
@@ -49,7 +50,8 @@ export const UserRouting: Route[] = [
       { path: 'shopping', component: ShoppingComponent },
       { path: 'order-details/:id', component: OrderDetailsComponent },
       { path: 'deal/:id', component: DealComponent },
- 
+      { path: 'message', component: MessagesComponent },
+     
     ],
   },
 ];

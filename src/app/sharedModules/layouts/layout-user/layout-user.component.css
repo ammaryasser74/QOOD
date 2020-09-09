@@ -16,3 +16,33 @@
     color: white !important;
     border-radius: 18px;
 }
+*{padding:0;margin:0;}
+
+
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:20px;
+	right:40px;
+	background-color:#a2185b;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+.chat{
+    position:fixed;
+	width:100px;
+	height:100px;
+	bottom:20px;
+	right:100px;
+	background-color:#a2185b;
+	color:#FFF;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+.my-float{
+	margin-top:22px;
+}
