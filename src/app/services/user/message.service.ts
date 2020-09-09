@@ -22,13 +22,7 @@ export class MessageService {
 
   initialize() {
     //RECIVE FROM PUSHER
-    let pusher = new Pusher('2bdb1c457286cdef1545', {
-      cluster: 'eu',
-      encrypted: true,
-    });
-    var channel = pusher.subscribe('chat');
-
-    channel.bind('send', (data) => {
+    this.pusherService.messagesChannel.bind('send', (data) => {
       this.emitNewMessage({ text: data.data.content, user: 'Doaa' });
     });
   }
