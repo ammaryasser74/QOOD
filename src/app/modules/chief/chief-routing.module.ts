@@ -13,6 +13,8 @@ import { MenusComponent } from './menus/menus.component';
 import { IngredientCalculatorComponent } from './ingredient-calculator/ingredient-calculator.component';
 import { WeekelyDealsComponent } from './../chief/weekely-deals/weekely-deals.component';
 import { GroceryComponent } from './../chief/grocery/grocery.component';
+import { GallaryComponent } from './gallary/gallary.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 export const ChiefRouting: Route[] = [{
   path: '', component: LayoutUserComponent, children: [
     { path: 'kitchen/:id', component: KitchenComponent },
@@ -27,6 +29,8 @@ export const ChiefRouting: Route[] = [{
     { path: 'ingredient-calculator', component: IngredientCalculatorComponent },
     { path: 'deals', component: WeekelyDealsComponent },
     { path: 'grocery-item', component: GroceryComponent },
+    { path: 'gallary', component: GallaryComponent },
+    { path: 'delivery', component: DeliveryComponent },
   ]
 }];
 

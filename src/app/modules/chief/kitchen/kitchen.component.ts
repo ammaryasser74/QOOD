@@ -21,6 +21,17 @@ export class KitchenComponent implements OnInit {
   myCover: any;
   kitchenID: number;
   loading = true;
+  tab = 1;
+  slideConfig =
+  {
+    slidesToShow: 3, slidesToScroll: 3, autoplay: true,
+    autoplaySpeed: 3500, dots: true, infinite: false,
+    arrows: true,
+    responsive: [
+      { breakpoint: 1600, settings: { slidesToShow: 3, slidesToScroll: 3, } },
+      { breakpoint: 1000, settings: { slidesToShow: 2, slidesToScroll: 2, } },
+      { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1, } }]
+  };
   constructor(private bookMarkService: BookMarkService,
               private toastr: ToastrService,
               private userService: UserService,
@@ -48,6 +59,8 @@ export class KitchenComponent implements OnInit {
                                                      this.loading = false;
         });
       });
+  }
+  slickInit(e) {
   }
   onRate($event: {oldValue: number, newValue: number, starRating: StarRatingComponent}, ChiefID) {
     if (this.userID == null) {

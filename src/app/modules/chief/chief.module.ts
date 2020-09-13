@@ -51,6 +51,8 @@ import { UnitService } from 'src/app/services/chief/unit.service';
 import { GroceryComponent } from './grocery/grocery.component';
 import { AddGroceryComponent } from './grocery/add-grocery/add-grocery.component';
 import { GroceryService } from 'src/app/services/user/grocery.service';
+import { GallaryComponent } from './gallary/gallary.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/chief/', '.json');
 }
@@ -91,6 +93,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     OrderModalDetailsComponent,
     GroceryComponent,
     AddGroceryComponent,
+    GallaryComponent,
+    DeliveryComponent,
   ],
 
   providers: [

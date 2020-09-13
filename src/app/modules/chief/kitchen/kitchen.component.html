@@ -52,11 +52,12 @@
                 <div class="deals mtxlg">
                     <div class="tab-g">
                         <ul class="nav nav-tabs text-center" role="tablist">
-                            <li role="presentation" class="active"><a class="btn" href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+                            <li role="presentation" [class.active]="tab==1"><a class="btn" (click)="tab=1" href="#info" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
+                            <li role="presentation" [class.active]="tab==2"><a class="btn" (click)="tab=2" href="#gallary" aria-controls="home" role="tab" data-toggle="tab">Gallary</a></li>
                             <li role="presentation"><a class="btn" routerLink="/user/search/0/0/{{Data.id}}">Menu</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="info">
+                            <div role="tabpanel" class="tab-pane active" id="info" [class.active]="tab==1">
                                 <div class="row">
                                     <div class="col-sm-10 col-sm-offset-1">
                                         <p class="text-center">
@@ -102,8 +103,89 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div role="tabpanel" class="tab-pane active" id="gallary" [class.active]="tab==2">
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <p class="text-center">
+                                            {{Data.info}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="features mtxxlg">
+                                    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" (init)="slickInit($event)" [config]="slideConfig">
+                                        <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4" ngxSlickItem >
+        
+                                            <div class="col-lg-12 col-md-12 col-xs-12 col-ms-12 mtsm mbsm mrsm mlsm">
+                                                <div class="product-item">
+                                                    <figure class="img-responsive" [ngStyle]="{'background':'url(assets/img/kitchen.jpg)', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center' }">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn dropdown-toggle" >
+                                                                <!-- <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
+                                                                <i class="fas fa-heart color-red" *ngIf="row.customers.length>0"></i> -->
+                                                            </button>
+                                                        </div>
+                                                    </figure>
+        
+                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4" ngxSlickItem >
+        
+                                            <div class="col-lg-12 col-md-12 col-xs-12 col-ms-12 mtsm mbsm mrsm mlsm">
+                                                <div class="product-item">
+                                                    <figure class="img-responsive" [ngStyle]="{'background':'url(assets/img/kitchen.jpg)', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center' }">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn dropdown-toggle" >
+                                                                <!-- <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
+                                                                <i class="fas fa-heart color-red" *ngIf="row.customers.length>0"></i> -->
+                                                            </button>
+                                                        </div>
+                                                    </figure>
+        
+                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4" ngxSlickItem >
+        
+                                            <div class="col-lg-12 col-md-12 col-xs-12 col-ms-12 mtsm mbsm mrsm mlsm">
+                                                <div class="product-item">
+                                                    <figure class="img-responsive" [ngStyle]="{'background':'url(assets/img/kitchen.jpg)', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center' }">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn dropdown-toggle" >
+                                                                <!-- <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
+                                                                <i class="fas fa-heart color-red" *ngIf="row.customers.length>0"></i> -->
+                                                            </button>
+                                                        </div>
+                                                    </figure>
+        
+                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4" ngxSlickItem >
+        
+                                            <div class="col-lg-12 col-md-12 col-xs-12 col-ms-12 mtsm mbsm mrsm mlsm">
+                                                <div class="product-item">
+                                                    <figure class="img-responsive" [ngStyle]="{'background':'url(assets/img/kitchen.jpg)', 'background-repeat': 'no-repeat', 'background-size': 'cover','background-position':'center' }">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn dropdown-toggle" >
+                                                                <!-- <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
+                                                                <i class="fas fa-heart color-red" *ngIf="row.customers.length>0"></i> -->
+                                                            </button>
+                                                        </div>
+                                                    </figure>
+        
+                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ngx-slick-carousel>
+                                </div>
+                            </div>
                         </div>
+                      
                     </div>
                 </div>
             </div>
