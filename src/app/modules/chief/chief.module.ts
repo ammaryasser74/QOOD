@@ -53,6 +53,7 @@ import { AddGroceryComponent } from './grocery/add-grocery/add-grocery.component
 import { GroceryService } from 'src/app/services/user/grocery.service';
 import { GallaryComponent } from './gallary/gallary.component';
 import { DeliveryComponent } from './delivery/delivery.component';
+import { DeliveryManService } from 'src/app/services/chief/delivery-man.service';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/chief/', '.json');
 }
@@ -113,7 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthGuard,
     GroceryService,
     UnitService,
-    BrankService , IngredientService, WeekelyDealsService
+    BrankService , IngredientService, WeekelyDealsService,DeliveryManService
   ],
   entryComponents: [
     RegisterChiefComponent, OrderModalDetailsComponent,

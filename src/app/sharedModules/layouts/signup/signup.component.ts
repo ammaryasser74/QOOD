@@ -45,12 +45,13 @@ export class SignupComponent implements OnInit {
     this.initForm();
   }
   initForm() {
+    const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this.form = this.formBuilder.group({
       ID: [0],
       firstname: [null, Validators.required],
       lastname: [null, Validators.required],
       phone: [null, [Validators.required, Validators.pattern('(05)[0-9]{8}')]],
-      email: [null, Validators.required],
+      email:[null, [Validators.required, Validators.pattern(EMAIL_REGEXP), Validators.pattern(/^\S*$/)]],
       password: [null, Validators.required],
       password_confirmation: [null, Validators.required],
       agree: [false, Validators.required],
@@ -154,6 +155,7 @@ export class SignupComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
+      this.form.get('Email').setValue(this.form.value.Email.toLowerCase())
       this.userService.Post(this.form.value).subscribe(res => {
         if (res.Success) {
           this.toastr.success(res.Message);

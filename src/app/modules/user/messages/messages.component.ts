@@ -30,8 +30,8 @@ export class MessagesComponent implements OnInit {
   newMessage(text: string, user: string): void {
     this.messageService.send({ text: text, user: user });
 
-    // this.messageService.sendapi({message: text, to_user: 2}).subscribe(res=>{console.log(res,"LLL");
-    // });
+    this.messageService.sendapi({message: text, to_user: 2}).subscribe(res=>{console.log(res,"LLL");
+    });
 
     this.message = '';
   }

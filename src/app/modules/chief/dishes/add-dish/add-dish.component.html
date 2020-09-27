@@ -78,14 +78,14 @@
                 <div class="col-xs-12 m-t-10">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <textarea formControlName="ar_description" cols="30" rows="2" placeholder="{{'add-dish.Description-arabic'|translate}}" [ngClass]="{'has-error':form.get('ar_description').invalid && form.get('ar_description').dirty}">
+                            <textarea formControlName="ar_description" cols="30" rows="2" placeholder="{{'add-dish.Description-arabic'|translate}}" >
                     </textarea>
                             <span class="text-danger" *ngIf="form.get('ar_description').invalid && form.get('ar_description').dirty">{{'share.arabic-letters'|translate}}</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <textarea formControlName="en_description" cols="30" rows="2" placeholder="{{'add-dish.Description-Elglish'|translate}}" [ngClass]="{'has-error':form.get('en_description').invalid && form.get('en_description').dirty}"></textarea>
+                            <textarea formControlName="en_description" cols="30" rows="2" placeholder="{{'add-dish.Description-Elglish'|translate}}" ></textarea>
                             <span class="text-danger" *ngIf="form.get('en_description').invalid && form.get('en_description').dirty">{{'share.english-letters'|translate}}</span>
                         </div>
                     </div>

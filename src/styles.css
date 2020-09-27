@@ -115,3 +115,6 @@
     -webkit-box-shadow: 0 1px 0 #D84315;
     box-shadow: 0 1px 0 #D84315;
 }
+.slick-initialized .slick-slide{
+    outline-width: 0px !important;
+}

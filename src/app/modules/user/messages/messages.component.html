@@ -1,4 +1,4 @@
-<div class="messages-component">
+<!-- <div class="messages-component">
   <div class="messages">
     <div class="message" *ngFor="let message of messages">
       <b>DODO</b>: {{ message.text }}
@@ -8,14 +8,14 @@
   <div class="new-message-component">
     <div class="field">
       <label for="user">Username</label>
-      <input id="user" type="text" [(ngModel)]="user">
+      <input id="user" type="text" >
     </div>
     <div class="field">
       <label for="message">Message</label>
       <input id="message" [(ngModel)]="message">
     </div>
   
-    <button (click)="newMessage(message, user)" class="btn btn-default">Send</button>
+    <button (click)="newMessage(message,1)" class="btn btn-default">Send</button>
   </div>
 
   <ul>
@@ -23,5 +23,5 @@
       {{item.name}}
     </li>
   </ul>
-  <!-- <app-new-message></app-new-message> -->
-</div>
+ 
+</div> -->

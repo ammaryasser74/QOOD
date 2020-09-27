@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/Rx';
 import { PusherService } from './pusher.service';
 import { WebApiService } from '../webApi.service';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Message {
   text: string;
@@ -15,6 +16,7 @@ export class MessageService {
   pusher: any;
   constructor(
     private pusherService: PusherService,
+    private toastr: ToastrService,
     private webApi: WebApiService
   ) {
     this.initialize();
@@ -23,6 +25,7 @@ export class MessageService {
   initialize() {
     //RECIVE FROM PUSHER
     this.pusherService.messagesChannel.bind('send', (data) => {
+    this.toastr.show(data.data.content);
       this.emitNewMessage({ text: data.data.content, user: 'Doaa' });
     });
   }

@@ -45,7 +45,7 @@
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input formControlName="email" autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" type="text" placeholder="{{'sign.email'|translate}}" autocomplete="doNotAutoComplete" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
+                                <input formControlName="email" autocomplete="off"  type="text" placeholder="{{'sign.email'|translate}}" autocomplete="doNotAutoComplete" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
                                 <span class="text-danger" *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.emailerror'|translate}}</span>
                             </div>
                         </div>

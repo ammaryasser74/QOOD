@@ -18,7 +18,11 @@ import { RatingModule } from 'ng-starrating';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/chief/Notification.service';
-
+import { ChatService,Filter } from 'src/app/services/user/chat.service';
+import {
+  MessageService,
+  Message,
+} from '../../../services/user/message.service';
 declare var require: any;
 @Component({
   selector: 'app-layout-user',
@@ -26,51 +30,70 @@ declare var require: any;
   styleUrls: ['./layout-user.component.css'],
 })
 export class LayoutUserComponent implements OnInit {
+  params: Filter = { name: '', per_page: 10, page: 1 };
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
   myUrl: any;
   imgLan: any;
   subLayoutEvent: Subscription;
   cusines: any;
   loadingdata: boolean;
+  messages: Array<Message>;
+  message: any;
   brands: any;
   Total = 0;
   myCart: any;
   mydir: any;
   settings;
+  UserChat: any
   form: FormGroup;
   isLogin = false;
   isChief = false;
   nav = 1;
   footnav = 1;
+  openUserChat: boolean
+  openNewChat: boolean
   loading: any = false;
+  toCurrentUserChat:any
+  oldMessages:any
   aside = 1;
   myasideclass: any;
   isOpen = false;
-  listNotification:[];
+  listNotification: [];
   constructor(
     private modalService: BsModalService,
     public languageService: LanguageService,
     public translateService: TranslateService,
-    public notificationService:NotificationService,
+    public notificationService: NotificationService,
     public settingService: SettingService,
     public cusinesService: CusinesService,
     public brandService: BrandService,
+    private chatService: ChatService,
+    private messageService: MessageService,
     private router: Router,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     public userService: UserService,
     public cartService: CartService,
     public localStorageService: LocalStorageService
-  ) {}
+  ) { this.messages = []; }
   ngOnInit() {
+    this.messageService.messagesStream.subscribe(
+      this.newMessageEventHandler.bind(this)
+    );
+    this.chatService.getUser(this.params).subscribe(res => {
+      this.UserChat = res.Data; console.log(res.Data, "res.Data");
+    })
     this.GetListNotifiction();
-    console.log(  this.localStorageService.get('first'),";;;");
+    console.log(this.localStorageService.get('first'), ";;;");
     // this.localStorageService.set('first',true)
-     if(this.localStorageService.get('first')==null){
+    if (this.localStorageService.get('first') == null) {
       this.userService.checkmyToken();
-      this.localStorageService.set('first',true)
+      this.localStorageService.set('first', true)
       this.localStorageService.set('mycart', null);
       this.localStorageService.set('mycarttotal', null);
-      this.localStorageService.set('accessToken',null);
+      this.localStorageService.set('accessToken', null);
       this.localStorageService.set('currentUser', null);
     }
     this.myUrl = environment.api_imges;
@@ -117,11 +140,16 @@ export class LayoutUserComponent implements OnInit {
       require('style-loader!src/assets/css/style.css');
     }
   }
-
+ 
   getFromLocalStorage(key: string) {
     return this.localStorageService.get(key) as any;
   }
-
+  newMessage(text: string, user: string): void {
+    this.messageService.send({ text: text, user: user });
+    this.messageService.sendapi({message: text, to_user: this.toCurrentUserChat.id}).subscribe(res=>{console.log(res,"LLL");
+    });
+    this.message = '';
+  }
   initForm() {
     this.form = this.formBuilder.group({
       email: [null, Validators.required],
@@ -148,18 +176,19 @@ export class LayoutUserComponent implements OnInit {
   closeMenu() {
     this.isOpen = false;
   }
-  GetListNotifiction(){
-    if(this.userService.currentUser){
+  GetListNotifiction() {
+    if (this.userService.currentUser) {
       setTimeout(() => {
         this.notificationService.GetList(this.userService.currentUser.id).subscribe(
-          res=>{
-            this.listNotification=res.Data.filter(i=>i.read==0)}
+          res => {
+            this.listNotification = res.Data.filter(i => i.read == 0)
+          }
         )
       }, 200);
     }
   }
-  readNotigication(id){
-    this.notificationService.Read(id).subscribe(res=>{
+  readNotigication(id) {
+    this.notificationService.Read(id).subscribe(res => {
       this.router.navigate(['/chief/orders'])
     })
   }
@@ -179,12 +208,36 @@ export class LayoutUserComponent implements OnInit {
       }
     }
   }
-  usersChat(){
-    if (this.userService.currentUser){
-
+  usersChat() {
+    if (this.userService.currentUser) {
+      this.closeUser()
     }
-    else{
+    else {
       this.login()
     }
+  }
+ 
+  openChat(user) {
+    
+    console.log(user,"LL");
+    this.oldMessages=[]
+    this.toCurrentUserChat=user
+    if(!this.openNewChat){
+      this.openNewChat=true;
+    }
+    this.chatService.getLastMessages(user.id).subscribe(res=>{
+      this.oldMessages=res.Data
+      debugger
+      console.log(res.Data,"LLLL");
+    })
+  }
+  closeChat(){
+    this.openNewChat=false
+  }
+  private newMessageEventHandler(event: Message): void {
+    this.messages.push(event);
+  }
+  closeUser() {
+    this.openUserChat = !this.openUserChat
   }
 }

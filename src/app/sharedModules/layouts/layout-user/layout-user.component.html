@@ -1,10 +1,89 @@
 <div dir="{{mydir}}">
-  <a class="float" (click)="usersChat()">
+  <!-- <a class="float" (click)="usersChat()">
     <i class="fas fa-comments my-float"></i>
-  </a>
- <!-- <div class="chat">
- DODDO
- </div> -->
+  </a> -->
+  <div *ngIf="openUserChat">
+    <div class="chat-box-user">
+      <div class="chat-box-header">
+        users
+        <button class="chat-box-toggle" (click)="closeUser()"><i class="fa fa-times"></i></button>
+        <!-- <button class="chat-box-toggle" (click)="closeUser()"><i class="fa fa-search"></i></button> -->
+      </div>
+      <div class="chat-logs">
+        <div class="m-10" *ngFor="let user of UserChat">
+          <button class="btn-chat-logs" (click)="openChat(user)">
+            <img src="assets/img/logo.png" class="avatar" *ngIf="!user.avatar">
+            <img [src]="user.avatar" class="avatar" *ngIf="user.avatar">
+            <span class="user-name">{{user.username}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="openNewChat">
+
+    <div class="chat-box">
+      <div class="chat-box-header">
+
+        <img src="assets/img/logo.png" class="avatar" *ngIf="!toCurrentUserChat?.avatar">
+        <img [src]="toCurrentUserChat?.avatar" class="avatar" *ngIf="toCurrentUserChat?.avatar">
+        <span class="user-name">{{toCurrentUserChat?.username}}</span>
+
+        <button class="chat-box-toggle" (click)="closeChat()"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="chat-box-body">
+        <div class="chat-box-overlay">
+        </div>
+        <div class="chat-logs">
+          <!-- With Name and Arrow - RIGHT -->
+         
+
+            
+          <div class="message" *ngFor="let row of oldMessages">
+            <div class="msg">
+              <div class="bubble" [ngClass]="{'alt':row.from_user.id==getFromLocalStorage('currentUser').id}">
+                <div class="txt">
+                  <!-- <span class="name "[ngClass]="{'alt':row.from_user.id==getFromLocalStorage('currentUser').id}" >My Name
+                  </span> -->
+                  <span class="timestamp">{{row.created_at}}</span>
+                 <div style="width:100%">
+                  <p class="message">  {{ row.content }}</p>
+                 </div> 
+                </div>
+                <div class="bubble-arrow " [ngClass]="{'alt':row.from_user.id==getFromLocalStorage('currentUser').id}"></div>
+              </div>
+            </div>
+          </div>
+          <div class="message" *ngFor="let message of messages">
+              <div class="msg">
+              <div class="bubble alt">
+                <div class="txt">
+                  <!-- <span class="name alt" >My Name
+                  </span> -->
+                  <span class="timestamp">just now</span>
+                 <div><p class="message">  {{ message.text }}</p></div> 
+                </div>
+                <div class="bubble-arrow alt"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--chat-log -->
+      </div>
+      <div class="chat-input">
+
+        <input type="text" id="chat-input" placeholder="Send a message..." [(ngModel)]="message" />
+        <button class="chat-submit" id="chat-submit" (click)="newMessage(message, toCurrentUserChat?.username)"><i
+            class="fa fa-paper-plane"></i></button>
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+
   <header class="ball">
     <nav class="navbar ">
       <div class="top-header">

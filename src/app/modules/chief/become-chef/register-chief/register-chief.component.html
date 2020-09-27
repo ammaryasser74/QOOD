@@ -56,9 +56,10 @@
                                     </div>
 
                                 </div>
+                                <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" -->
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" type="text" placeholder="{{'become-chief.Email' | translate}}" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
+                                        <input formControlName="email"  type="text" placeholder="{{'become-chief.Email' | translate}}" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
                                         <span class="text-danger" *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.emailerror'|translate}}</span>
                                     </div>
                                 </div>
@@ -95,33 +96,33 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="col-lg-12 col-md-12 col-xs-12">
+                            <!-- <div class="col-lg-12 col-md-12 col-xs-12">
                                 <h4 class="text-semibold m-t-15">{{'become-chief.have-health' | translate}}</h4>
                                 <div class="checkbox-custom">
                                     <input type="radio" name="health" (change)="haveHealthCard(1)" [checked]="form.get('health').value" id="health-yes" class="form-radio"><label class="mrlg" for="health-yes">{{'become-chief.yes' | translate}}</label>
                                     <input type="radio" name="health" (change)="haveHealthCard(0)" [checked]="!form.get('health').value" id="health-no" class="form-radio"><label for="health-no">{{'become-chief.no' | translate}}</label>
                                 </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-xs-12" *ngIf="Card">
+                            </div> -->
+                            <!-- <div class="col-lg-12 col-md-12 col-xs-12" *ngIf="Card">
                                 <div class="form-group mtxlg">
                                     <input type="number" formControlName="health_card" placeholder="{{'become-chief.health-card' | translate}}" required>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-lg-12 col-md-12 col-xs-12">
+                            <!-- <div class="col-lg-12 col-md-12 col-xs-12">
                                 <h4 class="text-semibold no-margin mtxlg">{{'become-chief.consumer-subscriptions' | translate}}</h4>
                                 <div class="checkbox-custom">
                                     <input type="radio" name="is_subscriptions" (change)="getsubscribe(1)" [checked]="form.get('is_subscriptions').value" id="will-yes" class="form-radio"><label class="mrlg" for="will-yes">{{'become-chief.yes' | translate}}</label>
                                     <input type="radio" name="is_subscriptions" (change)="getsubscribe(0)" [checked]="!form.get('is_subscriptions').value" id="will-yes" class="form-radio"><label for="will-no">{{'become-chief.no' | translate}}</label>
                                 </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-xs-12" *ngIf="subscribe">
+                            </div> -->
+                            <!-- <div class="col-lg-12 col-md-12 col-xs-12" *ngIf="subscribe">
                                 <h4 class="text-semibold no-margin mtxlg">Subscription</h4>
                                 <div class="checkbox-custom">
                                     <input type="radio" formControlName="years" value="1" id="one-year-sub" class="form-radio"><label class="mrlg" for="one-year-sub">{{'become-chief.One-year' | translate}} (250 SAR)</label>
                                     <input type="radio" formControlName="years" value="2" id="two-year-sub" class="form-radio"><label class="mrlg" for="two-year-sub">{{'become-chief.Two-years' | translate}} (450 SAR)</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                             <div class="col-lg-12 col-md-12 col-xs-12">
                                 <div class="select-container mtxlg">

@@ -90,11 +90,12 @@ swRegistration;
   }
  
   initForm() {
+    const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this.form = this.formBuilder.group({
       ID: [0],
       city_id: [null, Validators.required],
       phone: [null, [Validators.required, Validators.pattern('(05)[0-9]{8}')]],
-      email: [null, [Validators.required, Validators.email]],
+      email:[null, [Validators.required, Validators.pattern(EMAIL_REGEXP), Validators.pattern(/^\S*$/)]],
       slug: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9$@$-^-_+]+$')]],
       password: [null, Validators.required],
       password_confirmation: [null, [Validators.required]],
@@ -119,7 +120,10 @@ swRegistration;
     if (type == 0) {this.subscribe = false; this.form.get('years').setValue(null); } else {this.subscribe = true; }
   }
   save() {
+   
     if (this.form.valid) {
+      this.form.get('Email').setValue(this.form.value.Email.toLowerCase())
+      this.loading=true
       this.localStorageService.set('accessToken', null);
       this.localStorageService.set('currentUser', null);
       this.localStorageService.set('mycart', null);
@@ -127,6 +131,7 @@ swRegistration;
       this.userService.Post(this.form.value).subscribe(
        res => {
           if (res.Success) {
+            this.loading=false
             this.toastr.success(res.Message);
             this.localStorageService.set('accessToken', res.Data.token);
             this.localStorageService.set('currentUser', res.Data);

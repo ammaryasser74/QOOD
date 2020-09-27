@@ -20,7 +20,10 @@ import { ChiefLayoutComponent } from './chief-layout/chief-layout.component';
 import { SharedModule } from '../shared.module';
 import { VerficationCodeComponent } from './verfication-code/verfication-code.component';
 import { NotificationService } from 'src/app/services/chief/Notification.service';
-
+import { CartService } from 'src/app/services/user/cart.service';
+import { ChatService } from 'src/app/services/user/chat.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MessageService } from '@progress/kendo-angular-l10n';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'src/assets/i18n/layout/', '.json');
 }
@@ -31,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     RouterModule,
     RatingModule,
+    InfiniteScrollModule,
     BsDatepickerModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -65,6 +69,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     CusinesService,
     NotificationService,
+    ChatService,
+    MessageService,
     AuthService,
     {
       provide: AuthServiceConfig,

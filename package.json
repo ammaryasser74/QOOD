@@ -62,6 +62,7 @@
     "ng5-slider": "^1.2.4",
     "ngx-bootstrap": "^3.0.1",
     "ngx-float-button": "^1.0.0",
+    "ngx-infinite-scroll": "^9.1.0",
     "ngx-slick-carousel": "^0.4.6",
     "ngx-toastr": "^10.2.0",
     "pusher-js": "^7.0.0",

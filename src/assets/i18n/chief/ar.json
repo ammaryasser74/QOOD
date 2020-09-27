@@ -112,7 +112,9 @@
         "My-Account": "حسابي",
         "Active": "نشط",
         "Lock": "مقفول",
-        "grocery-item":"أصناف البقالة"
+        "grocery-item":"أصناف البقالة",
+        "delivery":"التوصيل",
+        "gallery":"معرض الصور"
 
     },
     "grocery":{
@@ -243,6 +245,12 @@
         "price": "السعر",
         "choose-meals":"اختر الوجبات"
 
+    },
+    "delivery":{
+        "save-photo": "حفظ الصورة",
+        "lastname":"الاسم الاخير",
+        "firstname":"الاسم الاول",
+        "phone":"الجوال"
     }
 
 }

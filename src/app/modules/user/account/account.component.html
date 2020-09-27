@@ -4,30 +4,37 @@
             <i class="fas fa-spinner fa-spin color-green"></i>
         </div>
     </div>
-    <div *ngIf="loadingtwo" style="position: absolute; background-color: rgba(255, 255, 255, 0.6); width: 100%; height: 100%; z-index: 100000">
+    <div *ngIf="loadingtwo"
+        style="position: absolute; background-color: rgba(255, 255, 255, 0.6); width: 100%; height: 100%; z-index: 100000">
         <div style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);">
             <i class="fas fa-spinner fa-spin color-green"></i>
         </div>
     </div>
     <section class="sec-pad" *ngIf="!loading">
         <div class="closed m-b-10" *ngIf="getFromLocalStorage('currentUser').phone_verified==0">
-            <p class="no-margin text-center text-semibold">{{'account.confirm-account'|translate}} <a style="text-decoration: underline;color:#ddd" (click)="sendverfication()">{{'account.click-here'|translate}}</a> </p>
+            <p class="no-margin text-center text-semibold">{{'account.confirm-account'|translate}} <a
+                    style="text-decoration: underline;color:#ddd"
+                    (click)="sendverfication()">{{'account.click-here'|translate}}</a> </p>
         </div>
         <div class="container">
             <div class="avatar-img text-center mbmd">
                 <form (ngSubmit)="onSubmit()" class="m-b-25">
                     <label tabindex="0" class="lbl-img res-img" for="my-file-1">
-                                    <a>  
-                                    <div class="avatar-img text-center mbmd " style="min-height: 125px;">
-                                        <div class="a-img text-center cover " style="background-image: url('assets/img/kitchen.jpg');" *ngIf="myavatar==null"></div>
-                                        <img [src]='myavatar'  class="profile text-center  " for="my-file-1" for="my-file-1"
-                                         *ngIf="myavatar!=null">
-                                        <input class="input-file" id="my-file-1" type="file" style="display :none" accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event)" class="select-profile-picture">
-                                        </div>
-                                    </a>
-                            </label>
+                        <a>
+                            <div class="avatar-img text-center mbmd " style="min-height: 125px;">
+                                <div class="a-img text-center cover "
+                                    style="background-image: url('assets/img/kitchen.jpg');" *ngIf="myavatar==null">
+                                </div>
+                                <img [src]='myavatar' class="profile text-center  " for="my-file-1" for="my-file-1"
+                                    *ngIf="myavatar!=null">
+                                <input class="input-file" id="my-file-1" type="file" style="display :none"
+                                    accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event)"
+                                    class="select-profile-picture">
+                            </div>
+                        </a>
+                    </label>
                     <button class="btn btn-primary save-photo" style="background: #7FB017;margin-left:45%">
-                        {{'account.save-photo'|translate}}   
+                        {{'account.save-photo'|translate}}
                     </button>
                 </form>
             </div>
@@ -41,12 +48,24 @@
             <div class="deals mtxlg">
                 <div class="tab-g">
                     <ul class="nav nav-tabs account-tabs text-center" role="tablist">
-                        <li role="presentation" [class.active]="tab==1"><a (click)="tab=1" class="btn" href="#account" aria-controls="account" role="tab" data-toggle="tab">{{'account.My-Account'|translate}}  </a></li>
-                        <li role="presentation" [class.active]="tab==2"><a (click)="tab=2" class="btn" href="#orders" aria-controls="orders" role="tab" data-toggle="tab">{{'account.Recent-Orders'|translate}}  </a></li>
-                        <li role="presentation" [class.active]="tab==3"><a (click)="tab=3" class="btn" href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">{{'account.Favourites'|translate}}  </a></li>
-                        <li role="presentation" [class.active]="tab==4"><a (click)="tab=4" class="btn" href="#address" aria-controls="address" role="tab" data-toggle="tab">{{'account.My-Address'|translate}}  </a></li>
-                        <li role="presentation" [class.active]="tab==5"><a (click)="tab=5" class="btn" href="#bookmarks" aria-controls="bookmarks" role="tab" data-toggle="tab">  {{'account.My-Bookmarks'|translate}}  </a></li>
-                        <li role="presentation" [class.active]="tab==6"><a (click)="tab=6" class="btn" href="#wallet" aria-controls="wallet" role="tab" data-toggle="tab">  {{'account.My-Wallet'|translate}}  </a></li>
+                        <li role="presentation" [class.active]="tab==1"><a (click)="tab=1" class="btn" href="#account"
+                                aria-controls="account" role="tab" data-toggle="tab">{{'account.My-Account'|translate}}
+                            </a></li>
+                        <li role="presentation" [class.active]="tab==2"><a (click)="tab=2" class="btn" href="#orders"
+                                aria-controls="orders" role="tab"
+                                data-toggle="tab">{{'account.Recent-Orders'|translate}} </a></li>
+                        <li role="presentation" [class.active]="tab==3"><a (click)="tab=3" class="btn"
+                                href="#favourites" aria-controls="favourites" role="tab"
+                                data-toggle="tab">{{'account.Favourites'|translate}} </a></li>
+                        <li role="presentation" [class.active]="tab==4"><a (click)="tab=4" class="btn" href="#address"
+                                aria-controls="address" role="tab" data-toggle="tab">{{'account.My-Address'|translate}}
+                            </a></li>
+                        <li role="presentation" [class.active]="tab==5"><a (click)="tab=5" class="btn" href="#bookmarks"
+                                aria-controls="bookmarks" role="tab" data-toggle="tab">
+                                {{'account.My-Bookmarks'|translate}} </a></li>
+                        <li role="presentation" [class.active]="tab==6"><a (click)="tab=6" class="btn" href="#wallet"
+                                aria-controls="wallet" role="tab" data-toggle="tab"> {{'account.My-Wallet'|translate}}
+                            </a></li>
 
                     </ul>
                     <div class="tab-content">
@@ -60,44 +79,67 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label class="text-semibold mlmd">  {{'account.First-Name'|translate}}</label>
-                                                    <input type="text" formControlName="firstname" placeholder="{{'account.First-Name'|translate}}" [ngClass]="{'has-error':form.get('firstname').invalid && form.get('firstname').dirty}">
-                                                    <span class="text-danger" *ngIf="form.get('firstname').invalid && form.get('firstname').dirty">{{'share.required' |translate}}</span>
+                                                    <label class="text-semibold mlmd">
+                                                        {{'account.First-Name'|translate}}</label>
+                                                    <input type="text" formControlName="firstname"
+                                                        placeholder="{{'account.First-Name'|translate}}"
+                                                        [ngClass]="{'has-error':form.get('firstname').invalid && form.get('firstname').dirty}">
+                                                    <span class="text-danger"
+                                                        *ngIf="form.get('firstname').invalid && form.get('firstname').dirty">{{'share.required' |translate}}</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label class="text-semibold mlmd"> {{'account.Last-Name'|translate}}</label>
-                                                    <input type="text" formControlName="lastname" placeholder="{{'account.Last-Name'|translate}}" [ngClass]="{'has-error':form.get('lastname').invalid && form.get('lastname').dirty}">
-                                                    <span class="text-danger" *ngIf="form.get('lastname').invalid && form.get('lastname').dirty">{{'share.required' |translate}}</span>
+                                                    <label class="text-semibold mlmd">
+                                                        {{'account.Last-Name'|translate}}</label>
+                                                    <input type="text" formControlName="lastname"
+                                                        placeholder="{{'account.Last-Name'|translate}}"
+                                                        [ngClass]="{'has-error':form.get('lastname').invalid && form.get('lastname').dirty}">
+                                                    <span class="text-danger"
+                                                        *ngIf="form.get('lastname').invalid && form.get('lastname').dirty">{{'share.required' |translate}}</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="text-semibold mlmd">{{'account.Phone-number'|translate}}</label>
-                                                    <input type="number" formControlName="phone" placeholder="{{'account.phone'|translate}}" [ngClass]="{'has-error':form.get('phone').invalid && form.get('phone').dirty}" readonly>
-                                                    <span class="text-danger" *ngIf="form.get('phone').invalid && form.get('phone').dirty">{{'share.required' |translate}}</span>
+                                                    <label
+                                                        class="text-semibold mlmd">{{'account.Phone-number'|translate}}</label>
+                                                    <input type="number" formControlName="phone"
+                                                        placeholder="{{'account.phone'|translate}}"
+                                                        [ngClass]="{'has-error':form.get('phone').invalid && form.get('phone').dirty}"
+                                                        readonly>
+                                                    <span class="text-danger"
+                                                        *ngIf="form.get('phone').invalid && form.get('phone').dirty">{{'share.required' |translate}}</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label class="text-semibold mlmd"> {{'account.E-mail'|translate}}</label>
-                                                    <input type="email" formControlName="email" placeholder="{{'account.E-mail'|translate}}" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}" readonly>
-                                                    <span class="text-danger" *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.required' |translate}}</span>
+                                                    <label class="text-semibold mlmd">
+                                                        {{'account.E-mail'|translate}}</label>
+                                                    <input type="email" formControlName="email"
+                                                        placeholder="{{'account.E-mail'|translate}}"
+                                                        [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}"
+                                                        readonly>
+                                                    <span class="text-danger"
+                                                        *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.required' |translate}}</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label class="text-semibold mlmd" style="visibility: hidden;"> {{'account.change-passowrd'|translate}}</label>
+                                                <label class="text-semibold mlmd" style="visibility: hidden;">
+                                                    {{'account.change-passowrd'|translate}}</label>
                                                 <div class="ptmd pbxxlg">
-                                                    <a class="ptlg" (click)="changePasswort()">{{'account.change-passowrd'|translate}}</a>
+                                                    <a class="ptlg"
+                                                        (click)="changePasswort()">{{'account.change-passowrd'|translate}}</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="checkbox-custom black">
-                                            <input type="checkbox" formControlName="receive_orders" id="receive" [checked]="form.get('receive_orders').value" class="form-radio">
-                                            <label class="mrlg" for="receive"> {{'account.Receive-orders'|translate}}</label>
+                                            <input type="checkbox" formControlName="receive_orders" id="receive"
+                                                [checked]="form.get('receive_orders').value" class="form-radio">
+                                            <label class="mrlg" for="receive">
+                                                {{'account.Receive-orders'|translate}}</label>
                                         </div>
-                                        <button class="btn btn-green mtxxlg pull-right" (click)="update()"> {{'share.Update'|translate}}</button>
+                                        <button class="btn btn-green mtxxlg pull-right" (click)="update()">
+                                            {{'share.Update'|translate}}</button>
                                     </form>
                                 </div>
                             </div>
@@ -109,13 +151,18 @@
                                         <div class="timeline" *ngFor="let row of recentOrder">
                                             <a routerLink="/user/order-details/{{row.id}}" class="timeline-content">
                                                 <div class="avatar-img text-center mbmd">
-                                                    <div class="a-img cover" style="background-image: url('assets/img/products/product.jpg')"></div>
+                                                    <div class="a-img cover"
+                                                        style="background-image: url('assets/img/products/product.jpg')">
+                                                    </div>
                                                 </div>
                                                 <div class="inner-content">
-                                                    <h6 class="title"> {{'account.Order-ID'|translate}}: {{row.code}}</h6>
+                                                    <h6 class="title"> {{'account.Order-ID'|translate}}: {{row.code}}
+                                                    </h6>
                                                     <p class="text-semibold date no-margin">{{row.date}}</p>
-                                                    <div class="text-semibold no-margin d-block order-id">{{'account.Status'|translate}}: {{row.status}}</div>
-                                                    <div class="text-semibold no-margin d-block order-id">{{'account.Total'|translate}}: {{row.NetTotal}}</div>
+                                                    <div class="text-semibold no-margin d-block order-id">
+                                                        {{'account.Status'|translate}}: {{row.status}}</div>
+                                                    <div class="text-semibold no-margin d-block order-id">
+                                                        {{'account.Total'|translate}}: {{row.NetTotal}}</div>
                                                     <span class="time">{{row.time}}</span>
                                                 </div>
                                             </a>
@@ -130,17 +177,23 @@
                                     <div class="col-md-3 col-sm-6">
                                         <div class="mbxlg">
                                             <div class="product-item">
-                                                <figure class="cover" [ngStyle]="{'background':'url(' + row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                                                <figure class="cover"
+                                                    [ngStyle]="{'background':'url(' + row.img+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn dropdown-toggle" (click)=addToFavourite(row.id)>
+                                                        <button type="button" class="btn dropdown-toggle"
+                                                            (click)=addToFavourite(row.id)>
                                                             <i class="fas fa-heart" *ngIf="row.customers.length==0"></i>
-                                                            <i class="fas fa-heart color-red" *ngIf="row.customers.length>0"></i>
+                                                            <i class="fas fa-heart color-red"
+                                                                *ngIf="row.customers.length>0"></i>
                                                         </button>
                                                     </div>
                                                 </figure>
-                                                <a routerLink="/user/search/0/0/0" class="btn btn-green text-upper">{{'share.order'|translate}}</a>
+                                                <a routerLink="/user/search/0/0/0"
+                                                    class="btn btn-green text-upper">{{'share.order'|translate}}</a>
                                                 <div class="product-info">
-                                                    <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="false" (rate)="onRate($event,row.id)">
+                                                    <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017"
+                                                        uncheckedcolor="#ccc" size="28px" readonly="false"
+                                                        (rate)="onRate($event,row.id)">
                                                     </star-rating>
                                                     <h3 class="no-margin mtmd mbmd">
                                                         <a routerLink="/user/meal-details/{{row.id}}">
@@ -148,20 +201,21 @@
                                                         </a>
                                                     </h3>
                                                     <div class="price">
-                                                       
-                                                        <span > {{row.price_of_person}}</span>
-                                                       
-                                                         {{'share.SAR'|translate}}
+
+                                                        <span> {{row.price_of_person}}</span>
+
+                                                        {{'share.SAR'|translate}}
                                                     </div>
                                                     <div class="meal-data mtmd mbmd">
-                         
+
                                                         <span>
-                        <img class="mrsm" src="assets/img/icons/person.svg">
-                       {{row.max_no_persons}}:{{row.min_no_persons}}  {{'share.person'|translate}}
-                    </span>
+                                                            <img class="mrsm" src="assets/img/icons/person.svg">
+                                                            {{row.max_no_persons}}:{{row.min_no_persons}}
+                                                            {{'share.person'|translate}}
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -188,12 +242,16 @@
                                                         {{'share.Default-address'|translate}}
                                                     </div>
                                                     <div class="default pull-left" *ngIf="row.default_address==0">
-                                                        <a (click)="setDefaultaddress(row)">   {{'share.Set-Default-address'|translate}}</a>
+                                                        <a (click)="setDefaultaddress(row)">
+                                                            {{'share.Set-Default-address'|translate}}</a>
                                                     </div>
                                                 </div>
                                                 <div class="act-address pull-right">
-                                                    <a class="edit text-semibold mrsm" (click)="updateAddress(row.id)"><i class="fa fa-edit mtxs"></i></a>
-                                                    <a (click)="deleteAddress(row.id)" class="delete text-semibold"><i class="fa fa-trash-alt mtxs"></i></a>
+                                                    <a class="edit text-semibold mrsm"
+                                                        (click)="updateAddress(row.id)"><i
+                                                            class="fa fa-edit mtxs"></i></a>
+                                                    <a (click)="deleteAddress(row.id)" class="delete text-semibold"><i
+                                                            class="fa fa-trash-alt mtxs"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,7 +259,8 @@
                                 </ng-container>
                             </div>
                             <div class="text-center mtxxlg">
-                                <a class="btn btn-green d-inline" (click)="addNewAddress()">{{'add-address.add-New'|translate}}</a>
+                                <a class="btn btn-green d-inline"
+                                    (click)="addNewAddress()">{{'add-address.add-New'|translate}}</a>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" [class.active]="tab==5">
@@ -210,15 +269,22 @@
                                     <div class="col-sm-4">
                                         <div class="bookmark-card mblg">
                                             <div class="bookmark-head">
-                                                <div class="kitchen-img cover" [ngStyle]="{'background':'url(' + row.cover+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }"></div>
-                                                <div class="avatar-img kitchen-img text-center">
-                                                    <div class="a-img cover" [ngStyle]="{'background':'url(' + row.avatar+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }"></div>
+                                                <div class="kitchen-img cover"
+                                                    [ngStyle]="{'background':'url(' + row.cover+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
                                                 </div>
-                                                <h3 class="no-margin text-semibold text-center mblg plxlg prxlg">{{row.kitchen_name}}</h3>
+                                                <div class="avatar-img kitchen-img text-center">
+                                                    <div class="a-img cover"
+                                                        [ngStyle]="{'background':'url(' + row.avatar+ ')', 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+                                                    </div>
+                                                </div>
+                                                <h3 class="no-margin text-semibold text-center mblg plxlg prxlg">
+                                                    {{row.kitchen_name}}</h3>
                                             </div>
                                             <div class="bookmark-footer text-center pbxxlg">
-                                                <a routerLink="/chief/kitchen/{{row.slug}}" class="btn btn-green d-inline"> {{'share.view'|translate}}</a>
-                                                <a (click)="addBookMark(row.pivot.ChiefID)" class="btn btn-delete d-inline">{{'share.Remove'|translate}}</a>
+                                                <a routerLink="/chief/kitchen/{{row.slug}}"
+                                                    class="btn btn-green d-inline"> {{'share.view'|translate}}</a>
+                                                <a (click)="addBookMark(row.pivot.ChiefID)"
+                                                    class="btn btn-delete d-inline">{{'share.Remove'|translate}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -231,7 +297,8 @@
                                     <div class="wallet-balance text-center">
                                         <img class="mbsm" src="assets/img/icons/wallet-1.svg">
                                         <h2 class="no-margin mbmd text-semibold">{{'account.My-Wallet'|translate}}</h2>
-                                        <div class="credit text-bold">{{userData.wallet}} {{'share.SAR'|translate}}</div>
+                                        <div class="credit text-bold">{{userData.wallet}} {{'share.SAR'|translate}}
+                                        </div>
 
                                         <!-- <p class="text-danger text-semibold noresult" *ngIf="userData.wallet==0">
                                             Your wallet is empty

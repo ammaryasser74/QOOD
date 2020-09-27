@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
 
-
+    this.loading=true
      
     this.myUrl = environment.api_imges;
     this.subLayoutService.broadcast(true);
@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
     this.cityService.GetList().subscribe(res => { this.cities = res.Data; });
     this.brandService.GetList().subscribe(res => { this.brands = res.Data; });
     this.menuService.NewMenu(this.userID).subscribe(res => {
+      this.loading=false
       res.Data.map(i => i.img = environment.api_imges + i.img);
       this.newMenu = res.Data;
       this.menuService.PopularMenu(this.userID).subscribe(
@@ -89,7 +90,7 @@ export class HomeComponent implements OnInit {
           this.popularMenu = res.Data;
         });
     });
-    this.loading = false;
+    //this.loading = false;
     this.filter.city_id = 1;
   }
   subscribe() {

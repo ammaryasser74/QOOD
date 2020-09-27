@@ -1,0 +1,54 @@
+.cover-photo {
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.save-photo {
+    font-size: 17px;
+    background: #7FB017;
+    border-radius: 10px;
+    width: 200px;
+}
+
+@media (min-width:768px) {
+    .save-photo {
+        margin-left: 39%
+    }
+}
+
+@media (max-width:450px) {
+    .save-photo {
+        margin-left: 20%
+    }
+}
+
+.profile {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+.res-img {
+    outline-width: 0;
+    min-width: 80%;
+    min-height: 125px;
+    max-height: 125px;
+}
+
+.m-r-30 {
+    margin-left: 30%;
+}
+
+.dodo {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center
+}
+
+agm-map {
+    height: 250px;
+}
+
+.m-top-10 {
+    margin-top: 10px;
+}

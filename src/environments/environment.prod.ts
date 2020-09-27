@@ -17,5 +17,5 @@ export const environment = {
   },
   api_imges: 'https://catering.qoot.online/',
   api_url: 'https://catering.qoot.online/api',
-  defaultLanguage: 'en',
+  defaultLanguage: 'ar',
 };

@@ -1,1 +1,75 @@
-<p>delivery works!</p>
+<main>
+    <div class="container">
+        <aside class="col-sm-3 d-aside no-padding sticky">
+            <app-chief-layout></app-chief-layout>
+        </aside>
+        <div class="col-sm-9 d-content">
+            <div *ngIf="loading" class="m-loading">
+              <i class="fas fa-spinner fa-spin color-green"></i>
+            </div>
+            <div *ngIf="!loading">
+              <div class="d-content-c plmd">
+                <div class="avatar-img text-center mbmd">
+                  <form (ngSubmit)="onSubmit()" class="m-b-25">
+                    <label tabindex="0" class="lbl-img res-img" for="my-file-1">
+                      <a>
+                        <div class="avatar-img text-center mbmd " style="min-height: 125px;">
+                          <div class="a-img text-center cover " style="background-image: url('assets/img/kitchen.jpg');"
+                            *ngIf="myavatar==null"></div>
+                          <!-- <img src='assets/img/kitchen.jpg' class="m-t-15 profile"  for="my-file-1" *ngIf="myavatar==null"> -->
+                          <img [src]='myavatar' class="profile text-center mbmd " for="my-file-1" for="my-file-1"
+                            *ngIf="myavatar!=null">
+                          <input class="input-file " id="my-file-1" type="file" style="display :none"
+                            accept="image/x-png,image/gif,image/jpeg" (change)="onSelectFile($event)"
+                            class="select-profile-picture">
+                        </div>
+                      </a>
+                    </label>
+                    <button class="btn btn-primary save-photo">
+                      {{'delivery.save-photo'|translate}}
+                    </button>
+                  </form>
+                </div>
+          
+                <div class="row">
+                  <div class="col-sm-12">
+                    <form [formGroup]="form" class="mtxxlg">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label class="text-semibold mlmd">{{'delivery.firstname'|translate}}</label>
+                            <input type="text" formControlName="firstname" placeholder="{{'delivery.firstname'|translate}}"
+                              [ngClass]="{'has-error':form.get('firstname').invalid && form.get('firstname').dirty}">
+                            <span class="text-danger"
+                              *ngIf="form.get('firstname').invalid && form.get('firstname').dirty">Required</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label class="text-semibold mlmd">{{'delivery.lastname'|translate}}</label>
+                            <input type="text" formControlName="lastname" placeholder="{{'delivery.lastname'|translate}}"
+                              [ngClass]="{'has-error':form.get('lastname').invalid && form.get('lastname').dirty}">
+                            <span class="text-danger"
+                              *ngIf="form.get('lastname').invalid && form.get('lastname').dirty">{{'share.required' |translate}}</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <label class="text-semibold mlmd">{{'delivery.phone'|translate}} </label>
+                            <input type="tel" formControlName="phone" placeholder="{{'delivery.phone'|translate}}"
+                              [ngClass]="{'has-error':form.get('phone').invalid && form.get('phone').dirty}">
+                            <span class="text-danger" *ngIf="form.get('phone').invalid && form.get('phone').dirty">
+                            {{'share.required' |translate}}</span>
+      
+                          </div>
+                        </div>
+                      </div>
+                      <button (click)="update()" class="btn btn-green mtxxlg pull-right">{{'share.Save'|translate}}</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</main>

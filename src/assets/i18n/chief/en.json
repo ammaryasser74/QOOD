@@ -128,7 +128,10 @@
         "My-Account": "My Account",
         "Active": "Active",
         "Lock": "Lock",
-        "grocery-item":"Grocery Item"
+        "grocery-item":"Grocery Item",
+        "delivery":"Delivery",
+        "gallery":"Gallery"
+
     },
     "grocery":{
         "add-item":"Add Item",
@@ -241,5 +244,12 @@
         "choose-meals":"Choose Meals"
 
 
+    }
+    ,
+    "delivery":{
+        "save-photo": "Save Photo",
+        "lastname":"Last Name",
+        "firstname":"First Name ",
+        "phone":"Phone"
     }
 }
