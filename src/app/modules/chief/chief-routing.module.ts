@@ -12,7 +12,6 @@ import { OrdersComponent } from './orders/orders.component';
 import { MenusComponent } from './menus/menus.component';
 import { IngredientCalculatorComponent } from './ingredient-calculator/ingredient-calculator.component';
 import { WeekelyDealsComponent } from './../chief/weekely-deals/weekely-deals.component';
-import { GroceryComponent } from './../chief/grocery/grocery.component';
 import { GallaryComponent } from './gallary/gallary.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 export const ChiefRouting: Route[] = [{
@@ -28,7 +27,7 @@ export const ChiefRouting: Route[] = [{
     { path: 'dashboard', component: DashboardComponent },
     { path: 'ingredient-calculator', component: IngredientCalculatorComponent },
     { path: 'deals', component: WeekelyDealsComponent },
-    { path: 'grocery-item', component: GroceryComponent },
+    
     { path: 'gallary', component: GallaryComponent },
     { path: 'delivery', component: DeliveryComponent },
   ]

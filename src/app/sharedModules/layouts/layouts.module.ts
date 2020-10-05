@@ -11,7 +11,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
-import { CusinesService } from 'src/app/services/user/cusines.service';
+
 import { BsDatepickerModule, RatingModule } from 'ngx-bootstrap';
 import { AuthServiceConfig, AuthService } from 'angularx-social-login';
 import { provideConfig } from 'src/app/app.module';
@@ -24,6 +24,7 @@ import { CartService } from 'src/app/services/user/cart.service';
 import { ChatService } from 'src/app/services/user/chat.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MessageService } from '@progress/kendo-angular-l10n';
+import { OccasionService } from 'src/app/services/user/occasion.service';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'src/assets/i18n/layout/', '.json');
 }
@@ -67,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     LanguageService,
     UserService,
-    CusinesService,
+    OccasionService,
     NotificationService,
     ChatService,
     MessageService,

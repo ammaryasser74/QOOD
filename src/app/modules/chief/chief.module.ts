@@ -48,8 +48,6 @@ import { BsModalService } from 'ngx-bootstrap';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { AuthGuard } from 'src/app/services/user/auth.guard';
 import { UnitService } from 'src/app/services/chief/unit.service';
-import { GroceryComponent } from './grocery/grocery.component';
-import { AddGroceryComponent } from './grocery/add-grocery/add-grocery.component';
 import { GroceryService } from 'src/app/services/user/grocery.service';
 import { GallaryComponent } from './gallary/gallary.component';
 import { DeliveryComponent } from './delivery/delivery.component';
@@ -92,8 +90,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     WeekelyDealsComponent,
     AddWeekelyDealsComponent,
     OrderModalDetailsComponent,
-    GroceryComponent,
-    AddGroceryComponent,
     GallaryComponent,
     DeliveryComponent,
   ],
@@ -120,7 +116,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterChiefComponent, OrderModalDetailsComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    AddGroceryComponent,
     AddDishComponent,
     AddMenuComponent, AddWeekelyDealsComponent
   ],

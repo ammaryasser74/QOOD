@@ -155,7 +155,7 @@ export class SignupComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
-      this.form.get('Email').setValue(this.form.value.Email.toLowerCase())
+     // this.form.get('Email').setValue(this.form.value.Email.toLowerCase())
       this.userService.Post(this.form.value).subscribe(res => {
         if (res.Success) {
           this.toastr.success(res.Message);

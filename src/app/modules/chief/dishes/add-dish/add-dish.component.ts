@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from 'src/app/services/user/categories.service';
 import { LanguageService } from 'src/app/services/language.service';
-import { CusinesService } from 'src/app/services/user/cusines.service';
+
 import { KitchenService } from 'src/app/services/chief/kitchen.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { UserService } from 'src/app/services/user/user.service';
@@ -36,7 +36,6 @@ export class AddDishComponent implements OnInit {
   categories: any;
   Dayselect: any = [];
   myimages = [];
-  cusines: any;
   img1: any = null;
   img2: any = null;
   img3: any = null;
@@ -48,7 +47,7 @@ export class AddDishComponent implements OnInit {
     public unitService:UnitService,
     private categoryService: CategoryService,
     public languageService: LanguageService,
-    private cusinesService: CusinesService,
+
     private kitchenService: KitchenService,
     private dishService: DishService,
     public userService: UserService,

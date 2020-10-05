@@ -8,9 +8,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { HttpRequest, HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-import { CusinesService } from 'src/app/services/user/cusines.service';
+
 import { CategoryService } from 'src/app/services/user/categories.service';
 import { MenuService } from 'src/app/services/user/menu.service';
+import { OccasionService } from 'src/app/services/user/occasion.service';
 @Component({
   selector: 'app-add-weekely-deals',
   templateUrl: './add-weekely-deals.component.html',
@@ -48,7 +49,7 @@ export class AddWeekelyDealsComponent implements OnInit {
     private menuService: MenuService,
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
-    private cusinesService: CusinesService,
+    private occasionService: OccasionService,
     public languageService: LanguageService,
     public modalService: BsModalService,
     private http: HttpClient,
@@ -56,7 +57,7 @@ export class AddWeekelyDealsComponent implements OnInit {
     public userService: UserService) { }
 
   ngOnInit() {
-    this.cusinesService.GetList().subscribe(res => {
+    this.occasionService.GetList().subscribe(res => {
       this.cusines = res.Data;
     });
     this.myUrl = environment.api_imges;
@@ -73,7 +74,7 @@ export class AddWeekelyDealsComponent implements OnInit {
       this.form.patchValue(this.Data);
       this.img = this.myUrl + this.Data.img;
       //cusines 
-      this.Data.cusines.forEach(element => {
+      this.Data.occasion.forEach(element => {
       this.selected.push(element.id);
       });
       this.allDish.map(i=>i.checked=false)
@@ -83,7 +84,7 @@ export class AddWeekelyDealsComponent implements OnInit {
         this.allDish.find(i => i.id == element.id).checked=true;
       });
 
-      this.form.get('cusines_ids').setValue(this.selected)
+      this.form.get('occasion_ids').setValue(this.selected)
  
     }
   }
@@ -110,7 +111,7 @@ export class AddWeekelyDealsComponent implements OnInit {
       min_no_persons: [null, [Validators.required, Validators.min(0)]],
       price_of_person: [null, [Validators.required, Validators.min(0)]],
       dishes_ids: [null],
-      cusines_ids: [null],
+      occasion_ids: [null],
       chief_id: this.userService.currentUser.chief_id,
       menu_id: [0, Validators.required],
       img: [null],

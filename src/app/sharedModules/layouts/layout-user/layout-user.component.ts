@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '../../../services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingService } from 'src/app/services/user/setting.service';
-import { CusinesService } from 'src/app/services/user/cusines.service';
+
 import { BrandService } from 'src/app/services/user/brand.service';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -67,7 +67,7 @@ export class LayoutUserComponent implements OnInit {
     public translateService: TranslateService,
     public notificationService: NotificationService,
     public settingService: SettingService,
-    public cusinesService: CusinesService,
+
     public brandService: BrandService,
     private chatService: ChatService,
     private messageService: MessageService,
@@ -116,8 +116,7 @@ export class LayoutUserComponent implements OnInit {
 
     this.loadingdata = true;
     this.initForm();
-    this.cusinesService.GetList().subscribe(res => {
-      this.cusines = res.Data;
+;
       this.settingService.GetList().subscribe(res => {
         this.settings = res.Data;
         this.brandService.GetList().subscribe(res => {
@@ -125,7 +124,7 @@ export class LayoutUserComponent implements OnInit {
           this.loadingdata = false;
         });
       });
-    });
+    
 
     this.translateService.setDefaultLang(
       this.languageService.getLanguageOrDefault()

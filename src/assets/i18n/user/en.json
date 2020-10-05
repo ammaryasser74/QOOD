@@ -14,7 +14,7 @@
         "search":"Search",
         "signup": "Sign up",
         "Qoot": "Qoot",
-        "Cusines": "Cuisine",
+        "Cusines": "Occasion",
         "Brands": "Brands",
         "Subscribe": "Subscribe",
         "Subscribe-text": "Receive deals from our restaurants via e-mail",
@@ -336,7 +336,7 @@
         "All-kitchen": "All kitchen",
         "Meal-type": "Meal-type",
         "All": "All",
-        "Cusines": "Cuisine",
+        "Cusines": "Occasion",
         "phone": "966 50 930 0666"
     }
 }

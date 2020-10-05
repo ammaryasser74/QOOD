@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { CityService } from 'src/app/services/user/city.service';
 import { CategoryService } from 'src/app/services/user/categories.service';
-import { CusinesService } from 'src/app/services/user/cusines.service';
+
 import { MealsService , MealFilter} from 'src/app/services/meals/meals.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
@@ -18,6 +18,7 @@ import { BookMarkService } from 'src/app/services/user/bookmark.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { environment } from 'src/environments/environment';
 import { MenuService } from 'src/app/services/user/menu.service';
+import { OccasionService } from 'src/app/services/user/occasion.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -32,7 +33,7 @@ export class SearchComponent implements OnInit {
     getPointerColor: (): string => {return '#7FB017';
   }
   };
-  filter: MealFilter = {min_price: 1, max_price: 2000, UserID: null, city_id: 0, day_id: [], category_id: 0, filterType: 0, cusines_id: []};
+  filter: MealFilter = {min_price: 1, max_price: 2000, UserID: null, city_id: 0, day_id: [], category_id: 0, filterType: 0, occasion_id: []};
   categories: any;
   cities: any;
   cusines: any;
@@ -51,7 +52,7 @@ export class SearchComponent implements OnInit {
                public cityService: CityService,
                private modelService: BsModalService,
                public categoryService: CategoryService,
-               public cusinesService: CusinesService,
+               public occasionService: OccasionService,
                public mealsService: MealsService,
                private activatedRoute: ActivatedRoute,
                private userService: UserService,
@@ -77,7 +78,7 @@ export class SearchComponent implements OnInit {
     this.listOrGrid = 'product-view grid-view';
     this.categoryService.GetList().subscribe(res => {this.categories = res.Data; });
     this.cityService.GetList().subscribe(res => {this.cities = res.Data; });
-    this.cusinesService.GetList().subscribe(res => {this.cusines = res.Data; });
+    this.occasionService.GetList().subscribe(res => {this.cusines = res.Data; });
     this.loadingKichen = true;
     if (this.filter.KitchenID > 0) {
       this.kitchenService.GetByID(this.filter.UserID, this.filter.KitchenID).subscribe(
@@ -106,11 +107,11 @@ export class SearchComponent implements OnInit {
   }
   cusinesSelect(e, id) {
     if (e.target.checked == true) {
-     this.filter.cusines_id.push(id);
+     this.filter.occasion_id.push(id);
      this.getFilterData();
     } else {
-      const index = this.filter.cusines_id.indexOf(id);
-      this.filter.cusines_id.splice(index, 1);
+      const index = this.filter.occasion_id.indexOf(id);
+      this.filter.occasion_id.splice(index, 1);
       this.getFilterData();
     }
   }

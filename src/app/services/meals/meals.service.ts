@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { WebApiService } from '../webApi.service';
 export interface MealFilter {
-    cusines_id?: any;
+    occasion_id?: any;
     category_id?: number;
     city_id?: number;
     min_price?: number;

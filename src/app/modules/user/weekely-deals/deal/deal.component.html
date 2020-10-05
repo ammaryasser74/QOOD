@@ -24,11 +24,14 @@
                     {{languageService.getLanguageOrDefault()=='ar' ? Data.ar_name :Data.en_name}}
                   </a>
                 </h3>
+               
                 <div class="price mbsm">{{Data.price_of_person}} {{'share.SAR'|translate}}</div>
                 <div class="meal-data mtmd mbmd">
                   <!-- <span class="mrlg"><img class="mrsm" src="assets/img/icons/time.svg" alt="">In 50 min</span> -->
                   <span><img class="mrsm" src="assets/img/icons/person.svg" alt="">
-                    {{'share.person'|translate}} {{Data.min_no_persons}}  الي  {{Data.max_no_persons}}  
+                     {{Data.min_no_persons}} 
+                    <span *ngIf="Data.max_no_persons!=Data.min_no_persons">:{{Data.max_no_persons}}  </span>
+                    {{'share.person'|translate}} 
                   </span>
                 </div>
               </div>
@@ -38,7 +41,7 @@
                 <p>{{languageService.getLanguageOrDefault()=='ar' ? Data.ar_description :Data.en_description}}</p>
                 <div class="action-btn mtxxlg">
                   <!-- <button type="button" class="btn btn-secondary d-inline">Add to favourite</button> -->
-                  <button type="button" (click)="SubscribDeal(Data)" class="btn btn-green d-inline">{{'share.subscribe'|translate}}</button>
+                  <button type="button" (click)="SubscribDeal(Data)" class="btn btn-green d-inline">{{'share.order'|translate}}</button>
                 </div>
               </div>
             </div>

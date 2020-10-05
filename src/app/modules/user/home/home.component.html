@@ -157,7 +157,7 @@
                                                 <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="false">
                                                 </star-rating>
                                                 <h3 class="no-margin mtmd mbmd">
-                                                    <a routerLink="/user/deal/{{row.id}}">
+                                                    <a class="hover-meale" routerLink="/user/deal/{{row.id}}">
                                                         {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
                                                      </a>
                                                 </h3>
@@ -172,15 +172,17 @@
                                                 <!-- {{'share.In'|translate}} {{row.preparation_time_value}} {{'share.'+row.preparation_time_type+''|translate}}  -->
                                                 </span>
                                                     <span>
-                                                    <img class="mrsm" src="assets/img/icons/person.svg"  >
-                                                 {{'share.person'|translate}} {{row.min_no_persons}}  الي  {{row.max_no_persons}}  
+                                                    <img class="mrsm" src="assets/img/icons/person.svg">
+                                                  {{row.min_no_persons}} 
+                                                 <span *ngIf="row.max_no_persons!=row.min_no_persons">:{{row.max_no_persons}}  </span>
+                                                 {{'share.person'|translate}}
                                                 </span>
                                                 </div>
                                             </div>
-                                            <!-- <a (click)="openMealModal(row)" class="more-details">
+                                            <a  routerLink="/user/deal/{{row.id}}" class="more-details">
                                               
                                                {{'share.More-details'|translate}} 
-                                            </a> -->
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -241,8 +243,8 @@
                                             <div class="product-info">
                                                 <star-rating value="{{row.average_rating}}" checkedcolor="#7FB017" uncheckedcolor="#ccc" size="28px" readonly="false">
                                                 </star-rating>
-                                                <h3 class="no-margin mtmd mbmd">
-                                                    <a routerLink="/user/deal/{{row.id}}">
+                                                <h3 class="no-margin mtmd mbmd ">
+                                                    <a  class="hover-meale" routerLink="/user/deal/{{row.id}}">
                                                         {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
                                                      </a>
                                                 </h3>
@@ -256,16 +258,18 @@
                                                
                                                 <!-- {{'share.In'|translate}} {{row.preparation_time_value}} {{'share.'+row.preparation_time_type+''|translate}}  -->
                                                 </span>
-                                                    <span>
-                                                    <img class="mrsm" src="assets/img/icons/person.svg"  >
-                                                 {{'share.person'|translate}} {{row.min_no_persons}}  الي  {{row.max_no_persons}}  
+                                                <span>
+                                                    <img class="mrsm" src="assets/img/icons/person.svg">
+                                                  {{row.min_no_persons}} 
+                                                 <span *ngIf="row.max_no_persons!=row.min_no_persons">:{{row.max_no_persons}}  </span>
+                                                 {{'share.person'|translate}}
                                                 </span>
                                                 </div>
                                             </div>
-                                            <!-- <a (click)="openMealModal(row)" class="more-details">
+                                            <a routerLink="/user/deal/{{row.id}}" class="more-details">
                                               
                                                {{'share.More-details'|translate}} 
-                                            </a> -->
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

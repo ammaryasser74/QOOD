@@ -122,7 +122,7 @@ swRegistration;
   save() {
    
     if (this.form.valid) {
-      this.form.get('Email').setValue(this.form.value.Email.toLowerCase())
+     
       this.loading=true
       this.localStorageService.set('accessToken', null);
       this.localStorageService.set('currentUser', null);
