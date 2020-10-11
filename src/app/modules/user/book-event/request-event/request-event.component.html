@@ -9,86 +9,121 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" (click)="myModel.hide()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <div class="modal-body margin-top-15">
             <div class="content-head text-center mbxlg">
                 <img src="assets/img/icons/event.svg" alt="">
-                <h3 class="no-margin mtmd mbsm text-semibold"> {{'events.event'|translate}}</h3>
+                <h3 class="no-margin mtmd mbsm text-semibold">
+                    {{'events.event'|translate}}</h3>
                 <p class="text-center">
                     {{'events.here'|translate}}
                 </p>
             </div>
             <form [formGroup]="form">
-                <div class="form-group">
-                    <input type="text" formControlName="name" placeholder="{{'events.Name'|translate}}" [ngClass]="{'has-error':form.get('name').invalid && form.get('name').dirty}">
-                    <span class="text-danger" *ngIf="form.get('name').invalid && form.get('name').dirty">{{'share.required' |translate}}</span>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" formControlName="name" placeholder="{{'events.Name'|translate}}"
+                            [ngClass]="{'has-error':form.get('name').invalid && form.get('name').dirty}">
+                        <span class="text-danger"
+                            *ngIf="form.get('name').invalid && form.get('name').dirty">{{'share.required' |translate}}</span>
+                    </div>
                 </div>
 
-
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="tel" formControlName="phone" placeholder="{{'events.Mobile-No'|translate}}"
+                            [ngClass]="{'has-error':form.get('phone').invalid && form.get('phone').dirty}">
+                        <span class="text-danger"
+                            *ngIf="form.get('phone').invalid && form.get('phone').dirty">{{'share.required' |translate}}</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="email" formControlName="email" placeholder="{{'events.Email'|translate}}">
+                    </div>
+                </div>
                 <div class="form-group">
-                    <input type="text" formControlName="address" placeholder="{{'events.Address'|translate}}" [ngClass]="{'has-error':form.get('address').invalid && form.get('address').dirty}">
-                    <span class="text-danger" *ngIf="form.get('address').invalid && form.get('address').dirty">{{'share.required' |translate}}</span>
+                    <input type="text" formControlName="address" placeholder="{{'events.Address'|translate}}"
+                        [ngClass]="{'has-error':form.get('address').invalid && form.get('address').dirty}">
+                    <span class="text-danger"
+                        *ngIf="form.get('address').invalid && form.get('address').dirty">{{'share.required' |translate}}</span>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="tel" formControlName="phone" placeholder="{{'events.Mobile-No'|translate}}" [ngClass]="{'has-error':form.get('phone').invalid && form.get('phone').dirty}">
-                            <span class="text-danger" *ngIf="form.get('phone').invalid && form.get('phone').dirty">{{'share.required' |translate}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="email" formControlName="email" placeholder="{{'events.Email'|translate}}" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
-                            <span class="text-danger" *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.required' |translate}}</span>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="select-container mbxlg">
                     <div class="custom-select" for="category">
                         <select id="city_id" formControlName="city_id">
-                                    <option value="null">{{'events.Select-City'|translate}}</option>
-                                   <ng-container *ngFor="let row of cities">
-                                    <option  value="{{row.id}}">
-                                        {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
-                                    </option>
-                                   </ng-container>
-                                    
-                                </select>
+                            <option value="null">{{'events.Select-City'|translate}}</option>
+                            <ng-container *ngFor="let row of cities">
+                                <option value="{{row.id}}">
+                                    {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                </option>
+                            </ng-container>
+
+                        </select>
+
                     </div>
+                    <span class="text-danger"
+                    *ngIf="form.get('city_id').invalid && form.get('city_id').dirty">{{'share.required' |translate}}</span>
                 </div>
 
 
 
                 <div class="select-container mbxlg">
-                    <!-- <label class="text-bold">Cusines</label> -->
-                    <ng-select placeholder="{{'events.Select-Menu-Type'|translate}}" [multiple]="true" formControlName="category_ids">
+                    <div class="custom-select" for="category">
+                        <!-- <label class="text-bold">Cusines</label> -->
+                        <!-- <ng-select placeholder="{{'events.Select-Menu-Type'|translate}}" [multiple]="false" formControlName="occasion_id">
                         <ng-option *ngFor="let row of categories" [value]="row.id" [disabled]="row.disabled">{{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}</ng-option>
-                    </ng-select>
-                    <span class="text-danger" *ngIf="form.get('category_ids').invalid && form.get('category_ids').dirty">{{'share.required' |translate}}</span>
+                    </ng-select> -->
+
+                        <select id="occasion_id" formControlName="occasion_id">
+                            <option value="null">{{'events.Select-Menu-Type'|translate}}</option>
+                            <ng-container *ngFor="let row of categories">
+                                <option value="{{row.id}}">
+                                    {{languageService.getLanguageOrDefault()=='ar' ? row.ar_name :row.en_name}}
+                                </option>
+                            </ng-container>
+
+                        </select>
+
+
+                    </div>
+                    <span class="text-danger"
+                    *ngIf="form.get('occasion_id').invalid && form.get('occasion_id').dirty">{{'share.required' |translate}}</span>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="number" formControlName="no_person" placeholder="{{'events.Number-of-people'|translate}}" [ngClass]="{'has-error':form.get('no_person').invalid && form.get('no_person').dirty}">
-                            <span class="text-danger" *ngIf="form.get('no_person').invalid && form.get('no_person').dirty">{{'share.required' |translate}}</span>
+                            <input type="number" formControlName="no_person"
+                                placeholder="{{'events.Number-of-people'|translate}}"
+                                [ngClass]="{'has-error':form.get('no_person').invalid && form.get('no_person').dirty}">
+                            <span class="text-danger"
+                                *ngIf="form.get('no_person').invalid && form.get('no_person').dirty">{{'share.required' |translate}}</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="number" formControlName="budget" placeholder="{{'events.Budget'|translate}}" [ngClass]="{'has-error':form.get('budget').invalid && form.get('budget').dirty}">
-                            <span class="text-danger" *ngIf="form.get('budget').invalid && form.get('budget').dirty">{{'share.required' |translate}}</span>
+                            <input type="number" formControlName="budget" placeholder="{{'events.Budget'|translate}}"
+                                [ngClass]="{'has-error':form.get('budget').invalid && form.get('budget').dirty}">
+                            <span class="text-danger"
+                                *ngIf="form.get('budget').invalid && form.get('budget').dirty">{{'share.required' |translate}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="text" formControlName="date" placeholder="{{'events.Date'|translate}}" [ngClass]="{'has-error':form.get('date').invalid && form.get('date').dirty}" [bsConfig]="{dateInputFormat: 'MM-DD-YYYY'}" bsDatepicker>
-                            <span class="text-danger" *ngIf="form.get('date').invalid && form.get('date').dirty">{{'share.required' |translate}}</span>
+                            <input type="text" formControlName="date" placeholder="{{'events.Date'|translate}}"
+                                [ngClass]="{'has-error':form.get('date').invalid && form.get('date').dirty}"
+                                [bsConfig]="{dateInputFormat: 'MM-DD-YYYY'}" bsDatepicker>
+                            <span class="text-danger"
+                                *ngIf="form.get('date').invalid && form.get('date').dirty">{{'share.required' |translate}}</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -96,8 +131,10 @@
                             <timepicker formControlName="time" (ngModelChange)="changed()"></timepicker>
                         </ng-template>
                         <!-- <input type="text" id="pickTime" class="input-field input-normal" placeholder="Pick a time"> -->
-                        <input placeholder="{{'events.Pick-time'|translate}}" value="{{mytime}}" [popover]="popTemplate" placement="bottom" />
-                        <span class="text-danger" *ngIf="form.get('time').invalid && form.get('time').dirty">{{'share.required' |translate}}</span>
+                        <input placeholder="{{'events.Pick-time'|translate}}" value="{{mytime}}" [popover]="popTemplate"
+                            placement="bottom" />
+                        <span class="text-danger"
+                            *ngIf="form.get('time').invalid && form.get('time').dirty">{{'share.required' |translate}}</span>
                     </div>
 
                 </div>
@@ -107,8 +144,8 @@
                     <input type="text" formControlName="Notes" placeholder="{{'events.Notes'|translate}}">
                 </div>
                 <button (click)="save()" class="btn btn-green mtxxlg margin-bottom-15">
-                        {{'share.send'|translate}}
-                    </button>
+                    {{'share.send'|translate}}
+                </button>
             </form>
         </div>
     </div>

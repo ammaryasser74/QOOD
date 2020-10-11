@@ -8,6 +8,7 @@ import { CityService } from 'src/app/services/user/city.service';
 import { BsModalRef } from 'ngx-bootstrap';
 import * as moment from 'moment-timezone';
 import { Time } from '@angular/common';
+import { OccasionService } from 'src/app/services/user/occasion.service';
 
 @Component({
   selector: 'app-request-event',
@@ -24,14 +25,14 @@ loading = false;
   constructor(private formBuilder: FormBuilder,
               public  eventService: EventService,
               private toastr: ToastrService,
-              public categoryService: CategoryService,
+              public occasionService: OccasionService,
               public languageService: LanguageService,
               public cityService: CityService,
               public myModel: BsModalRef, ) { }
 
   ngOnInit() {
     this.loading = true;
-    this.categoryService.GetList().subscribe(res => {this.categories = res.Data;
+    this.occasionService.GetList().subscribe(res => {this.categories = res.Data;
     });
     this.cityService.GetList().subscribe(res => {this.cities = res.Data; });
     this.loading = false;
@@ -40,13 +41,13 @@ loading = false;
   initForm() {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.email]],
       phone: [null, Validators.required],
       address: [null, Validators.required],
       no_person: [null, Validators.required],
       budget: [null, Validators.required],
       city_id: [null, Validators.required],
-      category_ids: [null, Validators.required],
+      occasion_id : [null, Validators.required],
       date: [new Date(), Validators.required],
       time: [moment(new Date()).format('hh:mm:ss'), Validators.required], // [null, Validators.required],
       Notes: [null],

@@ -49,15 +49,15 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
                                     <div class="form-group">
                                         <input formControlName="slug" type="text" placeholder="{{'become-chief.Your-link' | translate}}" [ngClass]="{'has-error':form.get('slug').invalid && form.get('slug').dirty}">
                                         <span class="text-danger" *ngIf="form.get('slug').invalid && form.get('slug').dirty">Required and no space</span>
                                     </div>
 
-                                </div>
+                                </div> -->
                                 <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" -->
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <input formControlName="email"  type="text" placeholder="{{'become-chief.Email' | translate}}" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
                                         <span class="text-danger" *ngIf="form.get('email').invalid && form.get('email').dirty">{{'share.emailerror'|translate}}</span>

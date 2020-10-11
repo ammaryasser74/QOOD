@@ -87,10 +87,10 @@
         "Notes":	"Notes",
         "Date":"Date",
         "event": "Event",
-        "here": "You can request an Event here",
-        "name": "ُEvents",
-        "request-event": "Request an event",
-        "content": "Events Catering in KSA with QOOT Need the perfect catering for your upcoming event?No problem."
+        "here": "Details are free! All you have to do is provide us with the details below, and we will contact you to help you choose the list according to your requests.",
+        "name": "Open buffet parties",
+        "request-event": "Catering Orders",
+        "content": "Qoot is the first choice for holding your parties and covering your big parties, meetings and gathering of friends, with the finest types of international dishes provided by a special staff and distinguished by long experience in preparing buffets for parties and events."
     },
     "contact": {
         "content": "Questions? Suggestions? Feel free to contact us.",
