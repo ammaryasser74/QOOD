@@ -40,7 +40,6 @@ export class DishesComponent implements OnInit,OnDestroy {
     this.getDishes();
 
     this.subject.pipe(distinctUntilChanged(),takeWhile(()=>this.alive)).subscribe(res=>{
-      console.log(res);
       this.filter.current_page =res;
       this.getDishes();
     })
